@@ -37,7 +37,7 @@ public class UtilityFunctions {
         }// end of loop through all retrieved documents
     }
 
-    private static AbstractQueue<Pair> orderResults(AbstractMap<String,Double> scoredDocs){
+    public static AbstractQueue<Pair> orderResults(AbstractMap<String,Double> scoredDocs){
         Set<String> allKeys = scoredDocs.keySet();
         AbstractQueue<Pair> sortedValues = new PriorityQueue<Pair>();
 
@@ -46,8 +46,20 @@ public class UtilityFunctions {
         }
 
         return sortedValues;
-
     }//end of orderResults
+
+    public static List<Pair> listRankedResults(AbstractMap<String,Double> scoredDocs, int numOfRankedResults){
+        AbstractQueue<Pair> orderedResults = orderResults(scoredDocs);
+        List<Pair> listedResults = new ArrayList<>();
+        for (int i = 0; i < numOfRankedResults; i++) {
+            if (orderedResults.isEmpty()){
+                break;
+            }
+            listedResults.add(orderedResults.poll());
+        }
+        return listedResults;
+    }//end of listRankedResults
+
 
     static class Pair implements Comparable<Pair>{
         private String key;
@@ -59,7 +71,7 @@ public class UtilityFunctions {
         }
         @Override
         public int compareTo(Pair o) {
-            return (value > o.value)? 1:-1;
+            return (value < o.value)? 1:-1;
         }
         public String getKey(){
             return key;
