@@ -3,104 +3,93 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class NewRetriever {
     private static HttpURLConnection httpConn;
-    //curl -XGET "http://10.10.6.160:9200/_search" -H 'Content-Type: application/json' -d'{"query":{"function_score":{"random_score":{"seed":10,"field":"_seq_no"}}},"size":2}'
-            /*
-            -XGET "http://10.10.6.160:9200/_search"
-            -H 'Content-Type: application/json'
-            -d'{"query":{"function_score":{"random_score":{"seed":10,"field":"_seq_no"}}},"size":2}'
-            */
 
-    /**
-     * Makes an HTTP request using POST method to the specified URL.
-     *
-     * @param requestURL
-     *            the URL of the remote server
-     * @param params
-     *            A map containing POST data in form of key-value pairs
-     * @return An HttpURLConnection object
-     * @throws IOException
-     *             thrown if any I/O error occurred
-     */
-    public static HttpURLConnection sendPostRequest(String requestURL,
-                                                    Map<String, String> params) throws IOException {
-        URL url = new URL(requestURL);
-        httpConn = (HttpURLConnection) url.openConnection();
-        httpConn.setUseCaches(false);
+    public static HttpURLConnection sendPostRequest(RestParameterCreator params) throws IOException {
+        try{
+            httpConn = (HttpURLConnection) params.url.openConnection();
 
-        httpConn.setDoInput(true); // true indicates the server returns response
-
-        StringBuffer requestParams = new StringBuffer();
-
-        if (params != null && params.size() > 0) {
-
+            // set
+            httpConn.setDoInput(true); // true indicates the server returns response
             httpConn.setDoOutput(true); // true indicates POST request
-
-            // creates the params string, encode them using URLEncoder
-            Iterator<String> paramIterator = params.keySet().iterator();
-            while (paramIterator.hasNext()) {
-                String key = paramIterator.next();
-                String value = params.get(key);
-                requestParams.append(URLEncoder.encode(key, "UTF-8"));
-                requestParams.append("=").append(
-                        URLEncoder.encode(value, "UTF-8"));
-                requestParams.append("&");
-            }
+            httpConn.setRequestProperty(params.headerKey, params.headerData);
 
             // sends POST data
-            OutputStreamWriter writer = new OutputStreamWriter(
-                    httpConn.getOutputStream());
-            writer.write(requestParams.toString());
+            OutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());
+            writer.write(params.postData);
             writer.flush();
-        }
+            writer.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return httpConn;
     }
-        public static void searchResultRetriever() throws IOException {
-            URL url = new URL("http://10.10.6.160:9200");
-            HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-            httpCon.setDoOutput(true);
-            OutputStream outputStream = httpCon.getOutputStream();
-            PrintWriter writer = new PrintWriter(outputStream);
-            String str = "This is String";
-            writer.print(str);
 
-            httpCon.connect();
+    public static JsonObject searchResultRetriever(RestParameterCreator params) throws IOException {
+        HttpURLConnection httpCon = sendPostRequest(params);
+        httpCon.connect();
 
-            String results = "";
-            String line;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpCon.getInputStream(), "UTF-8"))) {
-                while((line = reader.readLine()) != null) {
-                    results = results.concat(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        StringBuilder sb = new StringBuilder();
+        String line;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(httpCon.getInputStream(), "UTF-8"))) {
+            while((line = reader.readLine()) != null) {
+                sb.append(line);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        httpCon.disconnect();
 
-            // read the string as a JSON
-            JsonReader jsonRdr = Json.createReader(new StringReader(results));
-            // assume that it was a json object (and not a json array)
-            JsonObject entireRes = jsonRdr.readObject();
-            jsonRdr.close();
+        // read the string as a JSON
+        JsonReader jsonRdr = Json.createReader(new StringReader(sb.toString()));
+        // assume that it was a json object (and not a json array)
+        JsonObject entireRes = jsonRdr.readObject();
+        jsonRdr.close();
 
-            // testing
-            System.out.println("Total: \t" + ((JsonObject) entireRes.get("hits")).get("total"));
-            List arr = (List) ((JsonObject) entireRes.get("hits")).get("hits");
-            for ( Object entry:arr ) {
-                System.out.println("New doc \t" + entry.toString());
-            }
+        // TODO: 2019-11-01  
+        // testing
+        System.out.println("Total: \t" + ((JsonObject) entireRes.get("hits")).get("total"));
+        List arr = (List) ((JsonObject) entireRes.get("hits")).get("hits");
+        for ( Object entry:arr ) {
+            System.out.println("New doc \t" + ((JsonObject) entry).get("_source").toString());
+        }
+        
+        return entireRes;
+    }// end of searchResultRetriever
 
-        }// end of searchResultRetriever
+    /*
+    public static HttpURLConnection sendPostRequest(String requestURL,
+                                                    Map<String, String> params) throws IOException {
+        try{
+            String data = URLEncoder.encode("{\"query\":{\"function_score\":{\"random_score\":{\"seed\":10,\"field\":\"_seq_no\"}}},\"size\":2}", "UTF-8");
+            data = "{\"query\":{\"function_score\":{\"random_score\":{\"seed\":10,\"field\":\"_seq_no\"}}},\"size\":2}";
+            data = "{\"query\":{\"match\":{\"title\":\"Study\"}}}";
+            String header = URLEncoder.encode("Content-Type: application/json", "UTF-8");
+            requestURL = "http://10.10.6.160:9200/my_index2/_search";
+            URL url = new URL(requestURL);
+            httpConn = (HttpURLConnection) url.openConnection();
 
+            // set
+            httpConn.setDoInput(true); // true indicates the server returns response
+            httpConn.setDoOutput(true); // true indicates POST request
+            httpConn.setRequestProperty("Content-Type", "application/json");
 
+            // sends POST data
+            OutputStreamWriter writer = new OutputStreamWriter(httpConn.getOutputStream());
+            writer.write(data);
+            writer.flush();
+            writer.close();
 
-    }// end of class
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return httpConn;
+    }
+    */
+}// end of class
 
 

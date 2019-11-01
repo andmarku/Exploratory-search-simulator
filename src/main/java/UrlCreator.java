@@ -1,15 +1,18 @@
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
+// private URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=*");
+// URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=\"title\":\"study\"");
+// URL url = new URL("http://10.10.6.160:9200/my_index2/_search?q=title:*&size=100");
+// URL url = new URL("http://10.10.6.160:9200/my_index/_search?q=title:study&size=10000");
+// private URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=*");
+// URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=\"title\":\"study\"");
+// URL url = new URL("http://10.10.6.160:9200/my_index2/_search?q=title:*&size=100");
+// URL url = new URL("http://10.10.6.160:9200/my_index/_search?q=title:study&size=10000");
 public class UrlCreator {
 
     public static URL createSearchUrlFromListOfStrings(List<String> query, int size) throws MalformedURLException, NullPointerException {
-        // private URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=*");
-        // URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=\"title\":\"study\"");
-        // URL url = new URL("http://10.10.6.160:9200/my_index2/_search?q=title:*&size=100");
-        // URL url = new URL("http://10.10.6.160:9200/my_index/_search?q=title:study&size=10000");
 
         String address = "http://10.10.6.160:9200/my_index/_search?q=title:(" + formatQueryForUrl(query) + ")&size=" + size;
         URL url = new URL(address);
@@ -17,34 +20,12 @@ public class UrlCreator {
     } // end of createUrl
 
     public static URL createSearchUrlFromString(String query, int size) throws MalformedURLException, NullPointerException {
-        // private URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=*");
-        // URL url = new URL("http://10.10.6.160:8090/rest/apps/json2/searchers/json2?q=\"title\":\"study\"");
-        // URL url = new URL("http://10.10.6.160:9200/my_index2/_search?q=title:*&size=100");
-        // URL url = new URL("http://10.10.6.160:9200/my_index/_search?q=title:study&size=10000");
+
 
         String address = "http://10.10.6.160:9200/my_index/_search?q=title:(" + query + ")&size=" + size;
         URL url = new URL(address);
         return url;
     } // end of createUrl
-
-    // TODO: 2019-10-28 will fetch random results. but I have to learn how to convert the curl command to java
-    public static URL createUrlForGeneratingQueries(int size){
-      /*
-        {
-            "query": {
-                "function_score": {
-                    "random_score": {
-                        "seed": 10,
-                        "field": "_seq_no"
-                    }
-                }
-            },
-            "size":2
-        }
-* */
-        return null;
-    } // end of createUrlForGeneratingQueries
-
 
     /*
     * Has to be tested when the complete index is used, since the references are probably not in the current index
@@ -75,6 +56,5 @@ public class UrlCreator {
         }
         return sb.toString();
     }
-
 
 }// end of class

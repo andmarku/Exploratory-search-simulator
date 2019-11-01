@@ -1,6 +1,5 @@
 import javax.json.JsonObject;
         import java.io.IOException;
-        import java.net.URL;
         import java.util.ArrayList;
         import java.util.Arrays;
         import java.util.List;
@@ -8,8 +7,8 @@ import javax.json.JsonObject;
 
 public class QueryCreator {
 
-    public static List<String> createMasterQuery(int sizeOfFullQuery) throws IOException {
-        return createRandomQueryTerms(sizeOfFullQuery);
+    public static List<String> createMasterQuery(int sizeOfFullQuery, int seed) throws IOException {
+        return createRandomQueryTerms(sizeOfFullQuery, seed);
     }
 
     /*
@@ -23,14 +22,21 @@ public class QueryCreator {
         }
         return queries;
     }
-
-    public static List<String> createRandomQueryTerms(int numberOfQueryTerms) throws IOException {
+    // TODO: 2019-11-01 titles can be null
+    public static List<String> createRandomQueryTerms(int numberOfQueryTerms, int seed) throws IOException {
         List<String> queryTerms = new ArrayList<>();
 
-        URL url = UrlCreator.createUrlForGeneratingQueries(numberOfQueryTerms);
-        JsonObject retrievedRes = Retriever.searchResultRetriever_firstAttempt(url);
+        // set up REST parameters
+        RestParameterCreator params = new RestParameterCreator();
+        params.setRestParamsForRandomQueries(numberOfQueryTerms, seed);
+
+        // retrieve results from elastic
+        JsonObject retrievedRes = NewRetriever.searchResultRetriever(params);
+
+        // pick out the titles
         List<String> titles = extractTitles(retrievedRes);
 
+        // select a random word from each title
         List<String> titleAsList;
         for (String title : titles) {
             titleAsList = splitStringIntoWords(title);

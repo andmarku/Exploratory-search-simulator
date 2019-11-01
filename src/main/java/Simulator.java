@@ -21,7 +21,7 @@ public class Simulator {
 
         /* SIMULATION - set-up */
         // create the master query
-        List<String> masterQuery = QueryCreator.createStaticQuery(); // QueryCreator.createMasterQuery(sizeOfFullQuery);
+        List<String> masterQuery = QueryCreator.createMasterQuery(sizeOfFullQuery, 10);
 
         /* SIMULATION - base case */
         numOfSubQueries = 1; // just one query in the base case
@@ -75,9 +75,12 @@ public class Simulator {
         (List<List<String>> subQueries, int sizeOfRetrievedList, double expansionMultiplier) throws IOException {
 
         List<AbstractMap<String, Double>> storedRankedLists = new ArrayList<>();
+        RestParameterCreator queryParams = new RestParameterCreator();
         for (List<String> query:subQueries) {
             // search elastic for the specific query
-            JsonObject retrievedRes = Retriever.searchResultRetriever(query, sizeOfRetrievedList);
+            queryParams.setRestParamsForStandardQuery(query, sizeOfRetrievedList);
+            JsonObject retrievedRes = NewRetriever.searchResultRetriever(queryParams);
+//            JsonObject retrievedRes = Retriever.searchResultRetriever(query, sizeOfRetrievedList);
 
             // parse the elastic ranked list into scoredDocs, linkedDocs, and totalScore
             List parsedResult = SearchDocParser.docAndLinksScoreParser(retrievedRes);
