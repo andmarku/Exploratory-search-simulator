@@ -1,3 +1,4 @@
+/*
 package com.findwise.connect.base;
 
 import com.findwise.connect.api.TraverseConnector;
@@ -37,10 +38,12 @@ public class JSONconnector implements TraverseConnector {
         return ConnectorMode.STATEFUL;
     }
 
-    /*
+    */
+/*
     * Add all JSONs in the file.
     * Assumes that the JSONs are specified on separate lines.
-    * */
+    * *//*
+
     private void processFile(final File file, JobExecution jobExecution){
         JSONParser parser = new JSONParser();
         String line;
@@ -66,9 +69,11 @@ public class JSONconnector implements TraverseConnector {
         }
     }
 
-    /*
+    */
+/*
     * Create a ContentDocument.ContentDocumentBuilder document with fields from the JSON argument.
-    * */
+    * *//*
+
     private ContentDocument.ContentDocumentBuilder createJsonDocument(JSONObject jsonObject){
         // make sure that there is an id field
         //TODO can two ContentDocuments have the same id?
@@ -87,7 +92,8 @@ public class JSONconnector implements TraverseConnector {
         selectedKeys.add("inCitations");
         selectedKeys.add("outCitations");
 
-        /*
+        */
+/*
         // GENERAL VERSION, not needed for the moment
         // Add all the fields from the JSON
         for (Object key : jsonObject.keySet()) {
@@ -96,7 +102,8 @@ public class JSONconnector implements TraverseConnector {
                 selectedKeys.add((String) key);
             }
         }
-        */
+        *//*
+
 
         // Add the fields corresponding to the selected keys
         for (String key : selectedKeys) {
@@ -129,11 +136,13 @@ public class JSONconnector implements TraverseConnector {
         return doc;
     }
 
-    /*
+    */
+/*
      * Make sure that fields in the JSON object that are supposed to be empty are so (i.e. not null).
      * If the field is a JSON array, it is set to an empty array.
      * In all other cases the field is set to an empty string.
-     * */
+     * *//*
+
     private void setToEmpty(Object key, JSONObject jsonObject) {
         if (jsonObject.get(key) instanceof JSONArray) {
             jsonObject.put(key, new JSONArray());
@@ -142,10 +151,12 @@ public class JSONconnector implements TraverseConnector {
         }
     }
 
-    /*
+    */
+/*
      * See to that the object is an instance of String.
      * * OBS fails to check for null, could crash in toString.
-     * */
+     * *//*
+
     private String makeSureObjectIsString(Object obj){
         if(obj instanceof String) {
             return (String) obj;
@@ -154,3 +165,4 @@ public class JSONconnector implements TraverseConnector {
     }
 
 } // End of class
+*/

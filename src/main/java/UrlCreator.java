@@ -13,15 +13,12 @@ import java.util.List;
 public class UrlCreator {
 
     public static URL createSearchUrlFromListOfStrings(List<String> query, int size) throws MalformedURLException, NullPointerException {
-
         String address = "http://10.10.6.160:9200/my_index/_search?q=title:(" + formatQueryForUrl(query) + ")&size=" + size;
         URL url = new URL(address);
         return url;
     } // end of createUrl
 
     public static URL createSearchUrlFromString(String query, int size) throws MalformedURLException, NullPointerException {
-
-
         String address = "http://10.10.6.160:9200/my_index/_search?q=title:(" + query + ")&size=" + size;
         URL url = new URL(address);
         return url;

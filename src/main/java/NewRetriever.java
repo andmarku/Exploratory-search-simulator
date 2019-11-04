@@ -50,13 +50,13 @@ public class NewRetriever {
         JsonObject entireRes = jsonRdr.readObject();
         jsonRdr.close();
 
-        // TODO: 2019-11-01  
+        /*// TODO: 2019-11-01
         // testing
         System.out.println("Total: \t" + ((JsonObject) entireRes.get("hits")).get("total"));
         List arr = (List) ((JsonObject) entireRes.get("hits")).get("hits");
         for ( Object entry:arr ) {
             System.out.println("New doc \t" + ((JsonObject) entry).get("_source").toString());
-        }
+        }*/
         
         return entireRes;
     }// end of searchResultRetriever

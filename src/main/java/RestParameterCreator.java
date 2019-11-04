@@ -30,7 +30,7 @@ public class RestParameterCreator {
         postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
                     seedStr +  "\"field\":\"_seq_no\"}}}," +
                     "\"size\":" + size + "}";
-        System.out.println(postData);
+        // System.out.println(postData);
     }
 
     public void setRestParamsForStandardQuery(List<String> queryList, int size) throws MalformedURLException {
