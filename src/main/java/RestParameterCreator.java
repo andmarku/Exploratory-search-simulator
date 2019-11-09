@@ -16,6 +16,8 @@ public class RestParameterCreator {
 
     public RestParameterCreator() throws MalformedURLException {
         url = new URL("http://10.10.6.160:9200/my_index2/_search");
+        url = new URL("http://localhost:9200/articles/_search");
+        url = new URL("http://localhost:9200/index_articles/_search");
         headerKey = "Content-Type";
         headerData = "application/json";
     }
@@ -39,6 +41,12 @@ public class RestParameterCreator {
         postData = "{\"query\":{\"match\":{\"title\":\""  +
                 queryStr + "\"}}," +
                 "\"size\":" + size + "}";
+    }
+
+    public void setRestParamsForSingleId(String queryStr) throws MalformedURLException {
+        postData = "{\"query\":{\"match\":{\"_id\":\""  +
+                queryStr + "\"}}," +
+                "\"size\":" + 1 + "}";
     }
 
     private String formatQueryListForRest(List<String> query) throws NullPointerException{

@@ -23,7 +23,7 @@ public class Simulator {
         List<JsonObject> allSimulationResults = new ArrayList<>();
 
         // path to store result in
-        String pathToFolder = "C:\\Devlopment\\";
+        String pathToFolder = "//home//fallman//testJava";
         String simulationName = "firstAttempt";
 
         // general parameters
@@ -98,11 +98,13 @@ public class Simulator {
 
     }// end of moreGeneralSimulator
 
-    public static void printMyRankedList(String whichCase, List<UtilityFunctions.Pair> rankedList){
+    public static void printMyRankedList(String whichCase, List<UtilityFunctions.Pair> rankedList) throws IOException {
         System.out.println(whichCase);
         int pos = 1;
         for (UtilityFunctions.Pair p : rankedList) {
-            System.out.println("Position: " + pos + ", Doc: " + p.getKey() + ", Score: " + p.getValue());
+            String id = p.getKey();
+            String title = UtilityFunctions.retrieveTitleOfDocById(id);
+            System.out.println("Position: " + pos + ", Doc: " + title + ", Score: " + p.getValue());
             pos++;
         }
         System.out.println("");

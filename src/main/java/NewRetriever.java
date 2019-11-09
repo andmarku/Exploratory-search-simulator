@@ -3,7 +3,6 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.util.List;
 
 public class NewRetriever {
     private static HttpURLConnection httpConn;

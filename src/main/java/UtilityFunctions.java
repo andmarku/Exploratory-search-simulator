@@ -1,4 +1,6 @@
 import javax.json.JsonObject;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.*;
 
 public class UtilityFunctions {
@@ -10,6 +12,33 @@ public class UtilityFunctions {
             nextPair = orderedResults.poll();
             System.out.println("Doc " + nextPair.getKey() + " with score " + nextPair.getValue());
         }
+    }
+
+    public static List<String> retrieveTitlesOfListWithDocIds(List<String> docIds) throws IOException {
+        List<String> titles = new ArrayList<>();
+
+        for (String id: docIds) {
+            RestParameterCreator params = new RestParameterCreator();
+            params.setRestParamsForSingleId(id);
+            JsonObject doc = NewRetriever.searchResultRetriever(params);
+
+            // ugly hack but the search should only return one document which matches the id
+            titles.add(QueryCreator.extractTitles(doc).get(0));
+        }
+
+        return titles;
+    }
+
+    public static String retrieveTitleOfDocById(String docId) throws IOException {
+        RestParameterCreator params = new RestParameterCreator();
+        params.setRestParamsForSingleId(docId);
+        JsonObject doc = NewRetriever.searchResultRetriever(params);
+
+        System.out.println(docId);
+        System.out.println(doc);
+
+        // ugly hack but the search should only return one document which matches the id
+        return QueryCreator.extractTitles(doc).get(0);
     }
 
     public static void printUnorderedResults(AbstractMap<String, Double> result){

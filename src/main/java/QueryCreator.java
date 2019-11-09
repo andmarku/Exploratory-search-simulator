@@ -46,7 +46,7 @@ public class QueryCreator {
         return queryTerms;
     }
 
-    private static List<String> extractTitles(JsonObject docs){
+    public static List<String> extractTitles(JsonObject docs){
         List<String> titles = new ArrayList<>();
 
         // pick out the list of retrieved documents
