@@ -1,5 +1,13 @@
 import java.util.*;
-
+/*
+vill: premiera ha med i varje query
+vill: premiera hög poäng
+  6 * 6
+  sqrt(9) + sqrt(9)
+  25 * 2
+  40 * 1
+ // hitta på massa fall och se vilka som document som jag är ute efter
+ */
 public class RankedListCombiner {
 
     /*
@@ -29,6 +37,9 @@ public class RankedListCombiner {
                 }
             }
         }
+
+
+
 
         double newScore;
         for (String docId: preliminaryRes.keySet()) {

@@ -1,20 +1,17 @@
 import javax.json.JsonObject;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+// TODO: 2019-11-04 double check all variables and stuff so that I'm really sending in the correct values
+// TODO: 2019-10-30 general observation: the ranking score from elastic is not normalized. I need to do this myself when combining
+/* // TODO: 2019-11-09
+ * higher order functions
+ * start with objects
+ * */
 public class Simulator {
 
-    // TODO: 2019-11-04 double check all variables and stuff so that I'm really sending in the correct values
-
-    // TODO: 2019-11-04 factor out all references to old retriever, + lots of methods eg in simulator
-
-    // TODO: 2019-10-30 general observation: the ranking score from elastic is not normalized.
-    //  i need to do this myself when combining
     public static void moreGeneralSimulator() throws IOException {
         /*----------------------------*/
         /* --- GENERAL SET-UP --- */
@@ -43,6 +40,8 @@ public class Simulator {
         int numOfSubQueries = setNumOfSubQueries(2, sizeOfFullQuery);
 
 
+
+
         /*----------------------------*/
         /* --- SIMULATION: set-up --- */
         /*----------------------------*/
@@ -68,7 +67,7 @@ public class Simulator {
                 sizeOfFullQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
 
         // printing to the console for testing
-        printMyRankedList("The base case", listedRankedResults_base);
+        UtilityFunctions.printMyRankedList("The base case", listedRankedResults_base);
 
 
         /*----------------------------*/
@@ -79,7 +78,7 @@ public class Simulator {
                 sizeOfRetrievedList, sizeOfFinalRankedList);
 
         // printing to the console for testing
-        printMyRankedList("The trial case", listedRankedResults_trial);
+        UtilityFunctions.printMyRankedList("The trial case", listedRankedResults_trial);
 
 
         /*----------------------------*/
@@ -94,27 +93,10 @@ public class Simulator {
         /*----------------------------*/
         /* --- END OF SIMULATION: storing --- */
         /*----------------------------*/
-        storeResults(allSimulationResults, pathToFolder, simulationName);
+        UtilityFunctions.storeResultsInFile(allSimulationResults, pathToFolder, simulationName);
 
     }// end of moreGeneralSimulator
 
-    public static void printMyRankedList(String whichCase, List<UtilityFunctions.Pair> rankedList) throws IOException {
-        System.out.println(whichCase);
-        int pos = 1;
-        for (UtilityFunctions.Pair p : rankedList) {
-            String id = p.getKey();
-            String title = UtilityFunctions.retrieveTitleOfDocById(id);
-            System.out.println("Position: " + pos + ", Doc: " + title + ", Score: " + p.getValue());
-            pos++;
-        }
-        System.out.println("");
-    }
-
-    public static void storeResults(List<JsonObject> results, String pathToFolder, String simulationName)
-            throws FileNotFoundException {
-        String path = JsonPrinter.createCompleteFileName(pathToFolder, simulationName);
-        JsonPrinter.myFileWriter( results,path);
-    }
 
     public static List<UtilityFunctions.Pair> produceRankedList
             (List<String> masterQuery, double expansionMultiplier, int numOfSubQueries, int sizeOfFullQuery,
@@ -135,6 +117,7 @@ public class Simulator {
         // pick out the first x of the scored docs
          return UtilityFunctions.listRankedResults(scoredResults, sizeOfFinalRankedList);
     }
+
     /*
     *  Ranks expanded hits for each query in the list
     */
@@ -174,18 +157,4 @@ public class Simulator {
         return num;
     }
 
-    public static void mySimulator() throws IOException {
-        int sizeOfRetrievedList = 10;
-
-        String query = UrlCreator.formatQueryForUrl(QueryCreator.createStaticQuery());
-        URL url = UrlCreator.createSearchUrlFromString(query, sizeOfRetrievedList);
-        JsonObject retrievedRes = Retriever.searchResultRetriever_firstAttempt(url);
-        List expandedRes = SearchDocParser.docAndLinksScoreParser(retrievedRes);
-        AbstractMap<String, Double> results = QueryExpander.docAndPercentageLinkScorer((HashMap<String, Double>) expandedRes.get(0),
-                (HashMap<String, Double>) expandedRes.get(1), (Double) expandedRes.get(2), 1);
-        System.out.println("Original ranked list");
-        UtilityFunctions.printAllDocsInJson(retrievedRes);
-        System.out.println("My ranked list");
-        UtilityFunctions.printOrderedResults(results);
-    }
 }// end of simulator class

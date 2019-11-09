@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JSONconnector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NewRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NewRetriever.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RestParameterCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RestParameterCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RankedListCombiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RankedListCombiner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Retriever.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UtilityFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JSONconnector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NewRetriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NewRetriever.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/QueryCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueryCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/RestParameterCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RestParameterCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +39,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>

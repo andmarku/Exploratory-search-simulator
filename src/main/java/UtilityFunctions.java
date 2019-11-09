@@ -1,4 +1,5 @@
 import javax.json.JsonObject;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.*;
@@ -46,6 +47,24 @@ public class UtilityFunctions {
         for (String key : allKeys) {
             System.out.println(key + ": \t" + result.get(key));
         }
+    }
+
+    public static void storeResultsInFile(List<JsonObject> results, String pathToFolder, String simulationName)
+            throws FileNotFoundException {
+        String path = JsonPrinter.createCompleteFileName(pathToFolder, simulationName);
+        JsonPrinter.myFileWriter( results,path);
+    }
+
+    public static void printMyRankedList(String whichCase, List<UtilityFunctions.Pair> rankedList) throws IOException {
+        System.out.println(whichCase);
+        int pos = 1;
+        for (UtilityFunctions.Pair p : rankedList) {
+            String id = p.getKey();
+            String title = UtilityFunctions.retrieveTitleOfDocById(id);
+            System.out.println("Position: " + pos + ", Doc: " + title + ", Score: " + p.getValue());
+            pos++;
+        }
+        System.out.println("");
     }
 
     public static void printAllDocsInJson(JsonObject json){
