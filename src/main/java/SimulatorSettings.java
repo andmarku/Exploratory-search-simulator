@@ -16,11 +16,11 @@ class SimulatorSettings {
         simulationName = "firstAttempt";
 
         // general parameters
-        numOfItr = 1;
+        numOfItr = 2;
         // TODO: 2019-10-30 assumes that the query is divisible by the number of subqueries
         sizeOfFullQuery = 2;
         sizeOfFinalRankedList = 10;
-        sizeOfRetrievedList = 10;
+        sizeOfRetrievedList = 1000;
 
         // base case
         baseCaseExpansionMultiplier = 0;

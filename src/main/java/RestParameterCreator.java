@@ -20,10 +20,13 @@ class RestParameterCreator {
         if(seed <= 0){
             seedStr = "";
         }else {
-            seedStr = "\"seed\":" + seed + ",";
+            seedStr = "\"seed\":" + seed;
         }
+        /*postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
+                seedStr +  "\"field\":\"_seq_no\"}}}," +
+                "\"size\":" + size + "}";*/
         postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
-                    seedStr +  "\"field\":\"_seq_no\"}}}," +
+                    seedStr +  "}}}," +
                     "\"size\":" + size + "}";
     }
 

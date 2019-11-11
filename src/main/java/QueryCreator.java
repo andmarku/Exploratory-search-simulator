@@ -40,7 +40,7 @@ class QueryCreator {
         List<String> titleAsList;
         for (String title : titles) {
             titleAsList = splitStringIntoWords(title);
-            queryTerms.add(selectRandomStringFromArrayOfStrings(titleAsList));
+            queryTerms.add(selectRandomStringFromArrayOfStrings(titleAsList, seed));
         }
 
         return queryTerms;
@@ -63,11 +63,11 @@ class QueryCreator {
         return titles;
     }
 
-    private static String selectRandomStringFromArrayOfStrings(List<String> myList){
+    private static String selectRandomStringFromArrayOfStrings(List<String> myList, int seed){
         if( myList.size() == 0){
             return "";
         }
-        Random randomGenerator = new Random();
+        Random randomGenerator = new Random(seed);
         int index = randomGenerator.nextInt(myList.size());
         return myList.get(index);
     }

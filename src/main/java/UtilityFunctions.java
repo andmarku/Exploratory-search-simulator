@@ -8,6 +8,7 @@ class UtilityFunctions {
         params.setRestParamsForSingleId(docId);
         JsonObject doc = NewRetriever.searchResultRetriever(params);
 
+        //System.out.println(doc);
         // ugly hack but the search should only return one document which matches the id
         return QueryCreator.extractTitles(doc).get(0);
     }
@@ -32,6 +33,7 @@ class UtilityFunctions {
             }
             listedResults.add(orderedResults.poll());
         }
+        System.out.println("Length of list " + listedResults.size() + " length of list in " + scoredDocs.size());
         return listedResults;
     }//end of listRankedResults
 

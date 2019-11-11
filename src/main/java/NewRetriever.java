@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 class NewRetriever {
     static JsonObject searchResultRetriever(RestParameterCreator params) throws IOException {
+        System.out.println(params.headerKey + ", " + params.headerData + ", " +params.postData);
         HttpURLConnection httpCon = sendPostRequest(params);
         httpCon.connect();
         String receivedData = receiveDataFromConnection(httpCon);

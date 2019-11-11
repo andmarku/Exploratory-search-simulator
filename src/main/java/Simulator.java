@@ -29,48 +29,54 @@ class Simulator {
         int numOfSubQueries = settings.numOfSubQueries;
 
 
-        /*----------------------------*/
-        /* --- SIMULATION: set-up --- */
-        /*----------------------------*/
-        // create the master query
-        List<String> masterQuery = QueryCreator.createMasterQuery(sizeOfFullQuery, 10);
-
-        /*----------------------------*/
-        /* --- SIMULATION: base case --- */
-        /*----------------------------*/
-        List<UtilityFunctions.Pair> listedRankedResults_base = SimulatorUtility.produceRankedList(
-                masterQuery,baseCaseExpansionMultiplier, baseCaseNumOfSubQueries,
-                sizeOfFullQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
-
-        // printing to the console for testing
-        ConsolePrinting.printMyRankedList("The base case", listedRankedResults_base);
+        // TODO: 2019-11-11  move master queries outside loop and just retrieve a longer list. from there
+        // i can pick the x * numOfItr first documents instead of making numOfItr extra calls.
 
 
-        /*----------------------------*/
-        /* --- SIMULATION: trial case --- */
-        /*----------------------------*/
-        List<UtilityFunctions.Pair> listedRankedResults_trial = SimulatorUtility.produceRankedList(
-                masterQuery, expansionMultiplier, numOfSubQueries, sizeOfFullQuery,
-                sizeOfRetrievedList, sizeOfFinalRankedList);
+        for (int i = 0; i < numOfItr; i++) {
 
-        // printing to the console for testing
-        ConsolePrinting.printMyRankedList("The trial case", listedRankedResults_trial);
+            /*----------------------------*/
+            /* --- SIMULATION: set-up --- */
+            /*----------------------------*/
+            // create the master query
+            List<String> masterQuery = QueryCreator.createMasterQuery(sizeOfFullQuery, 100);
+            System.out.println(masterQuery);
+            /*----------------------------*/
+            /* --- SIMULATION: base case --- */
+            /*----------------------------*/
+            List<UtilityFunctions.Pair> listedRankedResults_base = SimulatorUtility.produceRankedList(
+                    masterQuery, baseCaseExpansionMultiplier, baseCaseNumOfSubQueries,
+                    sizeOfFullQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
+
+            // printing to the console for testing
+            //ConsolePrinting.printMyRankedList("The base case", listedRankedResults_base);
 
 
-        /*----------------------------*/
-        /* --- END of ITERATION: storing --- */
-        /*----------------------------*/
-        allSimulationResults.add(
-                JsonCreator.createJsonObjectFromTwoResults(
-                        listedRankedResults_base,
-                        listedRankedResults_trial));
+            /*----------------------------*/
+            /* --- SIMULATION: trial case --- */
+            /*----------------------------*/
+            List<UtilityFunctions.Pair> listedRankedResults_trial = SimulatorUtility.produceRankedList(
+                    masterQuery, expansionMultiplier, numOfSubQueries, sizeOfFullQuery,
+                    sizeOfRetrievedList, sizeOfFinalRankedList);
 
-        /*----------------------------*/
-        /* --- END OF SIMULATION: storing --- */
-        /*----------------------------*/
-        // JsonPrinter.storeResultsInFile(allSimulationResults, pathToFolder, simulationName);
+            // printing to the console for testing
+            //ConsolePrinting.printMyRankedList("The trial case", listedRankedResults_trial);
 
-    }// end of moreGeneralSimulator
 
+            /*----------------------------*/
+            /* --- END of ITERATION: storing --- */
+            /*----------------------------*/
+            allSimulationResults.add(
+                    JsonCreator.createJsonObjectFromTwoResults(
+                            listedRankedResults_base,
+                            listedRankedResults_trial));
+
+            /*----------------------------*/
+            /* --- END OF SIMULATION: storing --- */
+            /*----------------------------*/
+            // JsonPrinter.storeResultsInFile(allSimulationResults, pathToFolder, simulationName);
+        }
+
+    }
 
 }// end of simulator class
