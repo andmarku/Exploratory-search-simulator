@@ -1,20 +1,19 @@
 import javax.json.JsonObject;
-        import java.io.IOException;
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.List;
-        import java.util.Random;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+class QueryCreator {
 
-public class QueryCreator {
-
-    public static List<String> createMasterQuery(int sizeOfFullQuery, int seed) throws IOException {
+    static List<String> createMasterQuery(int sizeOfFullQuery, int seed) throws IOException {
         return createRandomQueryTerms(sizeOfFullQuery, seed);
     }
 
     /*
     * assumes that the query is divisible by the number of subqueries
     * */
-    public static List<List<String>> segmentQuery(List<String> masterQuery, int sizeOfFullQuery, int numOfSubQueries){
+    static List<List<String>> segmentQuery(List<String> masterQuery, int sizeOfFullQuery, int numOfSubQueries){
         int sizeOfSubQueries = sizeOfFullQuery/numOfSubQueries;
         List<List<String>> queries = new ArrayList<>();
         for(int i = 0; i<sizeOfFullQuery; i = i + sizeOfSubQueries) {
@@ -22,8 +21,9 @@ public class QueryCreator {
         }
         return queries;
     }
-    // TODO: 2019-11-01 titles can be null
-    public static List<String> createRandomQueryTerms(int numberOfQueryTerms, int seed) throws IOException {
+
+
+    private static List<String> createRandomQueryTerms(int numberOfQueryTerms, int seed) throws IOException {
         List<String> queryTerms = new ArrayList<>();
 
         // set up REST parameters
@@ -46,7 +46,8 @@ public class QueryCreator {
         return queryTerms;
     }
 
-    public static List<String> extractTitles(JsonObject docs){
+    // assumes that titles are not null
+    static List<String> extractTitles(JsonObject docs){
         List<String> titles = new ArrayList<>();
 
         // pick out the list of retrieved documents
@@ -66,7 +67,7 @@ public class QueryCreator {
         if( myList.size() == 0){
             return "";
         }
-        Random randomGenerator = new Random();;
+        Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(myList.size());
         return myList.get(index);
     }
@@ -74,38 +75,10 @@ public class QueryCreator {
     private static List<String> splitStringIntoWords(String str){
         //if string is empty or null, return empty array
         if(str == null || str.equals("")) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         String[] words = str.split(" ");
         return Arrays.asList(words);
     }
-
-    /*
-     * Adds together all doc ids into a single search string
-     * */
-    public static String createQueryForSpecificDocs(List<String> docs) throws NullPointerException{
-        if(docs.size() == 0){
-            throw new NullPointerException();
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(docs.get(0));
-        for (int i = 1; i < docs.size(); i++) {
-            sb.append("%20OR%20");
-            sb.append(docs.get(i));
-        }
-        return sb.toString();
-    }
-
-    /*
-     * creates a query string by adding some specified query terms
-     * */
-    public static List<String> createStaticQuery(){
-        List<String> query = new ArrayList<String>();
-        query.add("study");
-        query.add("search");
-        return query;
-    }
-}
+}// end of class

@@ -38,26 +38,20 @@ public class RankedListCombiner {
             }
         }
 
-
-
-
         double newScore;
+        double multiplier = 1;
         for (String docId: preliminaryRes.keySet()) {
-            newScore = combine(preliminaryRes.get(docId), 1);
+            newScore = combine(preliminaryRes.get(docId), multiplier);
             combinedRes.put(docId, newScore );
         }
         return combinedRes;
     } // end of additionQueryResultCombiner
 
-    /*
-     * Very simple multiplier combiner
-     * */
-    public static double combine(List<Double> scores, double multiplier){
+    private static double combine(List<Double> scores, double multiplier){
         double totalScore = 0;
         for (double queryScore: scores) {
             totalScore += queryScore;
         }
         return totalScore*multiplier;
-
     }
 }

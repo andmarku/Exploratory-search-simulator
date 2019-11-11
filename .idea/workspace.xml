@@ -2,12 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ConsolePrinting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/JsonCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SimulatorSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SimulatorUtility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JsonPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JsonPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NewRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NewRetriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/QueryExpander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryExpander.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/RankedListCombiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RankedListCombiner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Retriever.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RestParameterCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RestParameterCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchDocParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchDocParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UrlCreator.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UtilityFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/JsonPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/JsonPrinter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/NewRetriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/NewRetriever.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/QueryCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/QueryCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RestParameterCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RestParameterCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UrlCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UrlCreator.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +75,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="thesis" />
+      <module name="mySimulator" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

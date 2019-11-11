@@ -1,11 +1,11 @@
-import java.io.PrintWriter;
-
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Running");
-        Simulator.moreGeneralSimulator();
+        SimulatorSettings settings = new SimulatorSettings();
+        settings.setStandardSettings();
+        Simulator.mySimulator(settings);
         System.out.println("Finished");
     }
 }// end of class
