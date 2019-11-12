@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-class QueryCreator {
 
-    static List<String> createMasterQuery(int sizeOfFullQuery, int seed) throws IOException {
-        return createRandomQueryTerms(sizeOfFullQuery, seed);
+class SimulatorQueryCreator {
+
+    static List<String> createAllMasterQueries(int size, int seed) throws IOException {
+        return createRandomQueryTerms(size, seed);
     }
 
     /*
@@ -27,11 +28,11 @@ class QueryCreator {
         List<String> queryTerms = new ArrayList<>();
 
         // set up REST parameters
-        RestParameterCreator params = new RestParameterCreator();
+        RetrieverParameterCreator params = new RetrieverParameterCreator();
         params.setRestParamsForRandomQueries(numberOfQueryTerms, seed);
 
         // retrieve results from elastic
-        JsonObject retrievedRes = NewRetriever.searchResultRetriever(params);
+        JsonObject retrievedRes = Retriever.searchResultRetriever(params);
 
         // pick out the titles
         List<String> titles = extractTitles(retrievedRes);

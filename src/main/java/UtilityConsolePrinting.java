@@ -5,7 +5,7 @@ import java.util.AbstractQueue;
 import java.util.List;
 import java.util.Set;
 
-public class ConsolePrinting {
+public class UtilityConsolePrinting {
 
     public static void printAllDocsInJson(JsonObject json){
         List results = (List) json.getJsonObject("hits").get("hits");
@@ -16,12 +16,12 @@ public class ConsolePrinting {
         }
     }
 
-    public static void printMyRankedList(String whichCase, List<UtilityFunctions.Pair> rankedList) throws IOException {
+    public static void printMyRankedList(String whichCase, List<UtilityGeneral.Pair> rankedList) throws IOException {
         System.out.println(whichCase);
         int pos = 1;
-        for (UtilityFunctions.Pair p : rankedList) {
+        for (UtilityGeneral.Pair p : rankedList) {
             String id = p.getKey();
-            String title = UtilityFunctions.retrieveTitleOfDocById(id);
+            String title = UtilityGeneral.retrieveTitleOfDocById(id);
             System.out.println("Position: " + pos + ", Doc: " + title + ", Score: " + p.getValue());
             pos++;
         }
@@ -36,8 +36,8 @@ public class ConsolePrinting {
     }
 
     public static void printOrderedResults(AbstractMap<String, Double> result){
-        AbstractQueue<UtilityFunctions.Pair> orderedResults =  UtilityFunctions.orderResults(result);
-        UtilityFunctions.Pair nextPair;
+        AbstractQueue<UtilityGeneral.Pair> orderedResults =  UtilityGeneral.orderResults(result);
+        UtilityGeneral.Pair nextPair;
         while (!orderedResults.isEmpty()) {
             nextPair = orderedResults.poll();
             System.out.println("Doc " + nextPair.getKey() + " with score " + nextPair.getValue());

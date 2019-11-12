@@ -3,13 +3,13 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class JsonPrinter {
-    public static void storeResultsInFile(List<JsonObject> results, String pathToFolder, String simulationName){
-        String path = JsonPrinter.createCompleteFileName(pathToFolder, simulationName);
-        JsonPrinter.myFileWriter( results,path);
+class UtilityJsonPrinter {
+    static void storeResultsInFile(List<JsonObject> results, String pathToFolder, String simulationName){
+        String path = UtilityJsonPrinter.createCompleteFileName(pathToFolder, simulationName);
+        UtilityJsonPrinter.myFileWriter( results,path);
     }
 
-    public static void printJson(JsonObject json, String fileName) throws FileNotFoundException {
+    static void printJson(JsonObject json, String fileName) throws FileNotFoundException {
         JsonWriter jsonWriter = Json.createWriter(new FileOutputStream(fileName));
         jsonWriter.writeObject(json);
         jsonWriter.close();

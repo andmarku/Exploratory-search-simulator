@@ -1,6 +1,6 @@
 import java.util.AbstractMap;
 
-class QueryExpander {
+class FeatureExpander {
     /* idea: each linked doc gets sum of the percentage of the total score that the original documents had */
     static AbstractMap<String,Double> docAndPercentageLinkScorer
     (AbstractMap<String, Double> scoredDocs, AbstractMap<String, Double> linkedDocs,
@@ -18,4 +18,4 @@ class QueryExpander {
         }
         return scoredDocs;
     }
-}//end of class
+}

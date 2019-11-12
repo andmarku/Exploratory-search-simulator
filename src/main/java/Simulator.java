@@ -12,7 +12,7 @@ class Simulator {
         /*----------------------------*/
         // list to store results in
         List<JsonObject> allSimulationResults = new ArrayList<>();
-        allSimulationResults.add(JsonCreator.createJsonObjectFromSettings(settings));
+        allSimulationResults.add(UtilityJsonCreator.createJsonObjectFromSettings(settings));
         // path to store result in
         String pathToFolder = settings.pathToFolder;
         String simulationName = settings.simulationName;
@@ -21,55 +21,55 @@ class Simulator {
         int sizeOfFullQuery = settings.sizeOfFullQuery;
         int sizeOfFinalRankedList = settings.sizeOfFinalRankedList;
         int sizeOfRetrievedList = settings.sizeOfRetrievedList;
-        // base case
-        double baseCaseExpansionMultiplier = settings.baseCaseExpansionMultiplier;
-        int baseCaseNumOfSubQueries = settings.baseCaseNumOfSubQueries;
+
         // trial case
         double expansionMultiplier = settings.expansionMultiplier;
         int numOfSubQueries = settings.numOfSubQueries;
 
-
-        // TODO: 2019-11-11  move master queries outside loop and just retrieve a longer list. from there
-        // i can pick the x * numOfItr first documents instead of making numOfItr extra calls.
-
+        // create the master query
+        List<String> masterQueries = SimulatorQueryCreator.createAllMasterQueries(numOfItr*sizeOfFullQuery, 100);
+        System.out.println("All master queries are " + masterQueries);
 
         for (int i = 0; i < numOfItr; i++) {
-
             /*----------------------------*/
             /* --- SIMULATION: set-up --- */
             /*----------------------------*/
-            // create the master query
-            List<String> masterQuery = QueryCreator.createMasterQuery(sizeOfFullQuery, 100);
-            System.out.println(masterQuery);
+            List<String> masterQuery = masterQueries.subList(i*sizeOfFullQuery, (i + 1) * sizeOfFullQuery);
+            System.out.println("Master query of itr " + i + " is " + masterQuery);
+
             /*----------------------------*/
             /* --- SIMULATION: base case --- */
             /*----------------------------*/
-            List<UtilityFunctions.Pair> listedRankedResults_base = SimulatorUtility.produceRankedList(
-                    masterQuery, baseCaseExpansionMultiplier, baseCaseNumOfSubQueries,
-                    sizeOfFullQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
+            List<List<String>> baseQuery = new ArrayList<>();
+            baseQuery.add(masterQuery);
+            // create the ranked list
+            List<UtilityGeneral.Pair> listedResults_base =
+                    SimulatorUtility.produceRankedListFromBaseQuery(baseQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
 
             // printing to the console for testing
-            //ConsolePrinting.printMyRankedList("The base case", listedRankedResults_base);
+            //ConsolePrinting.printMyRankedList("The base case", listedResults_base);
 
 
             /*----------------------------*/
             /* --- SIMULATION: trial case --- */
             /*----------------------------*/
-            List<UtilityFunctions.Pair> listedRankedResults_trial = SimulatorUtility.produceRankedList(
-                    masterQuery, expansionMultiplier, numOfSubQueries, sizeOfFullQuery,
-                    sizeOfRetrievedList, sizeOfFinalRankedList);
+            // segment the query
+            List<List<String>> subQueries = SimulatorQueryCreator.segmentQuery(masterQuery, sizeOfFullQuery, numOfSubQueries);
+            // create the ranked list
+            List<UtilityGeneral.Pair> listedResults_trial = SimulatorUtility.produceRankedListFromListOfQueries(
+                    subQueries, expansionMultiplier, sizeOfRetrievedList, sizeOfFinalRankedList);
 
             // printing to the console for testing
-            //ConsolePrinting.printMyRankedList("The trial case", listedRankedResults_trial);
+            //ConsolePrinting.printMyRankedList("The trial case", listedResults_trial);
 
 
             /*----------------------------*/
             /* --- END of ITERATION: storing --- */
             /*----------------------------*/
             allSimulationResults.add(
-                    JsonCreator.createJsonObjectFromTwoResults(
-                            listedRankedResults_base,
-                            listedRankedResults_trial));
+                    UtilityJsonCreator.createJsonObjectFromTwoResults(
+                            listedResults_base,
+                            listedResults_trial));
 
             /*----------------------------*/
             /* --- END OF SIMULATION: storing --- */

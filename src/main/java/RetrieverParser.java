@@ -1,7 +1,7 @@
 import java.util.*;
 import javax.json.*;
 
-class SearchDocParser {
+class RetrieverParser {
 
     static List<List> docAndLinksScoreParser(JsonObject searchRes){
         // initialize list to be returned from the method

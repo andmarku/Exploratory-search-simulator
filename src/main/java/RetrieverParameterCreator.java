@@ -2,13 +2,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-class RestParameterCreator {
+class RetrieverParameterCreator {
     URL url;
     String postData;
     String headerKey;
     String headerData;
 
-    RestParameterCreator() throws MalformedURLException {
+    RetrieverParameterCreator() throws MalformedURLException {
         url = new URL("http://localhost:9200/index_articles/_search");
         url = new URL("http://10.10.6.160:9200/my_index2/_search");
         headerKey = "Content-Type";
@@ -26,8 +26,8 @@ class RestParameterCreator {
                 seedStr +  "\"field\":\"_seq_no\"}}}," +
                 "\"size\":" + size + "}";*/
         postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
-                    seedStr +  "}}}," +
-                    "\"size\":" + size + "}";
+                seedStr +  "}}}," +
+                "\"size\":" + size + "}";
     }
 
     void setRestParamsForStandardQuery(List<String> queryList, int size){
@@ -56,5 +56,4 @@ class RestParameterCreator {
         }
         return sb.toString();
     }
-
-}// end of class
+}

@@ -5,9 +5,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 
-class NewRetriever {
-    static JsonObject searchResultRetriever(RestParameterCreator params) throws IOException {
-        System.out.println(params.headerKey + ", " + params.headerData + ", " +params.postData);
+class Retriever {
+    static JsonObject searchResultRetriever(RetrieverParameterCreator params) throws IOException {
         HttpURLConnection httpCon = sendPostRequest(params);
         httpCon.connect();
         String receivedData = receiveDataFromConnection(httpCon);
@@ -25,11 +24,11 @@ class NewRetriever {
         for ( Object entry:arr ) {
             System.out.println("New doc \t" + ((JsonObject) entry).get("_source").toString());
         }*/
-        
+
         return entireRes;
     }
 
-    private static HttpURLConnection sendPostRequest(RestParameterCreator params) throws IOException {
+    private static HttpURLConnection sendPostRequest(RetrieverParameterCreator params) throws IOException {
         HttpURLConnection httpConn = (HttpURLConnection) params.url.openConnection();
 
         // set
@@ -59,6 +58,4 @@ class NewRetriever {
         return sb.toString();
     }
 
-}// end of class
-
-
+}

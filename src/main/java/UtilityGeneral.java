@@ -2,15 +2,15 @@ import javax.json.JsonObject;
 import java.io.IOException;
 import java.util.*;
 
-class UtilityFunctions {
+class UtilityGeneral {
     static String retrieveTitleOfDocById(String docId) throws IOException {
-        RestParameterCreator params = new RestParameterCreator();
+        RetrieverParameterCreator params = new RetrieverParameterCreator();
         params.setRestParamsForSingleId(docId);
-        JsonObject doc = NewRetriever.searchResultRetriever(params);
+        JsonObject doc = Retriever.searchResultRetriever(params);
 
         //System.out.println(doc);
         // ugly hack but the search should only return one document which matches the id
-        return QueryCreator.extractTitles(doc).get(0);
+        return SimulatorQueryCreator.extractTitles(doc).get(0);
     }
 
     static AbstractQueue<Pair> orderResults(AbstractMap<String, Double> scoredDocs){
@@ -33,7 +33,6 @@ class UtilityFunctions {
             }
             listedResults.add(orderedResults.poll());
         }
-        System.out.println("Length of list " + listedResults.size() + " length of list in " + scoredDocs.size());
         return listedResults;
     }//end of listRankedResults
 
