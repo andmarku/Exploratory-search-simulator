@@ -8,7 +8,6 @@ class UtilityGeneral {
         params.setRestParamsForSingleId(docId);
         JsonObject doc = Retriever.searchResultRetriever(params);
 
-        //System.out.println(doc);
         // ugly hack but the search should only return one document which matches the id
         return SimulatorQueryCreator.extractTitles(doc).get(0);
     }
@@ -20,7 +19,6 @@ class UtilityGeneral {
         for (String key: allKeys) {
             sortedValues.add(new Pair(key, scoredDocs.get(key)));
         }
-
         return sortedValues;
     }//end of orderResults
 
@@ -49,6 +47,7 @@ class UtilityGeneral {
         public int compareTo(Pair o) {
             return (value < o.value)? 1:-1;
         }
+
         String getKey(){
             return key;
         }

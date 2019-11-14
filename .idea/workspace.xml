@@ -2,44 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FeatureCombiner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/FeatureExpander.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Retriever.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/RetrieverParameterCreator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SimulatorManualQueries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/UtilityStopWords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ConsolePrinting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityConsolePrinting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JsonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityJsonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JsonPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityJsonPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NewRetriever.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Old classes/Retriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Old classes/OldRetriever.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorQueryCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueryExpander.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RankedListCombiner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RestParameterCreator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchDocParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RetrieverParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RetrieverParameterCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RetrieverParameterCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/RetrieverParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/RetrieverParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorManualQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorManualQueries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorQueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorQueryCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityGeneral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ConsolePrinting.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JsonCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JsonPrinter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityGeneral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityGeneral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FeatureCombiner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FeatureCombiner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FeatureExpander.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FeatureExpander.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/NewRetriever.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/QueryCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/QueryExpander.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/RankedListCombiner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/RestParameterCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OldRetriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OldRetriever.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Retriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Retriever.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchDocParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RetrieverParameterCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RetrieverParameterCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/RetrieverParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/RetrieverParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SimulatorManualQueries.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorManualQueries.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SimulatorQueryCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorQueryCreator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SimulatorSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SimulatorUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorUtility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UtilityFunctions$Pair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UtilityFunctions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UrlCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UrlCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityConsolePrinting.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityConsolePrinting.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityGeneral$Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityGeneral$Pair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityGeneral.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityGeneral.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityJsonCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityJsonCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityJsonPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityJsonPrinter.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +87,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="mySimulator" />
+      <module name="thesis" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

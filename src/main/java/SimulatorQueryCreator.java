@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class SimulatorQueryCreator {
 
-    static List<String> createAllMasterQueries(int size, int seed) throws IOException {
-        return createRandomQueryTerms(size, seed);
-    }
-
     /*
-    * assumes that the query is divisible by the number of subqueries
-    * */
+     * assumes that the query is divisible by the number of subqueries
+     * */
     static List<List<String>> segmentQuery(List<String> masterQuery, int sizeOfFullQuery, int numOfSubQueries){
         int sizeOfSubQueries = sizeOfFullQuery/numOfSubQueries;
         List<List<String>> queries = new ArrayList<>();
@@ -23,6 +21,9 @@ class SimulatorQueryCreator {
         return queries;
     }
 
+    static List<String> createAllMasterQueries(int size, int seed) throws IOException {
+        return createRandomQueryTerms(size, seed);
+    }
 
     private static List<String> createRandomQueryTerms(int numberOfQueryTerms, int seed) throws IOException {
         List<String> queryTerms = new ArrayList<>();
@@ -40,11 +41,26 @@ class SimulatorQueryCreator {
         // select a random word from each title
         List<String> titleAsList;
         for (String title : titles) {
+            title = removeStopWords(title);
             titleAsList = splitStringIntoWords(title);
             queryTerms.add(selectRandomStringFromArrayOfStrings(titleAsList, seed));
         }
 
         return queryTerms;
+    }
+
+    private static String removeStopWords(String strToClean){
+        // "\\b" is to account for word boundaries, i.e. not replace "his" in "this"
+        // the "\\s?" is to suppress optional trailing white space
+
+        // clean common stop words
+        Pattern p = Pattern.compile("\\b("+UtilityStopWords.STOPWORDS+")\\s");
+        Matcher m = p.matcher(strToClean);
+        String strWithoutStopWords = m.replaceAll(" ");
+
+        System.out.println("Orig  string is: " +strToClean +
+                "\nFirst string is: " + strWithoutStopWords);
+        return strWithoutStopWords;
     }
 
     // assumes that titles are not null
@@ -79,7 +95,7 @@ class SimulatorQueryCreator {
             return new ArrayList<>();
         }
 
-        String[] words = str.split(" ");
+        String[] words = str.split("\\s+");
         return Arrays.asList(words);
     }
 }// end of class

@@ -3,7 +3,7 @@ import javax.json.*;
 
 class RetrieverParser {
 
-    static List<List> docAndLinksScoreParser(JsonObject searchRes){
+    static List<List> docAndLinksScoreParser(JsonObject searchRes) throws Exception {
         // initialize list to be returned from the method
         AbstractMap<String, Double> retrievedDocs = new HashMap<>();
         AbstractMap<String, Double> linkedDocs = new HashMap<>();
@@ -47,12 +47,13 @@ class RetrieverParser {
     }// end of parser
 
     private static void addCitationsForDocAndLinksScoreParser
-            (AbstractMap<String, Double> citationList, JsonObject nextDoc, String key, double origDocScore){
+            (AbstractMap<String, Double> citationList, JsonObject nextDoc, String key, double origDocScore) throws Exception {
         String docId;
         if (nextDoc.getJsonObject("_source").get(key) instanceof JsonArray) {
-            JsonArray inCitations = nextDoc.getJsonObject("_source").getJsonArray(key);
-            for (int i = 0; i < inCitations.size(); i++) {
-                docId = inCitations.getString(i);
+            JsonArray citations = nextDoc.getJsonObject("_source").getJsonArray(key);
+            for (int i = 0; i < citations.size(); i++) {
+                docId = citations.getString(i);
+                docId = removeCitationMarks(docId);
                 if (citationList.containsKey(docId)){
                     Double oldScore = citationList.get(docId);
                     citationList.replace(docId, oldScore + origDocScore);
@@ -69,6 +70,13 @@ class RetrieverParser {
                 citationList.put(docId, origDocScore);
             }
         }
+    }
+
+    private static String removeCitationMarks(String str) throws Exception {
+        if(!(str.substring(0,1).equals("\"") && str.substring(str.length()-1).equals("\""))){
+            throw new Exception("Deleted something that wasn't citation marks ");
+        }
+        return str.substring(1,str.length()-1);
     }
 
 }// end of class

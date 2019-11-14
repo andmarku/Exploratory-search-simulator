@@ -4,7 +4,7 @@ import java.util.List;
 
 class SimulatorManualQueries {
 
-    static void runManualQueries(List<List<String>> subqueries, SimulatorSettings settings) throws IOException {
+    static void runManualQueries(List<List<String>> subqueries, SimulatorSettings settings) throws Exception {
         /*----------------------------*/
         /* --- GENERAL SET-UP --- */
         /*----------------------------*/
@@ -37,7 +37,8 @@ class SimulatorManualQueries {
         /* --- SIMULATION: trial case --- */
         /*----------------------------*/
         System.out.println("The trial case queries are " + subqueries);
-        List<UtilityGeneral.Pair> listedRankedResults_trial = SimulatorUtility.produceRankedListFromListOfQueries(
+        List<UtilityGeneral.Pair> listedRankedResults_trial =
+                SimulatorUtility.produceRankedListFromListOfQueries(
                 subqueries, expansionMultiplier, sizeOfRetrievedList, sizeOfFinalRankedList);
         // printing to the console
         UtilityConsolePrinting.printMyRankedList("The trial case", listedRankedResults_trial);

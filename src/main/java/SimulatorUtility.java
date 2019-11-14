@@ -8,7 +8,7 @@ import java.util.List;
 class SimulatorUtility {
 
     static List<UtilityGeneral.Pair> produceRankedListFromBaseQuery(List<List<String>> queries,
-                                                                    int sizeOfRetrievedList, int sizeOfFinalRankedList)throws IOException {
+                                                                    int sizeOfRetrievedList, int sizeOfFinalRankedList) throws Exception {
 
         // Rank expanded hits for the query
         List<AbstractMap<String, Double>> storedRankedLists = rankAllQueries(
@@ -20,11 +20,12 @@ class SimulatorUtility {
 
     static List<UtilityGeneral.Pair> produceRankedListFromListOfQueries
             (List<List<String>> queries, double expansionMultiplier,
-             int sizeOfRetrievedList, int sizeOfFinalRankedList) throws IOException {
+             int sizeOfRetrievedList, int sizeOfFinalRankedList) throws Exception {
 
         // Rank expanded hits for each query in the list
         List<AbstractMap<String, Double>> storedRankedLists = rankAllQueries(
                 queries, sizeOfRetrievedList, expansionMultiplier);
+
 
         // combine all sub-queries into a final list
         AbstractMap<String, Double> scoredResults = FeatureCombiner.multiplierCombiner(storedRankedLists);
@@ -37,7 +38,7 @@ class SimulatorUtility {
      *  Ranks expanded hits for each query in the list
      */
     private static List<AbstractMap<String, Double>> rankAllQueries
-    (List<List<String>> queries, int sizeOfRetrievedList, double expansionMultiplier) throws IOException {
+    (List<List<String>> queries, int sizeOfRetrievedList, double expansionMultiplier) throws Exception {
 
         List<AbstractMap<String, Double>> storedRankedLists = new ArrayList<>();
         RetrieverParameterCreator queryParams = new RetrieverParameterCreator();
@@ -59,6 +60,7 @@ class SimulatorUtility {
             // store
             storedRankedLists.add(scoredResults);
         }
+
         return storedRankedLists;
     }
 

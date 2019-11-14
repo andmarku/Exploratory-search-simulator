@@ -9,8 +9,8 @@ class RetrieverParameterCreator {
     String headerData;
 
     RetrieverParameterCreator() throws MalformedURLException {
-        url = new URL("http://localhost:9200/index_articles/_search");
-        url = new URL("http://10.10.6.160:9200/my_index2/_search");
+        url = new URL("http://localhost:9200/index_articles/_search"); // linux computer
+        //url = new URL("http://10.10.6.160:9200/my_index2/_search"); //findwise server
         headerKey = "Content-Type";
         headerData = "application/json";
     }
@@ -20,13 +20,10 @@ class RetrieverParameterCreator {
         if(seed <= 0){
             seedStr = "";
         }else {
-            seedStr = "\"seed\":" + seed;
+            seedStr = "\"seed\":" + seed + ",";
         }
-        /*postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
-                seedStr +  "\"field\":\"_seq_no\"}}}," +
-                "\"size\":" + size + "}";*/
         postData = "{\"query\":{\"function_score\":"+ "{\"random_score\":{" +
-                seedStr +  "}}}," +
+                seedStr +  "\"field\":\"_seq_no\"}}}," +
                 "\"size\":" + size + "}";
     }
 

@@ -11,12 +11,12 @@ class SimulatorSettings {
 
     void setStandardSettings(){
         // path to store result in
-        pathToFolder = "//home//fallman//testJava";
+        pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//";
         simulationName = "firstAttempt";
 
         // general parameters
-        numOfItr = 2;
-        sizeOfFullQuery = 4;
+        numOfItr = 1;
+        sizeOfFullQuery = 6;
         sizeOfFinalRankedList = 10;
         sizeOfRetrievedList = 1000;
 
