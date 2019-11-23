@@ -1,24 +1,25 @@
 class SimulatorSettings {
     String pathToFolder;
     String simulationName;
+    String baseCaseName;
     int numOfItr;
     int sizeOfFullQuery;
     int sizeOfFinalRankedList;
     int sizeOfRetrievedList;
-    double baseCaseExpansionMultiplier;
     double expansionMultiplier;
     int numOfSubQueries;
 
     void setStandardSettings(){
         // path to store result in
         pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//";
-        simulationName = "firstAttempt";
+        simulationName = "firstSimulation";
+        baseCaseName = "firstBaseCase";
 
         // general parameters
         numOfItr = 1;
         sizeOfFullQuery = 6;
-        sizeOfFinalRankedList = 10;
-        sizeOfRetrievedList = 1000;
+        sizeOfFinalRankedList = 5;
+        sizeOfRetrievedList = 100;
 
         // trial case
         expansionMultiplier = 2;

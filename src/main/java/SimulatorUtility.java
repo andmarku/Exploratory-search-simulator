@@ -7,8 +7,8 @@ import java.util.List;
 
 class SimulatorUtility {
 
-    static List<UtilityGeneral.Pair> produceRankedListFromBaseQuery(List<List<String>> queries,
-                                                                    int sizeOfRetrievedList, int sizeOfFinalRankedList) throws Exception {
+    static List<UtilityGeneral.Pair> produceRankedListFromBaseQuery
+            (List<List<String>> queries, int sizeOfRetrievedList, int sizeOfFinalRankedList) throws Exception {
 
         // Rank expanded hits for the query
         List<AbstractMap<String, Double>> storedRankedLists = rankAllQueries(
@@ -26,7 +26,6 @@ class SimulatorUtility {
         List<AbstractMap<String, Double>> storedRankedLists = rankAllQueries(
                 queries, sizeOfRetrievedList, expansionMultiplier);
 
-
         // combine all sub-queries into a final list
         AbstractMap<String, Double> scoredResults = FeatureCombiner.multiplierCombiner(storedRankedLists);
 
@@ -42,6 +41,7 @@ class SimulatorUtility {
 
         List<AbstractMap<String, Double>> storedRankedLists = new ArrayList<>();
         RetrieverParameterCreator queryParams = new RetrieverParameterCreator();
+
         for (List<String> query : queries) {
             // search elastic for the specific query
             queryParams.setRestParamsForStandardQuery(query, sizeOfRetrievedList);

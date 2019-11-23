@@ -49,17 +49,20 @@ class SimulatorQueryCreator {
         return queryTerms;
     }
 
-    private static String removeStopWords(String strToClean){
+    public static String removeStopWords(String strToClean){
         // "\\b" is to account for word boundaries, i.e. not replace "his" in "this"
         // the "\\s?" is to suppress optional trailing white space
 
         // clean common stop words
-        Pattern p = Pattern.compile("\\b("+UtilityStopWords.STOPWORDS+")\\s");
+        Pattern p = Pattern.compile("[" + UtilityStopWords.SIGNS + "]");
         Matcher m = p.matcher(strToClean);
-        String strWithoutStopWords = m.replaceAll(" ");
+        String strWithoutSigns = m.replaceAll(" ");
 
-        System.out.println("Orig  string is: " +strToClean +
-                "\nFirst string is: " + strWithoutStopWords);
+        p = Pattern.compile("\\b("+UtilityStopWords.STOPWORDS+")\\b");
+        m = p.matcher(strWithoutSigns);
+        String strWithoutStopWords = m.replaceAll(" ").trim();
+
+        System.out.println(strWithoutStopWords);
         return strWithoutStopWords;
     }
 

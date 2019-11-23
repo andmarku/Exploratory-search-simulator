@@ -17,14 +17,6 @@ class Retriever {
         JsonObject entireRes = jsonRdr.readObject(); // assume that it was a json object (and not a json array)
         jsonRdr.close();
 
-        /*
-        // testing
-        System.out.println("Total: \t" + ((JsonObject) entireRes.get("hits")).get("total"));
-        List arr = (List) ((JsonObject) entireRes.get("hits")).get("hits");
-        for ( Object entry:arr ) {
-            System.out.println("New doc \t" + ((JsonObject) entry).get("_source").toString());
-        }*/
-
         return entireRes;
     }
 

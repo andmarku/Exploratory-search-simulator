@@ -1,7 +1,4 @@
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 class FeatureCombiner {
 
@@ -35,15 +32,19 @@ class FeatureCombiner {
         AbstractMap<String, List<Double>> allScoresForEachDoc = new HashMap<>();
         List<Double> existingScoreList;
 
+        double maxScoreForQuery;
+        double queryScore;
         for (AbstractMap<String, Double> query : queries) {
+            maxScoreForQuery = findMaxScore(query);
             for (String docId: query.keySet()) {
+                queryScore = query.get(docId)/maxScoreForQuery;
                 if (allScoresForEachDoc.containsKey(docId)){
                     existingScoreList = allScoresForEachDoc.get(docId);
-                    existingScoreList.add(query.get(docId));
+                    existingScoreList.add(queryScore);
                     allScoresForEachDoc.put(docId, existingScoreList);
                 }else{
                     List<Double> newScoreList = new ArrayList<Double>();
-                    newScoreList.add(query.get(docId));
+                    newScoreList.add(queryScore);
                     // just add the document with its score if it had no match in the other query
                     allScoresForEachDoc.put(docId, newScoreList);
                 }
@@ -52,4 +53,13 @@ class FeatureCombiner {
         return allScoresForEachDoc;
     }
 
+    private static double findMaxScore (AbstractMap<String, Double> query){
+        double maxScore = 0;
+        for (double docScore: query.values()){
+            if(docScore > maxScore){
+                maxScore = docScore;
+            }
+        }
+        return maxScore == 0? 1 : maxScore;
+    }
 }

@@ -9,13 +9,14 @@ class UtilityJsonPrinter {
         UtilityJsonPrinter.myFileWriter( results,path);
     }
 
-    static void printJson(JsonObject json, String fileName) throws FileNotFoundException {
-        JsonWriter jsonWriter = Json.createWriter(new FileOutputStream(fileName));
+    static void writeJsonToFile(JsonObject json, String pathToFolder, String simulationName) throws FileNotFoundException {
+        String path = UtilityJsonPrinter.createCompleteFileName(pathToFolder, simulationName);
+        JsonWriter jsonWriter = Json.createWriter(new FileOutputStream(path));
         jsonWriter.writeObject(json);
         jsonWriter.close();
     }
 
-    private static String createCompleteFileName(String pathToFolder, String fileName){
+    static String createCompleteFileName(String pathToFolder, String fileName){
         return pathToFolder + fileName;
     }
 

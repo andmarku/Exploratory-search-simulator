@@ -1,4 +1,5 @@
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 import java.io.IOException;
 import java.util.*;
 
@@ -34,7 +35,6 @@ class UtilityGeneral {
         return listedResults;
     }//end of listRankedResults
 
-
     static class Pair implements Comparable<Pair>{
         private String key;
         private Double value;
@@ -56,4 +56,5 @@ class UtilityGeneral {
             return value;
         }
     } //end of inner class Pair
+
 }// end of class

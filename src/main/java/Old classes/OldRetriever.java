@@ -9,7 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-// TODO: 2019-10-24 parse immediately to json?
 public class OldRetriever {
 
     public static JsonObject searchResultRetriever(List<String> query, int sizeOfRankedList) throws IOException {

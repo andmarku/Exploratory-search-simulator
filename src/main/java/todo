@@ -1,0 +1,15 @@
+
+
+statistiska testet: - läsa och implementera
+                    - se till så att jag kan använda det statistiska testet mellan flera olika simuleringar
+
+features     - fixa iordning expansion conceptuellt och sen implementationen
+             - normalisera combiner - kolla conceptuellt på overleaf - typ färdigt, behöver bara dubbelkollas och testköras
+
+long term:   - slumpa om artiklar som har titlar på med tecken istället för bokstäver
+             - ordna sökmotorn bättre, med en mer riktig sökning genom att implementera den set-up smo används i google scholar eller semantic scholar.
+
+refactoring: - my use of pairs are unnecessary: i could just use jsonobjects with a comparator and maps in other cases
+             - general cleaning simulator
+             - general cleaning simulator settings
+             - rename features to modules

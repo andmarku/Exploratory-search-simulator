@@ -1,83 +1,61 @@
+import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.io.IOException;
+import javax.json.JsonValue;
 import java.util.*;
 
-// TODO: 2019-10-30 general observation: the ranking score from elastic is not normalized. I need to do this myself when combining
 class Simulator {
 
-
     static void mySimulator(SimulatorSettings settings) throws Exception {
-        /*----------------------------*/
-        /* --- GENERAL SET-UP --- */
-        /*----------------------------*/
-        // list to store results in
-        List<JsonObject> allSimulationResults = new ArrayList<>();
-        allSimulationResults.add(UtilityJsonCreator.createJsonObjectFromSettings(settings));
-        // path to store result in
-        String pathToFolder = settings.pathToFolder;
-        String simulationName = settings.simulationName;
-        // general parameters
-        int numOfItr = settings.numOfItr;
-        int sizeOfFullQuery = settings.sizeOfFullQuery;
-        int sizeOfFinalRankedList = settings.sizeOfFinalRankedList;
-        int sizeOfRetrievedList = settings.sizeOfRetrievedList;
 
-        // trial case
-        double expansionMultiplier = settings.expansionMultiplier;
-        int numOfSubQueries = settings.numOfSubQueries;
+        // read stored base case from file
+        String path = UtilityJsonPrinter.createCompleteFileName(settings.pathToFolder, settings.baseCaseName);
+        JsonObject baseCaseFromFile = UtilityFileReader.readJsonFromFile(path);
 
-        // create the master query
-        List<String> masterQueries = SimulatorQueryCreator.createAllMasterQueries(numOfItr*sizeOfFullQuery, 0);
-        System.out.println("All master queries are " + masterQueries);
+        List<> simulatedBaseCase = baseCaseFromFile.getJsonArray("baseCases");
 
-        for (int i = 0; i < numOfItr; i++) {
-            /*----------------------------*/
-            /* --- SIMULATION: set-up --- */
-            /*----------------------------*/
-            List<String> masterQuery = masterQueries.subList(i * sizeOfFullQuery, (i + 1) * sizeOfFullQuery);
-            System.out.println("Master query of itr " + i + " is " + masterQuery);
+        // RUN SIMULATION
+        List<String> masterQueries = UtilityFileReader.readMasterQueries(baseCaseFromFile);
+        List<JsonObject> simulatedTrialCases = SimulatorTrialCase.trialSimulator(settings, masterQueries);
 
-            /*----------------------------*/
-            /* --- SIMULATION: base case --- */
-            /*----------------------------*/
-            List<List<String>> baseQuery = new ArrayList<>();
-            baseQuery.add(masterQuery);
-            // create the ranked list
-            List<UtilityGeneral.Pair> listedResults_base =
-                    SimulatorUtility.produceRankedListFromBaseQuery(baseQuery, sizeOfRetrievedList, sizeOfFinalRankedList);
+        List<> scores = StatisticalRankComparision.compareAllCases(List<List<UtilityGeneral.Pair>> listOfOrderedListsOne,
+                simulatedTrialCases);
 
-            // printing to the console for testing
-            // UtilityConsolePrinting.printMyRankedList("The base case", listedResults_base);
+        //----------------
+        // --- STORING ---
+        //----------------
+        Map<String, JsonValue> storageMap = new HashMap<>();
 
+        // store settings
+        storageMap.put("settings", UtilityJsonCreator.createJsonObjectFromSettings(settings));
 
-            /*----------------------------*/
-            /* --- SIMULATION: trial case --- */
-            /*----------------------------*/
-            // segment the query
-            List<List<String>> subQueries = SimulatorQueryCreator.segmentQuery(masterQuery, sizeOfFullQuery, numOfSubQueries);
-            System.out.println("Subqueries of itr " + i + " are " + subQueries);
-            // create the ranked list
-            List<UtilityGeneral.Pair> listedResults_trial = SimulatorUtility.produceRankedListFromListOfQueries(
-                    subQueries, expansionMultiplier, sizeOfRetrievedList, sizeOfFinalRankedList);
+        // store trial cases
+        JsonArray trialCases = UtilityJsonCreator.createJsonArrayFromListOfJsonObjects(simulatedTrialCases);
+        storageMap.put("trialCases", trialCases);
 
-            // printing to the console for testing
-            // UtilityConsolePrinting.printMyRankedList("The trial case", listedResults_trial);
+        // save all stored jsons to file
+        JsonObject jsonToPrint = UtilityJsonCreator.createJsonFromMapOfJsonsForPrinting(storageMap);
+        UtilityJsonPrinter.writeJsonToFile(jsonToPrint, settings.pathToFolder, settings.simulationName);
+    }
 
+    static void baseSimulator(SimulatorSettings settings) throws Exception {
+        Map<String, JsonValue> storageMap = new HashMap<>();
 
-            /*----------------------------*/
-            /* --- END of ITERATION: storing --- */
-            /*----------------------------*/
-            allSimulationResults.add(
-                    UtilityJsonCreator.createJsonObjectFromTwoResults(
-                            listedResults_base,
-                            listedResults_trial));
-        }
+        // store settings
+        storageMap.put("settings", UtilityJsonCreator.createJsonObjectFromSettings(settings));
 
-        /*----------------------------*/
-        /* --- END OF SIMULATION: storing --- */
-        /*----------------------------*/
-        UtilityJsonPrinter.storeResultsInFile(allSimulationResults, pathToFolder, simulationName);
+        // create all query terms and store them
+        List<String> listOfQueryTerms = SimulatorQueryCreator.createAllMasterQueries(settings.numOfItr * settings.sizeOfFullQuery, 0);
+        JsonArray queries = UtilityJsonCreator.createJsonArrayFromListOfStrings(listOfQueryTerms);
+        storageMap.put("queryTerms", queries);
 
+        // create base case searches and store them
+        List<JsonObject> simulatedBaseCases = SimulatorBaseCase.simulateBaseCase(settings, listOfQueryTerms);
+        JsonArray baseCases = UtilityJsonCreator.createJsonArrayFromListOfJsonObjects(simulatedBaseCases);
+        storageMap.put("baseCases", baseCases);
+
+        // save all stored jsons to file
+        JsonObject jsonToPrint = UtilityJsonCreator.createJsonFromMapOfJsonsForPrinting(storageMap);
+        UtilityJsonPrinter.writeJsonToFile(jsonToPrint, settings.pathToFolder, settings.baseCaseName);
     }
 
 }// end of simulator class

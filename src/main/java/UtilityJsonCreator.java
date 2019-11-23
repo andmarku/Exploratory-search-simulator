@@ -1,18 +1,11 @@
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 class UtilityJsonCreator {
-    static JsonObject createPairJsonObject(List<UtilityGeneral.Pair> listedPairs){
-        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
-        for (UtilityGeneral.Pair p : listedPairs) {
-            jsonBuilder.add(p.getKey(), p.getValue());
-        }
-        return jsonBuilder.build();
-    }
+
 
     static JsonObject createJsonObjectFromSettings(SimulatorSettings settings){
         // create date
@@ -32,7 +25,32 @@ class UtilityJsonCreator {
         return jsonBuilder.build();
     }
 
-    static JsonObject createJsonObjectFromTwoResults
+    static JsonArray createJsonArrayFromListOfStrings(List<String> list){
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        for (String str : list) {
+            arrayBuilder.add(str);
+        }
+        return arrayBuilder.build();
+    }
+
+    static JsonArray createJsonArrayFromListOfJsonObjects(List<JsonObject> list){
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        for (JsonObject jsonObj : list) {
+            arrayBuilder.add(jsonObj);
+        }
+        return arrayBuilder.build();
+    }
+
+    static JsonObject createJsonFromMapOfJsonsForPrinting(Map<String, JsonValue> jsonMap){
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+        for (String key : jsonMap.keySet()) {
+            jsonBuilder.add(key, jsonMap.get(key));
+        }
+        return jsonBuilder.build();
+    }
+
+
+  /*  static JsonObject createJsonObjectFromTwoResults
             (List<UtilityGeneral.Pair> baseList, List<UtilityGeneral.Pair> trialList){
         JsonObject firstJ = createPairJsonObject(baseList);
         JsonObject secondJ = createPairJsonObject(trialList);
@@ -40,6 +58,14 @@ class UtilityJsonCreator {
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                 .add("base_case", firstJ)
                 .add("trial_case", secondJ);
+        return jsonBuilder.build();
+    }*/
+
+    static JsonObject createJsonObjectFromPairs(List<UtilityGeneral.Pair> listedPairs){
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+        for (UtilityGeneral.Pair p : listedPairs) {
+            jsonBuilder.add(p.getKey(), p.getValue());
+        }
         return jsonBuilder.build();
     }
 }
