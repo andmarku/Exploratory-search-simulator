@@ -3,25 +3,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SimulatorTrialCase {
-    static List<JsonObject> trialSimulator(SimulatorSettings settings, List<String> masterQueries) throws Exception {
-        // ----------------------------
-        // --- GENERAL SET-UP ---
-        // ----------------------------
+    static List<List<UtilityGeneral.Pair>> trialSimulator(SimulatorSettings settings, List<String> masterQueries) throws Exception {
+        // --- SET-UP ---
+
         // general parameters
         int numOfItr = settings.numOfItr;
         int sizeOfFullQuery = settings.sizeOfFullQuery;
         int sizeOfFinalRankedList = settings.sizeOfFinalRankedList;
         int sizeOfRetrievedList = settings.sizeOfRetrievedList;
 
-        // trial case
+        // specific to trial case
         double expansionMultiplier = settings.expansionMultiplier;
         int numOfSubQueries = settings.numOfSubQueries;
 
-        // ----------------------------
-        // --- SIMULATION: trial case ---
-        // ----------------------------
+        // --- SIMULATION ---
+
         // list to store results in
-        List<JsonObject> simulatedTrialCases = new ArrayList<>();
+        List<List<UtilityGeneral.Pair>> simulatedTrialCases = new ArrayList<>();
         for (int i = 0; i < numOfItr; i++) {
             // pick out this iterations master query
             List<String> masterQuery = masterQueries.subList(i * sizeOfFullQuery, (i + 1) * sizeOfFullQuery);
@@ -34,7 +32,7 @@ class SimulatorTrialCase {
                     subQueries, expansionMultiplier, sizeOfRetrievedList, sizeOfFinalRankedList);
 
             // storing ---
-            simulatedTrialCases.add(UtilityJsonCreator.createJsonObjectFromPairs(listedResults_trial));
+            simulatedTrialCases.add(listedResults_trial);
 
 /*            // some printing
             System.out.println("Master query of itr " + i + " is " + masterQuery);

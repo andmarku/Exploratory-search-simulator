@@ -2,38 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SimulatorBaseCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SimulatorTrialCase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/StatisticalRankComparision.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/UtilityFileReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/todo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/backlogg.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FeatureCombiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FeatureCombiner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Old classes/OldRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Old classes/OldRetriever.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Retriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Retriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Old classes/OldRetriever.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Old classes/Parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Old classes/UrlCreator.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorQueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorQueryCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorBaseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorBaseCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityGeneral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityGeneral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SimulatorTrialCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SimulatorTrialCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StatisticalRankComparision.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StatisticalRankComparision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityFileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityFileReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UtilityJsonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityJsonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityJsonPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityJsonPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityStopWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityStopWords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/FeatureCombiner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/FeatureCombiner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UtilityJsonPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UtilityStoreInFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/todo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/mySimulator.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/thesis.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/OldRetriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/OldRetriever.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Retriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Retriever.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/OldRetriever.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Parser.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SimulatorQueryCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorQueryCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SimulatorBaseCase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorBaseCase.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SimulatorSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SimulatorUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SimulatorUtility.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UtilityGeneral.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityGeneral.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StatisticalRankComparision.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StatisticalRankComparision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UrlCreator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityFileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityFileReader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UtilityJsonCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityJsonCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UtilityJsonPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityJsonPrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UtilityStopWords.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/UtilityStopWords.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UtilityJsonPrinter.class" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +58,11 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -70,18 +73,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="Settings.Markdown" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -91,6 +83,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -130,5 +134,39 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="473" y="277" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579522707527">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="473" y="277" key="#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579522707527" />
+    <state x="834" y="444" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579522813379">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="834" y="444" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1579522813379" />
+    <state width="1807" height="266" key="GridCell.Tab.0.bottom" timestamp="1579523447317">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="266" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1579523447317" />
+    <state width="1807" height="266" key="GridCell.Tab.0.center" timestamp="1579523447316">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="266" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1579523447316" />
+    <state width="1807" height="266" key="GridCell.Tab.0.left" timestamp="1579523447316">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="266" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1579523447316" />
+    <state width="1807" height="266" key="GridCell.Tab.0.right" timestamp="1579523447317">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="266" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1579523447317" />
+    <state x="482" y="187" key="SettingsEditor" timestamp="1579522301360">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1579522301360" />
+    <state x="638" y="283" width="710" height="538" key="find.popup" timestamp="1579521550303">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="638" y="283" width="710" height="538" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1579521550303" />
   </component>
 </project>

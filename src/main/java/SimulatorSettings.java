@@ -1,32 +1,67 @@
 class SimulatorSettings {
     String pathToFolder;
     String simulationName;
-    String baseCaseName;
+    String baseLineName;
+    String queryName;
+    String simulationPath;
+    String baseLinePath;
+    String queryPath;
     int numOfItr;
     int sizeOfFullQuery;
     int sizeOfFinalRankedList;
     int sizeOfRetrievedList;
     double expansionMultiplier;
     int numOfSubQueries;
+    double p;
 
     void setStandardSettings(){
         // path to store result in
         pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//";
         simulationName = "firstSimulation";
-        baseCaseName = "firstBaseCase";
+        baseLineName = "firstBaseLineCase";
+        queryName = "firstQueryTerms";
+        simulationPath = pathToFolder + simulationName;
+        baseLinePath = pathToFolder + baseLineName;
+        queryPath = pathToFolder + queryName;
 
         // general parameters
-        numOfItr = 1;
+        numOfItr = 50;
         sizeOfFullQuery = 6;
-        sizeOfFinalRankedList = 5;
-        sizeOfRetrievedList = 100;
+        sizeOfFinalRankedList = 100;
+        sizeOfRetrievedList = 1000;
+        p = 0.9;
 
         // trial case
-        expansionMultiplier = 2;
+        expansionMultiplier = 0.1;
         numOfSubQueries = 2;
 
         // Check that the number of sub-queries are compatible with the size of the full query
         checkNumOfSubQueries(numOfSubQueries, sizeOfFullQuery);
+    }
+
+    void setSimulationName(String simulationName){
+        this.simulationName = simulationName;
+        simulationPath = pathToFolder + simulationName;
+    }
+    void setSizeOfFullQuery(int sizeOfFullQuery){
+        this.sizeOfFullQuery = sizeOfFullQuery;
+        // Check that the number of sub-queries are compatible with the size of the full query
+        checkNumOfSubQueries(numOfSubQueries, sizeOfFullQuery);
+    }
+    void setSizeOfFinalRankedList(int sizeOfFinalRankedList){
+        this.sizeOfFinalRankedList = sizeOfFinalRankedList;
+    }
+    void setSizeOfRetrievedList(int sizeOfRetrievedList){
+        this.sizeOfRetrievedList = sizeOfRetrievedList;
+    }
+    void setValueOfP(int p){
+        this.p = p;
+    }
+    void setExpansionMultiplier(double expansionMultiplier){
+        this.expansionMultiplier = expansionMultiplier;
+    }
+    void setNumOfSubQueries(int numOfSubQueries){
+        this.numOfSubQueries = numOfSubQueries;
     }
 
     private static void checkNumOfSubQueries(int numOfSubQueries, int sizeOfFullQuery){

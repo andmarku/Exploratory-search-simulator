@@ -8,10 +8,10 @@ public class Main {
         SimulatorSettings settings = new SimulatorSettings();
         settings.setStandardSettings();
 
-        //SimulatorQueryCreator.removeStopWords("hi todo hi' t?odo` here' here's is * somethin?");
+        //SimulatorQueryCreator.removeStopWords("hi backlogg.md hi' t?odo` here' here's is * somethin?");
 
-        Simulator.baseSimulator(settings);
-
+        //Simulator.querySimulator(settings);
+        //Simulator.baseSimulator(settings);
         Simulator.mySimulator(settings);
 
         //SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
