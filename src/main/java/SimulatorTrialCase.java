@@ -3,18 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SimulatorTrialCase {
-    static List<List<UtilityGeneral.Pair>> trialSimulator(SimulatorSettings settings, List<String> masterQueries) throws Exception {
+    static List<List<UtilityGeneral.Pair>> trialSimulator(Settings settings, List<String> masterQueries) throws Exception {
         // --- SET-UP ---
 
         // general parameters
-        int numOfItr = settings.numOfItr;
-        int sizeOfFullQuery = settings.sizeOfFullQuery;
-        int sizeOfFinalRankedList = settings.sizeOfFinalRankedList;
-        int sizeOfRetrievedList = settings.sizeOfRetrievedList;
+        int numOfItr = settings.getNumOfItr();
+        int sizeOfFullQuery = settings.getSizeOfFullQuery();
+        int sizeOfFinalRankedList = settings.getSizeOfFinalRankedList();
+        int sizeOfRetrievedList = settings.getSizeOfRetrievedList();
 
         // specific to trial case
-        double expansionMultiplier = settings.expansionMultiplier;
-        int numOfSubQueries = settings.numOfSubQueries;
+       /* double expansionMultiplier = settings.getExpansionMultiplier();*/
+        int numOfSubQueries = settings.getNumOfSubQueries();
 
         // --- SIMULATION ---
 
@@ -29,7 +29,7 @@ class SimulatorTrialCase {
 
             // create the ranked list
             List<UtilityGeneral.Pair> listedResults_trial = SimulatorUtility.produceRankedListFromListOfQueries(
-                    subQueries, expansionMultiplier, sizeOfRetrievedList, sizeOfFinalRankedList);
+                    subQueries, 1, sizeOfRetrievedList, sizeOfFinalRankedList);
 
             // storing ---
             simulatedTrialCases.add(listedResults_trial);

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 class UtilityJsonCreator {
-    static JsonObject createJsonObjectFromSettings(SimulatorSettings settings){
+/*    static JsonObject createJsonObjectFromSettings(Settings settings){
         // create date
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate localDate = LocalDate.now();
@@ -15,13 +15,30 @@ class UtilityJsonCreator {
         // create json
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                 .add("date", date)
-                .add("sizeOfFullQuery", settings.sizeOfFullQuery)
-                .add("numOfItr", settings.numOfItr)
-                .add("sizeOfFinalRankedList", settings.sizeOfFinalRankedList)
-                .add("sizeOfRetrievedList", settings.sizeOfRetrievedList)
-                .add("valueOfP", settings.p)
-                .add("expansionMultiplier", settings.expansionMultiplier)
-                .add("numOfSubQueries", settings.numOfSubQueries);
+                .add("sizeOfFullQuery", settings.getSizeOfFullQuery())
+                .add("numOfItr", settings.getNumOfItr())
+                .add("sizeOfFinalRankedList", settings.getSizeOfFinalRankedList())
+                .add("sizeOfRetrievedList", settings.getSizeOfRetrievedList())
+                .add("expansionMultiplier", settings.getExpansionMultiplier())
+                .add("numOfSubQueries", settings.getNumOfSubQueries());
+        return jsonBuilder.build();
+    }*/
+
+    static JsonObject createJsonObjectFromSettings(Settings settings, double expMultiplier, int nrOfSubqueries, int itr){
+        // create date
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        String date = dtf.format(localDate);
+
+        // create json
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
+                .add("date", date)
+                .add("sQ", settings.getSizeOfFullQuery()) // sizeOfFullQuery
+                .add("sFL", settings.getSizeOfFinalRankedList()) // sizeOfFinalRankedList
+                .add("sRL", settings.getSizeOfRetrievedList()) // sizeOfRetrievedList
+                .add("itr", itr)
+                .add("eM", expMultiplier) // expansionMultiplier
+                .add("nSq", nrOfSubqueries); // numOfSubQueries
         return jsonBuilder.build();
     }
 

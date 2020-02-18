@@ -62,7 +62,7 @@ class SimulatorQueryCreator {
         m = p.matcher(strWithoutSigns);
         String strWithoutStopWords = m.replaceAll(" ").trim();
 
-        System.out.println(strWithoutStopWords);
+        /*System.out.println(strWithoutStopWords);*/
         return strWithoutStopWords;
     }
 

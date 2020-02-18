@@ -1,34 +1,56 @@
 
-priority
+January
 ========
-* Simulation
-   * I need to run for-loops over settings (started)
-      * How can I do subqueries with same number of baseQueries?
-   * Save loops in same file (without printing over)
-   * (what combinations can I use? simulation set-up)
 
-* Scoring
-   * create a module that does all tests, instead of running test with baseline at search time.
+* Write citation expansion in theory
+
+* Write method
+   * Which experiments should I do?
+      * How should setting be? Discuss all these parameters.
+      * How do I combine subqueries and masterqueries?
+         * How can I do many subqueries with same number of baseQueries?
+   * How should the expansion be done conceptually
+   * Statistiska testet
+      * How can I use the statistical test between different simulations
+      - Read up! If not clear after jan, ask Rebecka.
+
+February
+===
+
+* Development
+   * For-loop over settings
+      * No baseSim method - use regular and send in settings
+      * Only load queries once in looper
+   * Implement expansion
+   * Normalise combiner - kolla overleaf (dubbelkolla och testkör)
+   * Scoring
+      * create a module that does all tests, instead of running test with baseline at search time.
+      * p must be a parameter, not hardcoded in the testing module.
+
+* Write through report. STATUS OVERVIEW
+   * How much of what I have is OK?
+   * Create detailed backlogg
+      * Which parts are not OK at all?
+
+* Start with results section
+   * Run simulations
+   * Outline result
+      * Which subsections?
+      * Which figures?
+         * create bar plot over means of many simulations
+         * create 2d histogram of averaged scores for comparing two settings in same general case
+
+Mars
+===
+* Run simulations
 
 * R
-   * create bar plot over means of many simulations
-   * create 2d histogram of averaged scores for comparing two settings in same general case
+   * Implement code to create figures to analyze
 
-* Refactor
-   * Run the statistical test in a separate unit. (Need to be able to rerun tests.)
-      * p must be a parameter, not hardcoded in the testing module.
-   * Rename runSimulation and SimulationTrialCase
-   * Only load queries once in looper
-   * Perhaps no baseSim method - use regular and send in settings
-   
-long term
-=======
-* Statistiska testet
-   * se till så att jag kan använda det statistiska testet mellan flera olika simuleringar
-
-* Features
-   * fixa iordning expansion conceptuellt och sen implementationen
-   * normalisera combiner - kolla conceptuellt på overleaf - typ färdigt, behöver bara dubbelkollas och testköras
+* Write result
+    * Create figures
+       
+* Write discussion
 
 perhaps
 ===
@@ -41,6 +63,7 @@ perhaps
       * japanska tecken
       * cyriliska tecken (bokstäver Ôóðýðð Èóóö ×óðúòø Ôóðýðð Blockinøöóðýøø×)
    * termen -evolution dök upp. få bort bindessträcket eller tillbaka vad som varit på andra sidan
+   * -- and -  and AND happens in query terms
    * seed: 44, 46 (gave -null), 93 (lone -)
    
 * Optimising

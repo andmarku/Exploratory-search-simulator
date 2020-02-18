@@ -5,14 +5,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Running");
-        SimulatorSettings settings = new SimulatorSettings();
-        settings.setStandardSettings();
 
-        //SimulatorQueryCreator.removeStopWords("hi backlogg.md hi' t?odo` here' here's is * somethin?");
-
-        //Simulator.querySimulator(settings);
-        //Simulator.baseSimulator(settings);
-        Simulator.mySimulator(settings);
+        SimulatorWrapper.simulator();
 
         //SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
@@ -33,4 +27,4 @@ public class Main {
 
         return myQueries;
     }
-}// end of class
+}

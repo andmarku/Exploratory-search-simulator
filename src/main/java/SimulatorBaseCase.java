@@ -4,14 +4,14 @@ import java.util.List;
 
 class SimulatorBaseCase {
 
-    static List<JsonObject>  simulateBaseCase(SimulatorSettings settings, List<String> masterQueries) throws Exception {
+    static List<JsonObject>  simulateBaseCase(Settings settings, List<String> masterQueries) throws Exception {
         List<JsonObject> allSimulationResults = new ArrayList<>();
 
-        int sizeOfRetrievedList = settings.sizeOfRetrievedList;
-        int sizeOfFinalRankedList = settings.sizeOfFinalRankedList;
-        int sizeOfFullQuery = settings.sizeOfFullQuery;
+        int sizeOfRetrievedList = settings.getSizeOfRetrievedList();
+        int sizeOfFinalRankedList = settings.getSizeOfFinalRankedList();
+        int sizeOfFullQuery = settings.getSizeOfFullQuery();
 
-        for (int i = 0; i < settings.numOfItr; i++) {
+        for (int i = 0; i < settings.getNumOfItr(); i++) {
             // set-up
             List<String> masterQuery = masterQueries.subList(i * sizeOfFullQuery, (i + 1) * sizeOfFullQuery);
             System.out.println("Master query of itr " + i + " is " + masterQuery);
