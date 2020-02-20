@@ -1,4 +1,5 @@
-import java.io.IOException;
+import Simulator.Wrapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,9 +7,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Running");
 
-        SimulatorWrapper.simulator();
+        Wrapper.simulator();
 
-        //SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
+        //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
         System.out.println("Finished");
     }
