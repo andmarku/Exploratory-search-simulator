@@ -1,4 +1,11 @@
 
+* I can greatly increase the speed through reusing retrieved lists with the same items.
+    * I can at least have an inner loop for the expansion, where I reuse the same lists. 
+    * Perhaps I can also to one poll with the most segmented version and then add together 
+    the different segmentations, somewhat depending on how elastic has done it .
+    * (It doesn't  what the "correct" list from elastic is, when I'm going to discuss RMs
+     anyway.) 
+
 January
 ========
 
@@ -68,9 +75,6 @@ perhaps
    
 * Optimising
    * profile code. what takes time?
-   
-* Refactoring
-   * add folders
    
 not priority / will probably not do at all
 ===

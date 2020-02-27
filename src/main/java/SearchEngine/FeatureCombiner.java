@@ -1,7 +1,5 @@
 package SearchEngine;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
 import java.util.*;
 
 public class FeatureCombiner {

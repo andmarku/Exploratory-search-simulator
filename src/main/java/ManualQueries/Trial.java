@@ -1,6 +1,6 @@
 package ManualQueries;
 
-import SearchEngine.Utility;
+import SearchEngine.SearchEngine;
 import Settings.Settings;
 import Simulator.QueryCreator;
 import Utility.General;
@@ -34,7 +34,7 @@ class Trial {
             List<List<String>> subQueries = QueryCreator.segmentQuery(masterQuery, sizeOfFullQuery, numOfSubQueries);
 
             // create the ranked list
-            List<General.Pair> listedResults_trial = Utility.produceRankedListFromListOfQueries(
+            List<General.Pair> listedResults_trial = SearchEngine.produceRankedListFromListOfQueries(
                     subQueries, 1, sizeOfRetrievedList, sizeOfFinalRankedList);
 
             // storing ---

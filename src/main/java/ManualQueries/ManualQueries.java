@@ -1,9 +1,5 @@
 package ManualQueries;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ManualQueries {
 
     /*static void runManualQueries(List<List<String>> subqueries, Settings.Settings settings) throws Exception {

@@ -29,7 +29,7 @@ public class Looper {
             // pick out this iterations master query,
             List<String> mQuery = listOfQueryTerms.subList(itr*sizeOfMQuery, (itr+1)*sizeOfMQuery);
 
-            for (int nrOfSubqueries : settings.getSubqueries()){
+            for (int nrOfSubqueries : settings.getSubqueries()) {
                 for (double expMultiplier: settings.getExpMultipliers()) {
 
                     // create result

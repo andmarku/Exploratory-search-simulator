@@ -1,9 +1,6 @@
 package SearchEngine;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.AbstractMap;
-import java.util.List;
 
 public class FeatureExpander {
     /* idea: each linked doc gets sum of the percentage of the total score that the original documents had */
