@@ -35,18 +35,8 @@ public class Looper {
                     // create result
                     List<General.Pair> rankedListAsList = SearchEngine.produceRankedList(settings, mQuery, expMultiplier, nrOfSubqueries);
 
-                    // convert to json object
-                    JsonObject rankedListAsJson = JsonCreator.createJsonObjectFromListOfPairs(rankedListAsList);
-                    JsonObject settingsAsJson = JsonCreator.createJsonObjectFromSettings(settings, expMultiplier, nrOfSubqueries, itr);
-
-                    // create final json
-                    JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
-                    jsonBuilder.add("settings", settingsAsJson);
-                    jsonBuilder.add("rankedList", rankedListAsJson);
-
-                    // save to array
-                    JsonObject finalJson = jsonBuilder.build();
-                    simsAsListOfJsons.add(finalJson);
+                    // save ranked list as json in array
+                    simsAsListOfJsons.add(JsonCreator.rankedListToJson(rankedListAsList, settings, expMultiplier, nrOfSubqueries, itr));
                 }
             }
         }
@@ -54,32 +44,5 @@ public class Looper {
         StoreInFile.storeResultsInFile(simsAsListOfJsons, settings.getPathToFolder(), settings.getSimulationName());
     }
 
-
-/*
-
-
-    static void mySimulator(Settings.Settings settings) throws Exception {
-        // run simulation
-        List<List<Utility.UtilityGeneral.Pair>> mySims = runSimulation(settings);
-
-*//*
-        // score results
-        List<Double> scores = compareSimulationWithBaseLine(settings, mySims);
-*//*
-
-        // store resulting list
-        List<JsonObject> simulationsAsListOfJsons = Utility.UtilityJsonCreator.createListOfJsonObjectsFromListOfListOfPairs(mySims);
-        JsonArray trialCases = Utility.UtilityJsonCreator.createJsonArrayFromListOfJsonObjects(simulationsAsListOfJsons);
-
-        List<String> nameOfJsonsToStore = new ArrayList<>();
-        nameOfJsonsToStore.add("trials");
-        nameOfJsonsToStore.add("scores");
-
-        List<JsonValue> jsonsToStore = new ArrayList<>();
-        jsonsToStore.add(trialCases);
-        *//*jsonsToStore.add(Utility.UtilityJsonCreator.createJsonObjectFromListDoubles(scores));*//*
-
-        Utility.UtilityStoreInFile.storeResults(settings, settings.getSimulationName(), nameOfJsonsToStore, jsonsToStore);
-    }*/
 
 }

@@ -11,40 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StoreInFile {
-/*    public static void storeResults(SimulatorSettings settings, String nameOfJsonToStore, JsonValue json, String filename) throws FileNotFoundException {
-        Map<String, JsonValue> storageMap = new HashMap<>();
-
-        // store settings
-        storageMap.put("settings", Utility.UtilityJsonCreator.createJsonObjectFromSettings(settings));
-
-        // store trial cases
-        storageMap.put(nameOfJsonToStore, json);
-
-        // save all stored jsons to file
-        JsonObject jsonToPrint = Utility.UtilityJsonCreator.createJsonFromMapOfJsons(storageMap);
-        Utility.UtilityStoreInFile.writeJsonToFile(jsonToPrint, settings.pathToFolder, filename);
-    }*/
-
-/*    public static void storeResults(Settings.Settings settings, String filename, List<String> nameOfJsonToStore, List<JsonValue> jsonsToStore) throws Exception {
-        if(nameOfJsonToStore.size() != jsonsToStore.size()){
-            throw new Exception("List of different sizes");
-        }
-
-        Map<String, JsonValue> storageMap = new HashMap<>();
-
-        // store settings
-        storageMap.put("settings", Utility.UtilityJsonCreator.createJsonObjectFromSettings(settings));
-
-        // store jsons
-        for (int i = 0; i < jsonsToStore.size(); i++) {
-            storageMap.put(nameOfJsonToStore.get(i), jsonsToStore.get(i));
-        }
-
-        // save all stored jsons to file
-        JsonObject jsonToPrint = Utility.UtilityJsonCreator.createJsonFromMapOfJsons(storageMap);
-        Utility.UtilityStoreInFile.writeJsonToFile(jsonToPrint, settings.getPathToFolder(), filename);
-    }*/
-
     public static void storeQueries(Settings settings, String filename, List<String> nameOfJsonToStore, List<JsonValue> jsonsToStore) throws Exception {
         if(nameOfJsonToStore.size() != jsonsToStore.size()){
             throw new Exception("List of different sizes");

@@ -25,16 +25,6 @@ public class SearchEngine {
 
         return listedResults;
     }
-    public static List<General.Pair> produceRankedListFromBaseQuery
-            (List<List<String>> queries, int sizeOfRetrievedList, int sizeOfFinalRankedList) throws Exception {
-
-        // Rank expanded hits for the query
-        List<AbstractMap<String, Double>> storedRankedLists = rankAllQueries(
-                queries, sizeOfRetrievedList, 0);
-
-        // pick out the first x of the scored docs
-        return General.listRankedResults(storedRankedLists.get(0), sizeOfFinalRankedList);
-    }
 
     public static List<General.Pair> produceRankedListFromListOfQueries
             (List<List<String>> queries, double expansionMultiplier,

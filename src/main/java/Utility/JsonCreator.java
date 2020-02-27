@@ -9,24 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonCreator {
-/*    static JsonObject createJsonObjectFromSettings(Settings.Settings settings){
-        // create date
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate localDate = LocalDate.now();
-        String date = dtf.format(localDate);
-
-        // create json
-        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
-                .add("date", date)
-                .add("sizeOfFullQuery", settings.getSizeOfFullQuery())
-                .add("numOfItr", settings.getNumOfItr())
-                .add("sizeOfFinalRankedList", settings.getSizeOfFinalRankedList())
-                .add("sizeOfRetrievedList", settings.getSizeOfRetrievedList())
-                .add("expansionMultiplier", settings.getExpansionMultiplier())
-                .add("numOfSubQueries", settings.getNumOfSubQueries());
-        return jsonBuilder.build();
-    }*/
-
     public static JsonObject createJsonObjectFromSettings(Settings settings, double expMultiplier, int nrOfSubqueries, int itr){
         // create date
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -53,14 +35,6 @@ public class JsonCreator {
         return arrayBuilder.build();
     }
 
-    public static JsonArray createJsonArrayFromListOfJsonObjects(List<JsonObject> list){
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for (JsonObject jsonObj : list) {
-            arrayBuilder.add(jsonObj);
-        }
-        return arrayBuilder.build();
-    }
-
     public static JsonObject createJsonFromMapOfJsons(Map<String, JsonValue> jsonMap){
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         for (String key : jsonMap.keySet()) {
@@ -69,14 +43,6 @@ public class JsonCreator {
         return jsonBuilder.build();
     }
 
-    public static List<JsonObject> createListOfJsonObjectsFromListOfListOfPairs(List<List<General.Pair>> listOfListOfPairs){
-        List<JsonObject> listOfJsons  = new ArrayList<>();
-        for (List<General.Pair> listOfPairs : listOfListOfPairs) {
-            JsonObject jsonOfPairs = JsonCreator.createJsonObjectFromListOfPairs(listOfPairs);
-            listOfJsons.add(jsonOfPairs);
-        }
-        return listOfJsons;
-    }
 
     public static JsonObject createJsonObjectFromListOfPairs(List<General.Pair> listedPairs){
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
@@ -86,11 +52,16 @@ public class JsonCreator {
         return jsonBuilder.build();
     }
 
-    public static JsonArray createJsonObjectFromListDoubles(List<Double> listedDoubles) {
-        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for (Double value : listedDoubles) {
-            arrayBuilder.add(value);
-        }
-        return arrayBuilder.build();
+    public static JsonObject rankedListToJson(List<General.Pair> rankedListAsList, Settings settings, double expMultiplier, int nrOfSubqueries, int itr) {
+
+        // convert ranked list to json object
+        JsonObject rankedListAsJson = createJsonObjectFromListOfPairs(rankedListAsList);
+        JsonObject settingsAsJson = createJsonObjectFromSettings(settings, expMultiplier, nrOfSubqueries, itr);
+
+        // return final json
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+        jsonBuilder.add("settings", settingsAsJson);
+        jsonBuilder.add("rankedList", rankedListAsJson);
+        return jsonBuilder.build();
     }
 }
