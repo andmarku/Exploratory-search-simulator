@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SimpleModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngineWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/JsonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/JsonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/StoreInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/StoreInFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/SearchEngine.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/Utility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +58,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="public" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
@@ -57,6 +68,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="Utility.JsonCreator" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="test" />
     </key>
@@ -165,22 +179,22 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582188781593" />
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1582204067342">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1582789991997">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1582204067342" />
-    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1582204067341">
+    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991997" />
+    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1582789991996">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1582204067341" />
-    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1582204067341">
+    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
+    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1582789991996">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1582204067341" />
-    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1582204067341">
+    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1582789991996">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1582204067341" />
+    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
     <state width="1807" height="278" key="GridCell.Tab.1.bottom" timestamp="1582204067330">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -201,10 +215,18 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1582185785676" />
+    <state x="827" y="418" width="524" height="491" key="extract.method.dialog" timestamp="1582784672270">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="827" y="418" width="524" height="491" key="extract.method.dialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582784672270" />
     <state x="639" y="284" width="869" height="606" key="find.popup" timestamp="1582034464366">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="639" y="284" width="869" height="606" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1582034464366" />
+    <state x="656" y="257" key="search.everywhere.popup" timestamp="1582788103647">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="656" y="257" key="search.everywhere.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1582788103647" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thesis$Main.ic" NAME="Main Coverage Results" MODIFIED="1582192010840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

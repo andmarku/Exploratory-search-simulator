@@ -32,7 +32,7 @@ public class ThreeQueryTerms implements Settings{
         // general parameters
         numOfItr = 100;
         sizeOfFinalRankedList =50;
-        sizeOfRetrievedList = 50;
+        sizeOfRetrievedList = 1000;
 
         // simulation settings
         sizeOfFullQuery = 3;
