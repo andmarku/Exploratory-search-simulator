@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/Model.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SimpleModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngineWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/SearchEngine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/Utility.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backlogg.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backlogg.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
