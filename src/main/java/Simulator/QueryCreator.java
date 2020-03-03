@@ -4,7 +4,7 @@ import Retriever.ParameterCreator;
 import Retriever.Retriever;
 import Settings.Settings;
 import Utility.JsonCreator;
-import Utility.StoreInFile;
+import Utility.FileStorer;
 
 import javax.json.*;
 import java.io.IOException;
@@ -151,6 +151,15 @@ public class QueryCreator {
         // print using the storeResultInFile wrapper
         List<JsonObject> jsonInList = new ArrayList<>();
         jsonInList.add(jsonToPrint);
-        Utility.StoreInFile.storeResultsInFile(jsonInList, settings.getQueryPath());
+        FileStorer.storeResultsInFile(jsonInList, settings.getQueryPath());
+    }
+
+    public static List<String> parseMasterQueries(JsonObject jsonFromFile){
+        JsonArray queriesAsJsonArray = jsonFromFile.getJsonArray("queryTerms");
+        List<String> queriesAsList = new ArrayList<>();
+        for (int i = 0; i < queriesAsJsonArray.size(); i++) {
+            queriesAsList.add(queriesAsJsonArray.getString(i));
+        }
+        return queriesAsList;
     }
 }// end of class

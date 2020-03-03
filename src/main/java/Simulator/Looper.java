@@ -7,7 +7,7 @@ import Settings.Settings;
 import Utility.FileReader;
 import Utility.General;
 import Utility.JsonCreator;
-import Utility.StoreInFile;
+import Utility.FileStorer;
 
 import javax.json.*;
 import java.util.AbstractMap;
@@ -23,8 +23,12 @@ public class Looper {
         Model rankingModel = new SimpleModel();
 
         // read all queries from file
-        JsonObject queriesFromFile = FileReader.readJsonFromFile(settings.getQueryPath());
-        List<String> listOfQueryTerms = FileReader.readMasterQueries(queriesFromFile);
+        List<JsonObject> listQueriesFromFile = FileReader.readJsonFromFile(settings.getQueryPath());
+        if (listQueriesFromFile.size() > 1){
+            System.out.println("Maybe reading in wrong file for the queries!");
+        }
+        JsonObject queriesFromFile = listQueriesFromFile.get(0);
+        List<String> listOfQueryTerms = QueryCreator.parseMasterQueries(queriesFromFile);
 
 
         int nrOfLists = settings.getNumOfItr() * settings.getSubqueries().size() * settings.getExpMultipliers().size();
@@ -53,7 +57,7 @@ public class Looper {
             }
         }
 
-        StoreInFile.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
+        FileStorer.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
     }
 
 

@@ -1,7 +1,9 @@
 import Settings.*;
 import Simulator.SimWrapper;
 import Measures.MeasureWrapper;
+import Utility.FileReader;
 
+import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +11,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Running");
 
-        SimWrapper.simulator();
-
-        // Choose settings
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
-        MeasureWrapper.compareAllCombinationsWithRBD(settings);
 
+        SimWrapper.simulator(settings);
+
+        // Choose settings
+        /*
+        MeasureWrapper.compareAllCombinationsWithRBD(settings);
+*/
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
         System.out.println("Finished");

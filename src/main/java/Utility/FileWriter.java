@@ -1,17 +1,11 @@
 package Utility;
 
-import Settings.Settings;
 import javax.json.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class StoreInFile {
+public class FileStorer {
     /*
     Wrapper for appendJsonToFile
      */

@@ -12,9 +12,9 @@ import java.util.List;
 public class MeasureWrapper {
     public static List<Double> compareAllCombinationsWithRBD(Settings settings) throws Exception {
         // read queries from file
-        JsonObject simulationsJson = FileReader.readJsonFromFile(settings.getSimulationPath());
+        List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
         /*List<List<General.Pair>> simulations =*/
-        Parser.parseListOfSimulationResults(simulationsJson);
+        Parser.parseListOfSimulationResults(simulationsListOfJsons);
 
         // compare with statistical test
         //*return StatisticalRankComparision.compareAllCases(baseLines, mySims, settings.p);*//*

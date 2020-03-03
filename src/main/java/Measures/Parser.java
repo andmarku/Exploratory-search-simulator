@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    public static /*List<List<General.Pair>>*/ void parseListOfSimulationResults(JsonObject simsFromFile){
+    public static /*List<List<General.Pair>>*/ void parseListOfSimulationResults(List<JsonObject> simsFromFile){
         List<List<General.Pair>> listsSingleMasterQuery = new ArrayList<>();
 
         System.out.println(simsFromFile);
