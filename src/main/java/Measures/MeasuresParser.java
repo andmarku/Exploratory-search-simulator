@@ -7,15 +7,14 @@ import java.util.*;
 
 public class MeasuresParser {
     public static AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> parseListOfSimulationResults(List<JsonObject> simsFromFile){
-        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allItr = new HashMap<>();
-        AbstractQueue<General.Pair> sortedRes = new PriorityQueue<>();
+        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> listsFromAllItr = new HashMap<>();
 
-        int itr;
+        // go through all simulations
         for (JsonObject json : simsFromFile) {
             List<General.Pair> listRes = new ArrayList<>();
 
             // extract which iteration this list is from (should be in order)
-            itr = json.getJsonObject("settings").getInt("itr");
+            int itr = json.getJsonObject("settings").getInt("itr");
             System.out.println(itr);
 
             // extract which GoP simulation the results belong to
@@ -25,6 +24,7 @@ public class MeasuresParser {
 
             // extract ranked list
             JsonObject rankedList = json.getJsonObject("rankedList");
+            AbstractQueue<General.Pair> sortedRes = new PriorityQueue<>();
             for (String key : rankedList.keySet()) {
                 General.Pair pair = new General.Pair(key, rankedList.getJsonNumber(key).doubleValue());
                 sortedRes.add(pair);
@@ -36,14 +36,14 @@ public class MeasuresParser {
             }
 
             // see if anything regarding this iteration has been added yet. If not, add an empty list.
-            if (!allItr.containsKey(itr)){
-                allItr.put(itr, new HashMap<>());
+            if (!listsFromAllItr.containsKey(itr)){
+                listsFromAllItr.put(itr, new HashMap<>());
             }
 
             // add to the list containing each list in the iteration
-            allItr.get(itr).put(gopKey, listRes);
+            listsFromAllItr.get(itr).put(gopKey, listRes);
         }
 
-        return allItr;
+        return listsFromAllItr;
     }
 }
