@@ -4,7 +4,7 @@ import Retriever.ParameterCreator;
 import Retriever.Retriever;
 import Settings.Settings;
 import Simulator.QueryCreator;
-import Retriever.Parser;
+import Retriever.RetrieverParser;
 
 import javax.json.JsonObject;
 import java.util.AbstractMap;
@@ -31,7 +31,7 @@ public class SearchEngineWrapper {
             JsonObject retrievedRes = Retriever.searchResultRetriever(queryParams);
 
             // parse the elastic ranked list into scoredDocs, linkedDocs, and totalScore
-            List parsedResult = Parser.docAndLinksScoreParser(retrievedRes);
+            List parsedResult = RetrieverParser.docAndLinksScoreParser(retrievedRes);
             AbstractMap<String, Double> scoredDocs = (HashMap<String, Double>) parsedResult.get(0);
             AbstractMap<String, Double> linkedDocs = (HashMap<String, Double>) parsedResult.get(1);
             AbstractMap<String, Double> totalScore = new HashMap<>();

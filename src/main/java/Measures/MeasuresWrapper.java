@@ -4,18 +4,19 @@ import Settings.Settings;
 import Utility.FileReader;
 import Utility.General;
 
-import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.util.ArrayList;
+import java.util.AbstractMap;
 import java.util.List;
 
-public class MeasureWrapper {
+public class MeasuresWrapper {
     public static List<Double> compareAllCombinationsWithRBD(Settings settings) throws Exception {
         // read queries from file
         List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
         /*List<List<General.Pair>> simulations =*/
-        Parser.parseListOfSimulationResults(simulationsListOfJsons);
+        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
 
+        // CONTINUE WITH GOING THROUGH KEYSET IN ORDER TO COMPARE EVERYTHING IN AN ITERATION
+        // THEN START WITH WRITER WHICH SAVES RBD AND WHICH LIST THAT HAVE BEEN COMPARED
         // compare with statistical test
         //*return StatisticalRankComparision.compareAllCases(baseLines, mySims, settings.p);*//*
         return null;

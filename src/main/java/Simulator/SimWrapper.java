@@ -1,7 +1,6 @@
 package Simulator;
 
 import Settings.Settings;
-import Settings.ThreeQueryTerms;
 
 public class SimWrapper {
     public static void simulator(Settings settings) throws Exception {

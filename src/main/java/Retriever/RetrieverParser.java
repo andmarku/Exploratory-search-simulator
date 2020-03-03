@@ -3,7 +3,7 @@ package Retriever;
 import java.util.*;
 import javax.json.*;
 
-public class Parser {
+public class RetrieverParser {
 
     public static List<List> docAndLinksScoreParser(JsonObject searchRes) throws Exception {
         // initialize list to be returned from the method
