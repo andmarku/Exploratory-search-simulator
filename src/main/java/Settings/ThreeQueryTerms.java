@@ -6,16 +6,13 @@ import java.util.List;
 public class ThreeQueryTerms implements Settings{
     String pathToFolder;
     String simulationName;
-    String baseLineName;
     String queryName;
     String simulationPath;
-    String baseLinePath;
     String queryPath;
     int numOfItr;
     int sizeOfFullQuery;
     int sizeOfFinalRankedList;
     int sizeOfRetrievedList;
-    int numOfSubQueries;
     List<Double> expMultipliers = new ArrayList<>();
     List<Integer>  sizeOfSubqueries = new ArrayList<>();
 
@@ -23,10 +20,8 @@ public class ThreeQueryTerms implements Settings{
         // path to store result in
         pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";
         simulationName = "firstSimulation";
-        baseLineName = "firstBaseLineCase";
         queryName = "newQueryTerms";
         simulationPath = pathToFolder + simulationName;
-        baseLinePath = pathToFolder + baseLineName;
         queryPath = pathToFolder + queryName;
 
         // general parameters
@@ -49,16 +44,13 @@ public class ThreeQueryTerms implements Settings{
 
     public String getPathToFolder(){return pathToFolder;}
     public String getSimulationName(){return simulationName;}
-    public String getBaseLineName(){return baseLineName;}
     public String getQueryName(){return queryName;}
     public String getSimulationPath(){return simulationPath;}
-    public String getBaseLinePath(){return baseLinePath;}
     public String getQueryPath(){return queryPath;}
     public int getNumOfItr(){return numOfItr;}
     public int getSizeOfFullQuery(){return sizeOfFullQuery;}
     public int getSizeOfFinalRankedList(){return sizeOfFinalRankedList;}
     public int getSizeOfRetrievedList(){return sizeOfRetrievedList;}
-    public int getNumOfSubQueries(){return numOfSubQueries;}
     public List<Double> getExpMultipliers(){return expMultipliers;}
     public List<Integer> getSubqueries(){ return sizeOfSubqueries;}
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wrapper {
-    public static List<Double> compareSimulationWithBaseLine(Settings settings, List<List<General.Pair>> mySims ) throws Exception {
+    public static List<Double> compareAllCombinationsWithRBD(Settings settings) throws Exception {
         // read queries from file
-        JsonObject baseLinesFromFile = FileReader.readJsonFromFile(settings.getBaseLinePath());
+        JsonObject baseLinesFromFile = FileReader.readJsonFromFile(settings.getSimulationPath());
         List<List<General.Pair>> baseLines = FileReader.parseListOfSearchResults(baseLinesFromFile);
 
         // compare with statistical test
