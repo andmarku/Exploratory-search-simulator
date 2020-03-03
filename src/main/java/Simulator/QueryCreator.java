@@ -6,35 +6,32 @@ import Settings.Settings;
 import Utility.JsonCreator;
 import Utility.StoreInFile;
 
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
+import javax.json.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class QueryCreator {
     static void querySimulator(Settings settings) throws Exception {
+        // create a seed for repeatable simulations
         int seed = (int) (Math.random()*100);
         System.out.println("Seed for generating queries " + seed + ", making " +  settings.getNumOfItr() * settings.getSizeOfFullQuery() + " query terms");
+
+        // create queries
         List<String> listOfQueryTerms = QueryCreator.createAllMasterQueries(settings.getNumOfItr() * settings.getSizeOfFullQuery(), seed);
-        JsonArray queries = JsonCreator.createJsonArrayFromListOfStrings(listOfQueryTerms);
 
-        List<String> nameOfJsonsToStore = new ArrayList<>();
-        nameOfJsonsToStore.add("queryTerms");
+        // turn queries into json
+        JsonArray queriesAsJson = JsonCreator.createJsonArrayFromListOfStrings(listOfQueryTerms);
 
-        List<JsonValue> jsonsToStore = new ArrayList<>();
-        jsonsToStore.add(queries);
-
-        StoreInFile.storeQueries(settings,  settings.getQueryName(), nameOfJsonsToStore, jsonsToStore);
+        // store in the file specified in the settings
+        storeQueries(settings, queriesAsJson);
     }
 
     /*
-     * assumes that the query is divisible by the number of subqueries
+     * Assumes that the query is divisible by the number of subqueries
      * */
     public static List<List<String>> segmentQuery(List<String> masterQuery, int sizeOfFullQuery, int numOfSubQueries){
         int sizeOfSubQueries = sizeOfFullQuery/numOfSubQueries;
@@ -73,7 +70,7 @@ public class QueryCreator {
         return queryTerms;
     }
 
-    public static String removeStopWords(String strToClean){
+    private static String removeStopWords(String strToClean){
         // "\\b" is to account for word boundaries, i.e. not replace "his" in "this"
         // the "\\s?" is to suppress optional trailing white space
 
@@ -90,7 +87,11 @@ public class QueryCreator {
         return strWithoutStopWords;
     }
 
-    // assumes that titles are not null
+    /*
+    Method for parsing out titles from the results from elastic
+    Is currently needed as public in order to use ugly hack in Utility.General.retrieveTitleOfDocById
+    OBS! assumes that titles are not null.
+     */
     public static List<String> extractTitles(JsonObject docs){
         List<String> titles = new ArrayList<>();
 
@@ -124,5 +125,32 @@ public class QueryCreator {
 
         String[] words = str.split("\\s+");
         return Arrays.asList(words);
+    }
+
+    private static void storeQueries(Settings settings, JsonValue jsonsToStore) throws Exception {
+        Map<String, JsonValue> storageMap = new HashMap<>();
+
+        // create json for settings
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        String date = dtf.format(localDate);
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
+                .add("date", date)
+                .add("sizeOfFullQuery", settings.getSizeOfFullQuery())
+                .add("itr", settings.getNumOfItr());
+
+        // add settings to map
+        storageMap.put("settings", jsonBuilder.build());
+
+        // add jsons to map
+        storageMap.put("queryTerms", jsonsToStore);
+
+        // save map to file as json
+        JsonObject jsonToPrint = JsonCreator.createJsonFromMapOfJsons(storageMap);
+
+        // print using the storeResultInFile wrapper
+        List<JsonObject> jsonInList = new ArrayList<>();
+        jsonInList.add(jsonToPrint);
+        Utility.StoreInFile.storeResultsInFile(jsonInList, settings.getQueryPath());
     }
 }// end of class

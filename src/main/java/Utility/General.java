@@ -44,7 +44,7 @@ public class General {
         private String key;
         private Double value;
 
-        Pair(String key, Double value){
+        public Pair(String key, Double value){
             this.key = key;
             this.value = value;
         }

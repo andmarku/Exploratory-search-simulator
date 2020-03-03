@@ -16,24 +16,6 @@ public class FileReader {
         return queriesAsList;
     }
 
-    public static List<List<General.Pair>> parseListOfSearchResults(JsonObject baseLinesFromFile){
-        List<List<General.Pair>> allLists = new ArrayList<>();
-
-        JsonArray myJsonArray = baseLinesFromFile.getJsonArray("baseLines");
-
-        List<General.Pair> resultList;
-        for (int i = 0; i < myJsonArray.size(); i++) {
-            resultList = new ArrayList<>();
-            JsonObject listAsJson = myJsonArray.getJsonObject(i);
-            for (String key : listAsJson.keySet()) {
-                General.Pair pair = new General.Pair(key, listAsJson.getJsonNumber(key).doubleValue());
-                resultList.add(pair);
-            }
-            allLists.add(resultList);
-        }
-        return allLists;
-    }
-
     public static JsonObject readJsonFromFile(String path) throws IOException {
         BufferedReader br = new BufferedReader(new java.io.FileReader(path));
         JsonObject myJson;

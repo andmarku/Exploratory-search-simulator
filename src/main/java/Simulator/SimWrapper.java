@@ -3,7 +3,7 @@ package Simulator;
 import Settings.Settings;
 import Settings.ThreeQueryTerms;
 
-public class Wrapper {
+public class SimWrapper {
     public static void simulator() throws Exception {
         // OBS!! currently I must remove the query file in folder since I use append and am not sure if I want to write over anyway.
 

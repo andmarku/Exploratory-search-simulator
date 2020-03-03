@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="" />
+    <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Measures/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/Wrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/MeasureWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Wrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/SimWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/General.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/StoreInFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/StoreInFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasureRank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Measures/RankComparision.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Settings/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Wrapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/FileReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/FileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/General$Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/General$Pair.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/StoreInFile.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,6 +76,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="Measures.Wrapper" />
       <recent name="Utility.JsonCreator" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -140,6 +163,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="801" y="265" width="374" height="575" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1582014700338" />
+    <state x="721" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1583224834379">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="721" y="338" width="525" height="428" key="#com.intellij.ide.util.TreeClassChooserDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583224834379" />
     <state x="834" y="444" width="308" height="216" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1579522813379">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -148,14 +175,14 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="746" y="439" width="494" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/67.27.1853.1053@67.27.1853.1053" timestamp="1582183287868" />
-    <state x="703" y="259" width="571" height="587" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1582784301174">
+    <state x="703" y="259" width="571" height="587" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1583224852283">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="703" y="259" width="571" height="587" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582784301174" />
-    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582783844481">
+    <state x="703" y="259" width="571" height="587" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583224852283" />
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583226124562">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1582783844481" />
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583226124562" />
     <state x="729" y="408" width="518" height="288" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1582184495125">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -164,22 +191,22 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582188781593" />
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1582789991997">
+    <state width="1807" height="181" key="GridCell.Tab.0.bottom" timestamp="1583228045111">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991997" />
-    <state width="1807" height="278" key="GridCell.Tab.0.center" timestamp="1582789991996">
+    <state width="1807" height="181" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583228045111" />
+    <state width="1807" height="181" key="GridCell.Tab.0.center" timestamp="1583228045111">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
-    <state width="1807" height="278" key="GridCell.Tab.0.left" timestamp="1582789991996">
+    <state width="1807" height="181" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583228045111" />
+    <state width="1807" height="181" key="GridCell.Tab.0.left" timestamp="1583228045110">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
-    <state width="1807" height="278" key="GridCell.Tab.0.right" timestamp="1582789991996">
+    <state width="1807" height="181" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583228045110" />
+    <state width="1807" height="181" key="GridCell.Tab.0.right" timestamp="1583228045111">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1582789991996" />
+    <state width="1807" height="181" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583228045111" />
     <state width="1807" height="278" key="GridCell.Tab.1.bottom" timestamp="1582204067330">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

@@ -53,7 +53,7 @@ public class Looper {
             }
         }
 
-        StoreInFile.storeResultsInFile(simsAsListOfJsons, settings.getPathToFolder(), settings.getSimulationName());
+        StoreInFile.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
     }
 
 

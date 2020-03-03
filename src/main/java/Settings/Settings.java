@@ -3,9 +3,9 @@ package Settings;
 import java.util.List;
 
 public interface Settings {
-    String getPathToFolder();
+    /*String getPathToFolder();
     String getSimulationName();
-    String getQueryName();
+    String getQueryName();*/
     String getSimulationPath();
     String getQueryPath();
     int getNumOfItr();

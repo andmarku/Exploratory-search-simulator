@@ -1,4 +1,6 @@
-import Simulator.Wrapper;
+import Settings.*;
+import Simulator.SimWrapper;
+import Measures.MeasureWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Running");
 
-        Wrapper.simulator();
+        SimWrapper.simulator();
+
+        // Choose settings
+        Settings settings = new ThreeQueryTerms();
+        settings.setStandardSettings();
+        MeasureWrapper.compareAllCombinationsWithRBD(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 

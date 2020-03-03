@@ -4,20 +4,24 @@ import Settings.Settings;
 import Utility.FileReader;
 import Utility.General;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wrapper {
+public class MeasureWrapper {
     public static List<Double> compareAllCombinationsWithRBD(Settings settings) throws Exception {
         // read queries from file
-        JsonObject baseLinesFromFile = FileReader.readJsonFromFile(settings.getSimulationPath());
-        List<List<General.Pair>> baseLines = FileReader.parseListOfSearchResults(baseLinesFromFile);
+        JsonObject simulationsJson = FileReader.readJsonFromFile(settings.getSimulationPath());
+        /*List<List<General.Pair>> simulations =*/
+        Parser.parseListOfSimulationResults(simulationsJson);
 
         // compare with statistical test
-        /*return StatisticalRankComparision.compareAllCases(baseLines, mySims, settings.p);*/
+        //*return StatisticalRankComparision.compareAllCases(baseLines, mySims, settings.p);*//*
         return null;
     }
+
+    /*
     public static List<Double> compareAllCases(List<List<General.Pair>> listOfOrderedListsOne,
                                                List<List<General.Pair>> listOfOrderedListsTwo, double p) throws Exception {
 
@@ -32,5 +36,6 @@ public class Wrapper {
         }
 
         return scores;
-    }
+    }*/
+
 }
