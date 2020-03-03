@@ -43,8 +43,6 @@ public class FileReader {
             line = br.readLine();
         }
 
-        System.out.println(listOfJsons);
-
         // close buffered reader
         br.close();
 
