@@ -7,7 +7,7 @@ import Settings.Settings;
 import Utility.FileReader;
 import Utility.General;
 import Utility.JsonCreator;
-import Utility.FileStorer;
+import Utility.FileWriter;
 
 import javax.json.*;
 import java.util.AbstractMap;
@@ -57,7 +57,7 @@ public class Looper {
             }
         }
 
-        FileStorer.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
+        FileWriter.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
     }
 
 

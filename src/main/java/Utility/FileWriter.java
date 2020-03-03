@@ -5,7 +5,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class FileStorer {
+public class FileWriter {
     /*
     Wrapper for appendJsonToFile
      */
@@ -28,6 +28,4 @@ public class FileStorer {
             ex.printStackTrace();
         }
     }
-
-
 }// end of class
