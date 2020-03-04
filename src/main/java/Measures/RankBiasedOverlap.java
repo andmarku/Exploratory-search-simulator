@@ -12,7 +12,8 @@ public class RankBiasedOverlap {
     Computes the metric Ranked Biased Distance
      */
     public static double computeRankBiasedDistance(List<General.Pair> orderedListOne, List<General.Pair> orderedListTwo, double p){
-        double rBO = computeRboMin(orderedListOne, orderedListTwo, p);
+        // double rBO = computeRboMin(orderedListOne, orderedListTwo, p);
+        double rBO = computeRankBiasedOverlap(orderedListOne, orderedListTwo, p);
 
         // the measure is defined as 1 - totalScore (since higher total score means more similar lists)
         return 1 - rBO;

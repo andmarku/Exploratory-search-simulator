@@ -15,10 +15,9 @@ public class MeasuresParser {
 
             // extract which iteration this list is from (should be in order)
             int itr = json.getJsonObject("settings").getInt("itr");
-            System.out.println(itr);
 
             // extract which GoP simulation the results belong to
-            int em = json.getJsonObject("settings").getInt("eM");
+            double em = json.getJsonObject("settings").getJsonNumber("eM").doubleValue();
             int nSq = json.getJsonObject("settings").getInt("nSq");;
             String gopKey = "itr=" + itr + ",em=" + em + ",nSq=" + nSq;
 

@@ -13,7 +13,7 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        // SimWrapper.simulator(settings);
+        //SimWrapper.simulator(settings);
 
         MeasuresWrapper.compareAllCombinationsWithRBD(settings);
 
