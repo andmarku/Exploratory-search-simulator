@@ -13,9 +13,9 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        //SimWrapper.simulator(settings);
+        SimWrapper.simulator(settings);
 
-        MeasuresWrapper.compareAllCombinationsWithRBD(settings);
+        MeasuresWrapper.compareWithRBD(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 

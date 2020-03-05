@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThreeQueryTerms implements Settings{
-    String pathToFolder;
-    String simulationName;
-    String queryName;
     String simulationPath;
     String queryPath;
+    String scorePath;
     int numOfItr;
     int sizeOfFullQuery;
     int sizeOfFinalRankedList;
@@ -17,12 +15,16 @@ public class ThreeQueryTerms implements Settings{
     List<Integer>  sizeOfSubqueries = new ArrayList<>();
 
     public void setStandardSettings(){
-        // path to store result in
-        pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";
-        simulationName = "firstSimulation";
-        queryName = "newQueryTerms";
+        // set names
+        String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";
+        String simulationName = "firstSimulation";
+        String queryName = "newQueryTerms";
+        String scoreName = "rboScores";
+
+        // create paths
         simulationPath = pathToFolder + simulationName;
         queryPath = pathToFolder + queryName;
+        scorePath = pathToFolder + scoreName;
 
         // general parameters
         numOfItr = 2;
@@ -42,11 +44,9 @@ public class ThreeQueryTerms implements Settings{
         expMultipliers.add((double) 2);
     }
 
-    public String getPathToFolder(){return pathToFolder;}
-    public String getSimulationName(){return simulationName;}
-    public String getQueryName(){return queryName;}
     public String getSimulationPath(){return simulationPath;}
     public String getQueryPath(){return queryPath;}
+    public String getScorePath(){return scorePath;}
     public int getNumOfItr(){return numOfItr;}
     public int getSizeOfFullQuery(){return sizeOfFullQuery;}
     public int getSizeOfFinalRankedList(){return sizeOfFinalRankedList;}

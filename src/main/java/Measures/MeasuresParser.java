@@ -18,8 +18,10 @@ public class MeasuresParser {
 
             // extract which GoP simulation the results belong to
             double em = json.getJsonObject("settings").getJsonNumber("eM").doubleValue();
-            int nSq = json.getJsonObject("settings").getInt("nSq");;
-            String gopKey = "itr=" + itr + ",em=" + em + ",nSq=" + nSq;
+            int nSq = json.getJsonObject("settings").getInt("nSq");
+
+            // use CSV format for the name
+            String gopKey = itr + "," + em + "," + nSq;
 
             // extract ranked list
             JsonObject rankedList = json.getJsonObject("rankedList");

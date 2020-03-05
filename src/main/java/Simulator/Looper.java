@@ -57,7 +57,7 @@ public class Looper {
             }
         }
 
-        FileWriter.storeResultsInFile(simsAsListOfJsons, settings.getSimulationPath());
+        FileWriter.storeResultsInFileAsJson(simsAsListOfJsons, settings.getSimulationPath());
     }
 
 

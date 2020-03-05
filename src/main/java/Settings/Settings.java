@@ -8,6 +8,7 @@ public interface Settings {
     String getQueryName();*/
     String getSimulationPath();
     String getQueryPath();
+    String getScorePath();
     int getNumOfItr();
     int getSizeOfFullQuery();
     int getSizeOfFinalRankedList();

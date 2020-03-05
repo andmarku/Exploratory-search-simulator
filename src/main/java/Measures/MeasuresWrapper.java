@@ -2,6 +2,7 @@ package Measures;
 
 import Settings.Settings;
 import Utility.FileReader;
+import Utility.FileWriter;
 import Utility.General;
 
 import javax.json.JsonObject;
@@ -11,45 +12,63 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MeasuresWrapper {
-    public static List<Double> compareAllCombinationsWithRBD(Settings settings) throws Exception {
+    public static void compareWithRBD(Settings settings) throws Exception {
+        // OBS!!
+        double p = 0.7;
+        System.out.println("OBS!!!! P is (temporary) set withing method.");
+
         // read queries from file
         List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
 
         // parse jsons read from file
         AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
-        System.out.println("Size of allresults is " + allResults.size());
 
-        AbstractMap<String, Double> scoresForIteration;
-        double p = 0.7;
-        AbstractMap<String, List<General.Pair>> simsForItr;
+        // list to store the results in
+        AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = compareAllCombinationsWithRBD(p, allResults);
 
-        for (Integer itr : allResults.keySet()) {
-            simsForItr = allResults.get(itr);
+        FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());
 
-            scoresForIteration = compareAllCases(simsForItr, p);
-            System.out.println("------ This iteration is " + itr + " " + scoresForIteration.size());
-            for (String key: scoresForIteration.keySet()) {
-                System.out.println(key + " score " + scoresForIteration.get(key));
-            }
+        for (String key : scoresForAllIterations.get(0).keySet()) {
+            System.out.println(key + "," + scoresForAllIterations.get(0).get(key));
         }
-        // THEN START WITH WRITER WHICH SAVES RBD AND WHICH LIST THAT HAVE BEEN COMPARED
 
-        // compare with statistical test
-        //*return StatisticalRankComparision.compareAllCases(baseLines, mySims, settings.p);*//*
-        return null;
+    }
+
+    private static AbstractMap<Integer, AbstractMap<String, Double>> compareAllCombinationsWithRBD
+            (double p, AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults ) throws Exception {
+
+        // map for returning all scores
+        AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = new HashMap<>();
+
+        // map for temporary saving the results in loop
+        AbstractMap<String, Double> scoresForIteration;
+
+        // compare all lists from the same interation (the iterations are keys in the map)
+        for (Integer itr : allResults.keySet()) {
+            // compare the lists
+            scoresForIteration = compareAllCases(allResults.get(itr), p);
+
+            // save this iterations scores
+            scoresForAllIterations.put(itr, scoresForIteration);
+        }
+        return scoresForAllIterations;
     }
 
 
-    public static AbstractMap<String, Double>  compareAllCases(AbstractMap<String, List<General.Pair>> sims, double p) throws Exception {
+    private static AbstractMap<String, Double>  compareAllCases(AbstractMap<String, List<General.Pair>> sims, double p) throws Exception {
         AbstractMap<String, Double> allMeasuredCases = new HashMap<>();
+        // compare each set-up once with each other set-up
         for (String firstKey : sims.keySet()) {
             for (String secondKey : sims.keySet()) {
-                // OBS makes sure that each comparison is only done once.
+                // OBS makes sure that each comparison is only done once. (breaks when reaching the matrix diagonal)
                 if (firstKey.equals(secondKey)){
                     break;
                 }
+                // compute the score
                 double score = RankBiasedOverlap.computeRankBiasedDistance(sims.get(firstKey), sims.get(secondKey), p);
-                String name = firstKey + "AND" + secondKey;
+
+                // save the score in map using CSV format
+                String name = firstKey + "," + secondKey;
                 allMeasuredCases.put(name, score);
             }
         }

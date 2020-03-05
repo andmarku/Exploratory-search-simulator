@@ -151,7 +151,7 @@ public class QueryCreator {
         // print using the storeResultInFile wrapper
         List<JsonObject> jsonInList = new ArrayList<>();
         jsonInList.add(jsonToPrint);
-        FileWriter.storeResultsInFile(jsonInList, settings.getQueryPath());
+        FileWriter.storeResultsInFileAsJson(jsonInList, settings.getQueryPath());
     }
 
     public static List<String> parseMasterQueries(JsonObject jsonFromFile){
