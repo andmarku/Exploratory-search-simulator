@@ -27,11 +27,6 @@ public class MeasuresWrapper {
         AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = compareAllCombinationsWithRBD(p, allResults);
 
         FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());
-
-        for (String key : scoresForAllIterations.get(0).keySet()) {
-            System.out.println(key + "," + scoresForAllIterations.get(0).get(key));
-        }
-
     }
 
     private static AbstractMap<Integer, AbstractMap<String, Double>> compareAllCombinationsWithRBD

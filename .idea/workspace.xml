@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/MeasuresParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/MeasuresParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedOverlap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedOverlap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasuresParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/MeasuresParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
