@@ -27,9 +27,9 @@ public class ThreeQueryTerms implements Settings{
         scorePath = pathToFolder + scoreName;
 
         // general parameters
-        numOfItr = 2;
+        numOfItr = 20;
         sizeOfFinalRankedList =50;
-        sizeOfRetrievedList = 1000;
+        sizeOfRetrievedList = 100;
 
         // simulation settings
         sizeOfFullQuery = 3;

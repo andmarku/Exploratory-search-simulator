@@ -1,3 +1,5 @@
+import Measures.RankBiasedClusters;
+import Measures.RankBiasedOverlap;
 import Settings.*;
 import Measures.MeasuresWrapper;
 import Simulator.SimWrapper;
@@ -13,9 +15,10 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        SimWrapper.simulator(settings);
+        RankBiasedClusters.run();
+        //SimWrapper.simulator(settings);
 
-        MeasuresWrapper.compareWithRBD(settings);
+        //MeasuresWrapper.compareWithRBD(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
