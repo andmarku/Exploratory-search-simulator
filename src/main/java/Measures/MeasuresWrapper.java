@@ -23,10 +23,12 @@ public class MeasuresWrapper {
         // parse jsons read from file
         AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
 
+        PrepClusterMetric.createListOfSets(allResults.get(0));
+       /*
         // list to store the results in
         AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = compareAllCombinationsWithRBD(p, allResults);
 
-        FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());
+        FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());*/
     }
 
     private static AbstractMap<Integer, AbstractMap<String, Double>> compareAllCombinationsWithRBD

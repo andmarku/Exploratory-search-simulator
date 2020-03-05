@@ -11,8 +11,7 @@ public class ParameterCreator {
     String headerData;
 
     public ParameterCreator() throws MalformedURLException {
-        url = new URL("http://localhost:9200/index_articles/_search"); // linux computer
-        //url = new URL("http://10.10.6.160:9200/my_index2/_search"); //findwise server
+        url = new URL("http://localhost:9200/index_articles/_search");
         headerKey = "Content-Type";
         headerData = "application/json";
     }
@@ -34,6 +33,53 @@ public class ParameterCreator {
         postData = "{\"query\":{\"match\":{\"title\":\""  +
                 queryStr + "\"}}," +
                 "\"size\":" + size + "}";
+    }
+
+    public void setRestParamsForClusters(List<String> queryList, int size){
+        String queryStr = formatQueryListClusterForRest(queryList);
+        postData = "{" +
+                        "\"query\":" +
+                    "{" +
+                        "\"bool\":" + "" +
+                    "{" +
+                        "\"must\":" +
+                    "[" +
+                    "{" +
+                        "\"bool\":" +
+                    "{" +
+                        "\"should\":" +
+                    "["  +
+                queryStr +
+                "]" +
+                "}" +
+                "}" +
+                "]" +
+                "}" +
+                "}" +
+                "}";
+        System.out.println(postData);
+    }
+
+    private String formatQueryListClusterForRest(List<String> query) throws NullPointerException{
+        if(query.size() == 0){
+            throw new NullPointerException();
+        }
+
+        query = query.subList(0, 3);
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"term\": {\"_id\": ");
+        sb.append(query.get(0));
+        sb.append("}},");
+        for (int i = 1; i < query.size()-1; i++) {
+            sb.append("{\"term\": {\"_id\": ");
+            sb.append(query.get(i));
+            sb.append("}},");
+        }
+        sb.append("{\"term\": {\"_id\": ");
+        sb.append(query.get(query.size()-1));
+        sb.append("}}");
+
+        return sb.toString();
     }
 
     public void setRestParamsForSingleId(String queryStr) {

@@ -47,5 +47,33 @@ public class SearchEngineWrapper {
         }
         return storedSearchResultLists;
     }
+
+    public static List<AbstractMap<String, AbstractMap<String, Double>>> retrieveClustersLists(List<List<String>> queries, int sizeOfRetrievedList) throws Exception {
+
+        List<AbstractMap<String, AbstractMap<String, Double>>> storedSearchResultLists = new ArrayList<>();
+        ParameterCreator queryParams = new ParameterCreator();
+
+        for (List<String> query : queries) {
+            // search elastic for the specific query
+            queryParams.setRestParamsForClusters(query, sizeOfRetrievedList);
+            JsonObject retrievedRes = Retriever.searchResultRetriever(queryParams);
+
+            // parse the elastic ranked list into scoredDocs, linkedDocs, and totalScore
+            List parsedResult = RetrieverParser.docAndLinksScoreParser(retrievedRes);
+            AbstractMap<String, Double> scoredDocs = (HashMap<String, Double>) parsedResult.get(0);
+            AbstractMap<String, Double> linkedDocs = (HashMap<String, Double>) parsedResult.get(1);
+            AbstractMap<String, Double> totalScore = new HashMap<>();
+            totalScore.put("totalScore", (Double) parsedResult.get(2));
+
+            AbstractMap<String, AbstractMap<String, Double>> parsedSearchResults = new HashMap<>();
+            parsedSearchResults.put("scoredDocs", scoredDocs);
+            parsedSearchResults.put("linkedDocs", linkedDocs);
+            parsedSearchResults.put("totalScore", totalScore);
+
+            // store
+            storedSearchResultLists.add(parsedSearchResults);
+        }
+        return storedSearchResultLists;
+    }
 }
 
