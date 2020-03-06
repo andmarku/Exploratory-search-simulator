@@ -11,46 +11,57 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class NewRetriver {
 
-    public static void multiGet() throws IOException {
+    public static void multiGet(List<String> ids) throws IOException {
+        List<List<String>> allIdsAndLinked = new ArrayList<>();
+
         // set-up
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(
                         new HttpHost("localhost", 9200, "http")));
 
+        // add ids to request
         MultiGetRequest request = new MultiGetRequest();
-        request.add(new MultiGetRequest.Item("index_articles", "6bccc6a15bb56c459cd9b24858f3d4db139912e5"));
-        request.add(new MultiGetRequest.Item("index_articles", "a1bb2712c5cd51c6918bd19ac84eb1af88325189"));
+        for (String id : ids) {
+            request.add(new MultiGetRequest.Item("index_articles", id));
+        }
 
         // request
         MultiGetResponse response = client.mget(request, RequestOptions.DEFAULT);
 
         // parsing
-        for (MultiGetItemResponse firstItem :response.getResponses()) {
-            GetResponse firstGet = firstItem.getResponse();
-            String id = firstItem.getId();
-            System.out.println(id);
-            if (firstGet.isExists()) {
-                String sourceAsString = firstGet.getSourceAsString();
-                Map<String, Object> sourceAsMap = firstGet.getSourceAsMap();
-                System.out.println(sourceAsString);
-                System.out.println(sourceAsMap.get("inCitations"));
+        for (MultiGetItemResponse item :response.getResponses()) {
+            List<String> docAndLinked = new ArrayList<>();
+
+            String id = item.getId();
+            docAndLinked.add(id);
+
+            // if the item existed
+            GetResponse itemResponse = item.getResponse();
+            if (itemResponse.isExists()) {
+                Map<String, Object> sourceAsMap = itemResponse.getSourceAsMap();
+                docAndLinked.addAll((List<String>)  sourceAsMap.get("inCitations"));
+                docAndLinked.addAll((List<String>)  sourceAsMap.get("outCitations"));
             } else {
 
             }
+
+            allIdsAndLinked.add(docAndLinked);
         }
+
+        // System.out.println(allIdsAndLinked);
 
         // terminate call
         client.close();
