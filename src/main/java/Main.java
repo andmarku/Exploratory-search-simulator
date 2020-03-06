@@ -2,6 +2,7 @@ import Measures.RankBiasedClusters;
 import Measures.RankBiasedOverlap;
 import Settings.*;
 import Measures.MeasuresWrapper;
+import Retriever.NewRetriver;
 import Simulator.SimWrapper;
 
 import java.util.ArrayList;
@@ -15,10 +16,13 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
+        //NewRetriver.newRetriver();
+        NewRetriver.multiGet();
+
         //RankBiasedClusters.run();
         //SimWrapper.simulator(settings);
 
-        MeasuresWrapper.compareWithRBD(settings);
+        //MeasuresWrapper.compareWithRBD(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
