@@ -12,19 +12,19 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class NewRetriver {
 
-    public static void multiGet(List<String> ids) throws IOException {
+    public static List<List<String>> multiGetList(List<String> ids) throws IOException {
         List<List<String>> allIdsAndLinked = new ArrayList<>();
 
         // set-up
@@ -65,7 +65,56 @@ public class NewRetriver {
 
         // terminate call
         client.close();
+
+        return allIdsAndLinked;
     }
+
+    /*public static List<List<List<String>>> multiGetListList(List<List<String>> ids) throws IOException {
+        List<List<String>> allIdsAndLinked = new ArrayList<>();
+
+        // set-up
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(
+                        new HttpHost("localhost", 9200, "http")));
+
+        // add ids to request
+        MultiGetRequest request = new MultiGetRequest();
+        for (List<String> ls : ids) {
+            for (String id : ls) {
+                request.add(new MultiGetRequest.Item("index_articles", id));
+            }
+        }
+
+        // request
+        MultiGetResponse response = client.mget(request, RequestOptions.DEFAULT);
+
+        // parsing
+        for (MultiGetItemResponse item :response.getResponses()) {
+            List<String> docAndLinked = new ArrayList<>();
+
+            String id = item.getId();
+            docAndLinked.add(id);
+
+            // if the item existed
+            GetResponse itemResponse = item.getResponse();
+            if (itemResponse.isExists()) {
+                Map<String, Object> sourceAsMap = itemResponse.getSourceAsMap();
+                docAndLinked.addAll((List<String>)  sourceAsMap.get("inCitations"));
+                docAndLinked.addAll((List<String>)  sourceAsMap.get("outCitations"));
+            } else {
+
+            }
+
+            allIdsAndLinked.add(docAndLinked);
+        }
+
+        // System.out.println(allIdsAndLinked);
+
+        // terminate call
+        client.close();
+
+        return allIdsAndLinked;
+    }*/
 
     public static void newRetriver() throws IOException {
 

@@ -18,16 +18,18 @@ public class Main {
 
         // NewRetriver.newRetriver();
 
-        List<String> ls = new ArrayList<>();
+    /*    List<String> ls = new ArrayList<>();
         ls.add("6bccc6a15bb56c459cd9b24858f3d4db139912e5");
         ls.add("a1bb2712c5cd51c6918bd19ac84eb1af88325189");
         ls.add("b4d9b7a2800c0030cc2468790ba28cf370b59476");
-        NewRetriver.multiGet(ls);
+        NewRetriver.multiGet(ls);*/
 
         //RankBiasedClusters.run();
         //SimWrapper.simulator(settings);
 
         //MeasuresWrapper.compareWithRBD(settings);
+
+        MeasuresWrapper.run2(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 

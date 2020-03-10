@@ -1,21 +1,68 @@
 package Measures;
 
+import Retriever.NewRetriver;
 import Settings.Settings;
 import Utility.FileReader;
 import Utility.FileWriter;
 import Utility.General;
 
 import javax.json.JsonObject;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class MeasuresWrapper {
+    public static void run2(Settings settings) throws Exception {
+        // OBS!!
+        double p = 0.7;
+        System.out.println("OBS!!!! P is set in writing method.");
+
+        // read queries from file
+        List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
+
+        // parse jsons read from file
+        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
+
+        // map to store all scores in
+        AbstractMap<Integer, AbstractMap<String, Double>> scoredSimulations = new HashMap<>();
+
+        // loop trough all iterations from the simulations
+        for (Integer simNr: allResults.keySet()) {
+            // map for the score of each result in this simulationNr
+            AbstractMap<String, Double> scoredSettings = new HashMap<>();
+
+            // loop through all settings
+            for (String key: allResults.get(simNr).keySet()) {
+                // list for the ids in the result for this setting
+                List<String> settingsList = new ArrayList<>();
+
+                // loop through all pairs in single result
+                for (General.Pair pair: allResults.get(simNr).get(key)) {
+                    settingsList.add(pair.getKey());
+                }
+                // retrieve all linked documents
+                List<List<String>> retrievedForSettings = NewRetriver.multiGetList(settingsList);
+
+                // score the result list and its linked documents
+                double score = RankBiasedClusters.runMeasureSingleResult(retrievedForSettings, p);
+
+                // save the score with the setting as key
+                scoredSettings.put(key, score);
+            }
+            // add the scores of the simulations to the main map
+            scoredSimulations.put(simNr, scoredSettings);
+        }
+
+
+       /*
+        // list to store the results in
+        AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = compareAllCombinationsWithRBD(p, allResults);
+
+        FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());*/
+    }
+
     public static void compareWithRBD(Settings settings) throws Exception {
         // OBS!!
         double p = 0.7;
-        System.out.println("OBS!!!! P is (temporary) set withing method.");
+        System.out.println("OBS!!!! P is set withing method.");
 
         // read queries from file
         List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());

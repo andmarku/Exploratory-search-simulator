@@ -1,55 +1,54 @@
 package Measures;
 
+import Utility.General;
+
 import java.util.*;
 
 public class RankBiasedClusters {
 
-    public static void run(){
-        List<Set<Integer>> l = new ArrayList<>();
+    public static List<List<Double>> runMeasureListOfListOfResults(List<List<List<List<String>>>> allLists, double p){
+        List<List<Double>> scores = new ArrayList<>();
 
-        Set<Integer> s = new TreeSet<>();
-        s.add(1);
-        s.add(2);
-        s.add(3);
-        s.add(4);
-        s.add(5);
-        l.add(s);
+        // through all lists of results
+        for (List<List<List<String>>> listOfLists : allLists) {
+            scores.add(runMeasureListOfResults(listOfLists, p));
+        }
+        return scores;
+    }
 
-        s = new TreeSet<>();
-        s.add(6);
-        s.add(7);
-        s.add(8);
-        s.add(9);
-        s.add(10);
-        l.add(s);
+    public static List<Double> runMeasureListOfResults(List<List<List<String>>> allLists, double p){
+        List<Double> scores = new ArrayList<>();
 
-        s = new TreeSet<>();
-        s.add(1);
-        s.add(11);
-        s.add(12);
-        s.add(13);
-        s.add(14);
-        l.add(s);
+        // through all lists of results
+        for (List<List<String>> listOfLinks : allLists) {
+            scores.add(runMeasureSingleResult(listOfLinks, p));
+        }
+        return scores;
+    }
 
-        s = new TreeSet<>();
-        s.add(12);
-        s.add(15);
-        s.add(16);
-        s.add(17);
-        s.add(18);
-        l.add(s);
-        l.add(s);
-        l.add(s);
-        l.add(s);
+    public static double runMeasureSingleResult(List<List<String>> listOfLinks, double p){
+        List<Set<Integer>> setsInResult = new ArrayList<>();
 
-        double a = computeRankBiasedClusterDistance(l,0.9);
+        // through all list of linked document (incl original doc)
+        for (List<String> listOfIds : listOfLinks) {
+            Set mySet = new HashSet();
 
-        System.out.println(a);
+            // through all linked documents (incl original doc)
+            for (String docId : listOfIds) {
+                mySet.add(Integer.getInteger(docId));
+            }
+            setsInResult.add(mySet);
+        }
+
+        // calculate the score for a single result list
+        double score = computeRankBiasedClusterDistance(setsInResult,p);
+
+        /*System.out.println(score);*/
+
+        return score;
     }
 
     public static double computeRankBiasedClusterDistance(List<Set<Integer>> orderedList, double p){
-        System.out.println("OBS!!!!! article itself must be included in its list!!!!");
-
         double rBO = computeRankBiasedClusters(orderedList, p);
 
         // the measure is defined as 1 - totalScore (since higher total score means more similar lists)
@@ -127,3 +126,42 @@ public class RankBiasedClusters {
     }
 
 }
+
+
+       /* List<Set<Integer>> l = new ArrayList<>();
+
+        Set<Integer> s = new TreeSet<>();
+        s.add(1);
+        s.add(2);
+        s.add(3);
+        s.add(4);
+        s.add(5);
+        l.add(s);
+
+        s = new TreeSet<>();
+        s.add(6);
+        s.add(7);
+        s.add(8);
+        s.add(9);
+        s.add(10);
+        l.add(s);
+
+        s = new TreeSet<>();
+        s.add(1);
+        s.add(11);
+        s.add(12);
+        s.add(13);
+        s.add(14);
+        l.add(s);
+
+        s = new TreeSet<>();
+        s.add(12);
+        s.add(15);
+        s.add(16);
+        s.add(17);
+        s.add(18);
+        l.add(s);
+        l.add(s);
+        l.add(s);
+        l.add(s);
+*/
