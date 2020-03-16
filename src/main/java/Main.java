@@ -16,7 +16,7 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        // NewRetriver.newRetriver();
+        NewRetriver.queryTest();
 
     /*    List<String> ls = new ArrayList<>();
         ls.add("6bccc6a15bb56c459cd9b24858f3d4db139912e5");
@@ -29,7 +29,7 @@ public class Main {
 
         //MeasuresWrapper.compareWithRBD(settings);
 
-        MeasuresWrapper.run2(settings);
+        //MeasuresWrapper.run2(settings);
 
         //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
