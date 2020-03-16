@@ -16,7 +16,7 @@ public class Main {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        NewRetriver.queryTest();
+        // NewRetriver.queryTest();
 
     /*    List<String> ls = new ArrayList<>();
         ls.add("6bccc6a15bb56c459cd9b24858f3d4db139912e5");
@@ -25,13 +25,13 @@ public class Main {
         NewRetriver.multiGet(ls);*/
 
         //RankBiasedClusters.run();
-        //SimWrapper.simulator(settings);
+
+        SimWrapper.simulator(settings);
 
         //MeasuresWrapper.compareWithRBD(settings);
 
         //MeasuresWrapper.run2(settings);
 
-        //ManualQueries.SimulatorManualQueries.runManualQueries(createMyQueries(), settings);
 
         System.out.println("Finished");
     }

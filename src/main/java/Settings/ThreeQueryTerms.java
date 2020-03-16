@@ -35,13 +35,9 @@ public class ThreeQueryTerms implements Settings{
         sizeOfFullQuery = 3;
 
         sizeOfSubqueries.add(1);
-        sizeOfSubqueries.add(3);
 
-        expMultipliers.add(-0.5);
         expMultipliers.add((double) 0);
-        expMultipliers.add(0.5);
         expMultipliers.add((double) 1);
-        expMultipliers.add((double) 2);
     }
 
     public String getSimulationPath(){return simulationPath;}

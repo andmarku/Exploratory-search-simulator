@@ -30,18 +30,6 @@ public class QueryCreator {
         storeQueries(settings, queriesAsJson);
     }
 
-    /*
-     * Assumes that the query is divisible by the number of subqueries
-     * */
-    public static List<List<String>> segmentQuery(List<String> masterQuery, int sizeOfFullQuery, int numOfSubQueries){
-        int sizeOfSubQueries = sizeOfFullQuery/numOfSubQueries;
-        List<List<String>> queries = new ArrayList<>();
-        for(int i = 0; i<sizeOfFullQuery; i = i + sizeOfSubQueries) {
-            queries.add(masterQuery.subList(i, i + sizeOfSubQueries));
-        }
-        return queries;
-    }
-
     public static List<String> createAllMasterQueries(int size, int seed) throws IOException {
         return createRandomQueryTerms(size, seed);
     }

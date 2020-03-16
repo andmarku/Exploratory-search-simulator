@@ -5,9 +5,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/FeatureCombiner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngineWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngineWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SimpleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SearchEngine/SimpleModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Retriever/NewRetriver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Retriever/NewRetriver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/FeatureCombiner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SearchEngine/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/SimpleModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SearchEngine/SimpleModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,10 +175,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="703" y="259" width="571" height="587" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583231522001" />
-    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583226124562">
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584368430870">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1583226124562" />
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1584368430870" />
     <state x="729" y="408" width="518" height="288" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1582184495125">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -177,22 +187,22 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582188781593" />
-    <state width="1807" height="336" key="GridCell.Tab.0.bottom" timestamp="1584364574259">
+    <state width="1807" height="336" key="GridCell.Tab.0.bottom" timestamp="1584369367322">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="336" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1584364574259" />
-    <state width="1807" height="336" key="GridCell.Tab.0.center" timestamp="1584364574258">
+    <state width="1807" height="336" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1584369367322" />
+    <state width="1807" height="336" key="GridCell.Tab.0.center" timestamp="1584369367321">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="336" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1584364574258" />
-    <state width="1807" height="336" key="GridCell.Tab.0.left" timestamp="1584364574258">
+    <state width="1807" height="336" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1584369367321" />
+    <state width="1807" height="336" key="GridCell.Tab.0.left" timestamp="1584369367321">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="336" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1584364574258" />
-    <state width="1807" height="336" key="GridCell.Tab.0.right" timestamp="1584364574258">
+    <state width="1807" height="336" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1584369367321" />
+    <state width="1807" height="336" key="GridCell.Tab.0.right" timestamp="1584369367321">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="336" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1584364574258" />
+    <state width="1807" height="336" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1584369367321" />
     <state width="1807" height="343" key="GridCell.Tab.1.bottom" timestamp="1584083988822">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

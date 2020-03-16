@@ -35,25 +35,19 @@ public class Looper {
         List<JsonObject> simsAsListOfJsons  = new ArrayList<>(nrOfLists);
 
         for (int itr= 0; itr < settings.getNumOfItr(); itr++) {
+            // pick out this iterations query,
+            List<String> query = listOfQueryTerms.subList(itr*sizeOfMQuery, (itr+1)*sizeOfMQuery);
 
-            // pick out this iterations master query,
-            List<String> mQuery = listOfQueryTerms.subList(itr*sizeOfMQuery, (itr+1)*sizeOfMQuery);
+            // retrieve the search result lists corresponding this iterations subquery
+            AbstractMap<String, AbstractMap<String, Double>>  searchResult =
+                    SearchEngineWrapper.retrieveSearchResultsLists(query, settings.getSizeOfRetrievedList());
 
-            for (int nrOfSubqueries : settings.getSubqueries()) {
-                // segment the master query into list of subqueries
-                List<List<String>> subQueries = SearchEngineWrapper.getSegmentedQueries(settings, mQuery, nrOfSubqueries);
+            for (double expMultiplier: settings.getExpMultipliers()) {
+                // create result
+                List<General.Pair> rankedListAsList = rankingModel.produceExpandedRankedList(settings, expMultiplier, searchResult);
 
-                // retrieve the search result lists corresponding this iterations subquery
-                List<AbstractMap<String, AbstractMap<String, Double>>>  searchResultLists =
-                        SearchEngineWrapper.retrieveSearchResultsLists(subQueries, settings.getSizeOfRetrievedList());
-
-                for (double expMultiplier: settings.getExpMultipliers()) {
-                    // create result
-                    List<General.Pair> rankedListAsList = rankingModel.produceRankedList(settings, expMultiplier, searchResultLists);
-
-                    // save ranked list as json in array
-                    simsAsListOfJsons.add(JsonCreator.rankedListToJson(rankedListAsList, settings, expMultiplier, nrOfSubqueries, itr));
-                }
+                // save ranked list as json in array
+                simsAsListOfJsons.add(JsonCreator.rankedListToJson(rankedListAsList, settings, expMultiplier, 1, itr));
             }
         }
 
