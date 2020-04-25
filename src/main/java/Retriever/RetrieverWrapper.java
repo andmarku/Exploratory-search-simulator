@@ -1,10 +1,6 @@
-package SearchEngine;
+package Retriever;
 
-import Retriever.ParameterCreator;
-import Retriever.Retriever;
-import Settings.Settings;
-import Simulator.QueryCreator;
-import Retriever.RetrieverParser;
+import org.elasticsearch.search.SearchHits;
 
 import javax.json.JsonObject;
 import java.util.AbstractMap;
@@ -12,9 +8,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class SearchEngineWrapper {
-    public static AbstractMap<String, AbstractMap<String, Double>> retrieveSearchResultsLists(List<String> query, int sizeOfRetrievedList) throws Exception {
+public class RetrieverWrapper {
+    public static JsonObject retrieveSearchResults(List<String> query, int sizeOfRetrievedList) throws Exception {
+        // query elastic
+        SearchHits hits = NewRetriever.queryElastic(query, sizeOfRetrievedList);
 
+        // parse hits into json
+        JsonObject searchResultsAsJson = NewParser.newParser(hits);
+
+        return searchResultsAsJson;
+    }
+
+    public static AbstractMap<String, AbstractMap<String, Double>> retrieveSearchResultsLists(List<String> query, int sizeOfRetrievedList) throws Exception {
         ParameterCreator queryParams = new ParameterCreator();
 
         // search elastic for the specific query

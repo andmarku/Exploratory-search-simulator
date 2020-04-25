@@ -4,7 +4,7 @@ import Settings.Settings;
 import javax.json.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class JsonCreator {
         // create json
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                 .add("date", date)
-                .add("sQ", settings.getSizeOfFullQuery()) // sizeOfFullQuery
+                .add("sQ", settings.getSizeOfQuery()) // sizeOfFullQuery
                 .add("sFL", settings.getSizeOfFinalRankedList()) // sizeOfFinalRankedList
                 .add("sRL", settings.getSizeOfRetrievedList()) // sizeOfRetrievedList
                 .add("itr", itr)
@@ -43,6 +43,28 @@ public class JsonCreator {
         return jsonBuilder.build();
     }
 
+    public static JsonObject createJsonFromMapOfMapOfDoubles(AbstractMap<String, AbstractMap<String, Double>> myMap, int itr){
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+        JsonObjectBuilder innerJsonBuilder;
+        AbstractMap<String, Double> innerMap;
+
+        // through outer map
+        for (String key : myMap.keySet()) {
+            innerJsonBuilder = Json.createObjectBuilder();
+            innerMap = myMap.get(key);
+
+            // through inner map
+            for (String innerKey : innerMap.keySet()) {
+                jsonBuilder.add(innerKey, innerMap.get(innerKey));
+                System.out.println("Outer key " + key + " \n\tInner key " + innerKey + " \n\t\tStoring " + innerMap.get(innerKey));
+            }
+            jsonBuilder.add(key, innerJsonBuilder);
+        }
+
+        jsonBuilder.add("itr", itr);
+
+        return jsonBuilder.build();
+    }
 
     public static JsonObject createJsonObjectFromListOfPairs(List<General.Pair> listedPairs){
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();

@@ -1,4 +1,4 @@
-package Simulator;
+package QueryCreator;
 
 public class QueryStopWords {
 

@@ -1,15 +1,5 @@
 package ManualQueries;
 
-import SearchEngine.Model;
-import SearchEngine.SearchEngineWrapper;
-import SearchEngine.SimpleModel;
-import Settings.Settings;
-import Simulator.QueryCreator;
-import Utility.General;
-
-import java.util.ArrayList;
-import java.util.List;
-
 class Trial {
     /*static List<List<General.Pair>> trialSimulator(Settings settings, List<String> masterQueries) throws Exception {
         // --- SET-UP ---

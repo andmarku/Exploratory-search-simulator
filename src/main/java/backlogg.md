@@ -1,4 +1,27 @@
 
+PRIORITY (FIX THIS WEEKEND)
+===
+
+* Implement all measures. (DUE SATURDAY)
+    * Implement rank biased sampling.
+    * Is rank biased clusters ready?
+    * Is rank biased overlap ready?
+
+* Make entire simulator ready for runs. (DUE SUNDAY)
+    * Run tests and see how it works. 
+        * Does it break?
+        * Is the stored files OK?
+        * Go through each new file, write comments and explain logic.
+
+Start simulations on MONDAY!
+
+
+
+
+
+
+old
+===
 * I can greatly increase the speed through reusing retrieved lists with the same items.
     * I can at least have an inner loop for the expansion, where I reuse the same lists. 
     * Perhaps I can also to one poll with the most segmented version and then add together 

@@ -1,4 +1,4 @@
-package Simulator;
+package QueryCreator;
 
 import Retriever.ParameterCreator;
 import Retriever.Retriever;
@@ -15,13 +15,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class QueryCreator {
-    static void querySimulator(Settings settings) throws Exception {
+    public static void querySimulator(Settings settings) throws Exception {
         // create a seed for repeatable simulations
         int seed = (int) (Math.random()*100);
-        System.out.println("Seed for generating queries " + seed + ", making " +  settings.getNumOfItr() * settings.getSizeOfFullQuery() + " query terms");
+        System.out.println("Seed for generating queries " + seed + ", making " +  settings.getNumOfItr() * settings.getSizeOfQuery() + " query terms");
 
         // create queries
-        List<String> listOfQueryTerms = QueryCreator.createAllMasterQueries(settings.getNumOfItr() * settings.getSizeOfFullQuery(), seed);
+        List<String> listOfQueryTerms = QueryCreator.createAllMasterQueries(settings.getNumOfItr() * settings.getSizeOfQuery(), seed);
 
         // turn queries into json
         JsonArray queriesAsJson = JsonCreator.createJsonArrayFromListOfStrings(listOfQueryTerms);
@@ -124,7 +124,7 @@ public class QueryCreator {
         String date = dtf.format(localDate);
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                 .add("date", date)
-                .add("sizeOfFullQuery", settings.getSizeOfFullQuery())
+                .add("sizeOfFullQuery", settings.getSizeOfQuery())
                 .add("itr", settings.getNumOfItr());
 
         // add settings to map

@@ -16,32 +16,10 @@ public class FileWriter {
         appendToFile(jsonAsStringsList, fileName);
     }
 
-    public static void storeScoreInFileAsCsv(AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations, String fileName){
-        List<String> csvList = turnMapIntoListOfCsvStrings(scoresForAllIterations);
-        appendToFile(csvList, fileName);
-    }
-
-    private static List<String> turnMapIntoListOfCsvStrings(AbstractMap<Integer, AbstractMap<String, Double>> mapOfMap) {
-        // list to return
-        List<String> csvList = new ArrayList<>();
-
-        // temporary map
-        AbstractMap<String, Double> mapOfDoubles;
-
-        // pick out each interations map
-        for (Integer firstKey : mapOfMap.keySet()) {
-
-            mapOfDoubles = mapOfMap.get(firstKey);
-
-            // pick out each key and score in the iteration
-            for (String secondKey : mapOfDoubles.keySet()) {
-
-                // save as csv
-                csvList.add(secondKey + "," + mapOfDoubles.get(secondKey));
-            }
-        }
-
-        return csvList;
+    public static void storeResultsInFileAsJson(JsonObject json, String fileName){
+        List<String> jsonAsStringsList = new ArrayList<>();
+        jsonAsStringsList.add(json.toString());
+        appendToFile(jsonAsStringsList, fileName);
     }
 
     private static List<String> jsonToListOfStrings(List<JsonObject> jsonList){

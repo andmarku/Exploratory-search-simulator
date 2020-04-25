@@ -1,6 +1,6 @@
 package Measures;
 
-import SearchEngine.SearchEngineWrapper;
+import Retriever.RetrieverWrapper;
 import Utility.General;
 
 import java.util.*;
@@ -20,7 +20,7 @@ public class PrepClusterMetric {
 
         List<List<String>> queries = new ArrayList<>();
         queries.add(lsResult);
-        List<AbstractMap<String, AbstractMap<String, Double>>> stuff = SearchEngineWrapper.retrieveClustersLists(queries,10000);
+        List<AbstractMap<String, AbstractMap<String, Double>>> stuff = RetrieverWrapper.retrieveClustersLists(queries,10000);
         AbstractMap<String, AbstractMap<String, Double>> stuff_2 = stuff.get(0);
         AbstractMap<String, Double> scoredDocs = stuff_2.get("scoredDocs");
         AbstractMap<String, Double> linkedDocs = stuff_2.get("linkedDocs");

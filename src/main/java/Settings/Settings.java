@@ -1,19 +1,18 @@
 package Settings;
 
+import java.util.AbstractMap;
 import java.util.List;
 
 public interface Settings {
-    /*String getPathToFolder();
-    String getSimulationName();
-    String getQueryName();*/
+    String getScorePath();
     String getSimulationPath();
     String getQueryPath();
-    String getScorePath();
+    String getSearchPath();
     int getNumOfItr();
-    int getSizeOfFullQuery();
+    int getSizeOfQuery();
     int getSizeOfFinalRankedList();
     int getSizeOfRetrievedList();
-    List<Double> getExpMultipliers();
-    List<Integer> getSubqueries();
     void setStandardSettings();
+    List<AbstractMap<String, Double>> getParamCombs();
+
 }
