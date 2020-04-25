@@ -11,12 +11,8 @@ public class RankBiasedOverlap {
     /*
     Computes the metric Ranked Biased Distance
      */
-    public static double computeRankBiasedDistance(List<General.Pair> orderedListOne, List<General.Pair> orderedListTwo, double p){
-        double rBO = computeRboMin(orderedListOne, orderedListTwo, p);
-        // double rBO = computeRankBiasedOverlap(orderedListOne, orderedListTwo, p);
-
-        // the measure is defined as 1 - totalScore (since higher total score means more similar lists)
-        return 1 - rBO;
+    public static double computeRankBiasedOverlap(List<General.Pair> orderedListOne, List<General.Pair> orderedListTwo, double p){
+        return computeRboMin(orderedListOne, orderedListTwo, p);
     }
 
     /*
@@ -66,9 +62,21 @@ public class RankBiasedOverlap {
         return score;
     }
 
+    private static double computeOverlapFormulaAtDepthK(int sizeOfJoinedSet, double k, double p){
+    /*
+    The method calculates the score at depth k, defined as (size of overlap / depth) * p^(k-1).
+    OBS! Overlap is NOT equal to size of joined set.
+     */
+        // The size of the joined set of two lists at depth must be between k and 2 k, where size k means full overlap
+        // and 2k means no overlap.
+        double overlap = (2*k - sizeOfJoinedSet)/k;
+        return Math.pow(p, k-1) * overlap;
+    }
+
     /*
     Computes the basic version of the metric Ranked Biased Overlap up to max overlap
-     */
+    */
+    /*
     private static double computeRankBiasedOverlap(List<General.Pair> orderedListOne, List<General.Pair> orderedListTwo, double p){
         // length shared by both list (cannot compare further down)
         int sizeOfOverlap = Math.min(orderedListOne.size(), orderedListTwo.size());
@@ -93,15 +101,5 @@ public class RankBiasedOverlap {
 
         return score;
     }
-
-    /*
-    The method calculates the score at depth k, defined as (size of overlap / depth) * p^(k-1).
-    OBS! Overlap is NOT equal to size of joined set.
-     */
-    private static double computeOverlapFormulaAtDepthK(int sizeOfJoinedSet, double k, double p){
-        // The size of the joined set of two lists at depth must be between k and 2 k, where size k means full overlap
-        // and 2k means no overlap.
-        double overlap = (2*k - sizeOfJoinedSet)/k;
-        return Math.pow(p, k-1) * overlap;
-    }
+*/
 }

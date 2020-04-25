@@ -19,6 +19,7 @@ public class ThreeQueryTerms implements Settings{
     List<Double> etaList = new ArrayList<>();
     List<Double> gamma1List = new ArrayList<>();
     List<Double> gamma2List = new ArrayList<>();
+    List<Double> valuesOfP = new ArrayList<>();
     List<AbstractMap<String, Double>> parameterCombinations;
 
     public void setStandardSettings(){
@@ -37,6 +38,10 @@ public class ThreeQueryTerms implements Settings{
 
         // create all relevant combinations
         parameterCombinations = createAllParamCombinations(alphaList, betaList, etaList, gamma1List, gamma2List);
+
+        // set values of p
+        valuesOfP.add(0.9);
+        valuesOfP.add(0.95);
 
         // set names
         String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//";
@@ -86,5 +91,6 @@ public class ThreeQueryTerms implements Settings{
     public int getSizeOfFinalRankedList(){return sizeOfFinalRankedList;}
     public int getSizeOfRetrievedList(){return sizeOfRetrievedList;}
     public List<AbstractMap<String, Double>> getParamCombs(){return parameterCombinations;}
+    public List<Double> getValuesOfP(){return valuesOfP;}
 
 }

@@ -1,5 +1,6 @@
 package Simulator;
 
+import Measures.MeasuresWrapper;
 import Retriever.NewRetriever;
 import Retriever.RetrieverWrapper;
 import Settings.Settings;
@@ -31,7 +32,9 @@ public class Simulator {
             AbstractMap<String, Set<String>> v1 = createV1(singleSearchResult);
             AbstractMap<String, Set<String>> v2 = createV2(v1);
 
+
             // For each different combination of parameter values, apply component, apply metrics, and store results
+            Map<String, List<General.Pair>> mapOfAllListsFromIteration = new HashMap<>();
             for (AbstractMap<String, Double> fcnParams : settings.getParamCombs() ) {
 
                 // Rescore wtr to expansion
@@ -42,30 +45,35 @@ public class Simulator {
                 // TODO: 2020-04-24 just rank the list, dont trim
                 List<General.Pair> rankedResults = General.listRankedResults(expandedResults, settings.getSizeOfFinalRankedList());
 
+                String paramName = parametersToString(fcnParams);
+                mapOfAllListsFromIteration.put(paramName, rankedResults);
 /*
                 System.out.println("In fcnparam loop " + settings.getParamCombs().size());
-*/
 
-/*                for (General.Pair p : rankedResults) {
+                for (General.Pair p : rankedResults) {
                     System.out.println("key " + p.getKey() + " value " + p.getValue());
                 }*/
-
-                //MeasuresWrapper.run2(settings);
-                //MeasuresWrapper.compareWithRBD(settings);
-                //RankBiasedClusters.run();
-
-
-
-
-                // TODO: 2020-04-24 save metrics in json
-                // save ranked list as json in array
-                //simsAsListOfJsons.add(JsonCreator.rankedListToJson(rankedListAsList, settings, expMultiplier, 1, itr));
             }
+
+            MeasuresWrapper.measureAll(settings, mapOfAllListsFromIteration);
+
+            // TODO: 2020-04-24 save metrics in json
+            // save ranked list as json in array
+            //simsAsListOfJsons.add(JsonCreator.rankedListToJson(rankedListAsList, settings, expMultiplier, 1, itr));
         }
 
         FileWriter.storeResultsInFileAsJson(simsAsListOfJsons, settings.getSimulationPath());
     }
 
+    public static String parametersToString(AbstractMap<String, Double> fcnParams){
+        String settingsAsString = "";
+        String stringToAdd = "";
+        for (String paramName : fcnParams.keySet()) {
+            settingsAsString = settingsAsString + stringToAdd + paramName + "=" + fcnParams.get(paramName);
+            stringToAdd = ",";
+        }
+        return settingsAsString;
+    }
     public static AbstractMap<String, Double> createScoredDocs(JsonObject singleSearchResult){
 /*
         System.out.println("Unchecked scored docs");

@@ -2,50 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedSampling.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/QueryCreator/QueriesFromFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Retriever/NewParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Simulator/FeatureExpander.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Simulator/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ManualQueries/Trial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/MeasuresParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/REMOVE__MeasuresParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/PrepClusterMetric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/PrepClusterMetric.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriever.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/FeatureExpander.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SearchEngineWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Retriever/RetrieverWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SearchEngine/SimpleModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedClusters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedClusters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedOverlap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedOverlap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedSampling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedSampling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Looper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/QueryCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryCreator/QueryCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/QueryStopWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueryCreator/QueryStopWords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/SimWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/SimWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/General.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/JsonCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/JsonCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/backlogg.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/backlogg.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ManualQueries/Trial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Measures/PrepClusterMetric.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/PrepClusterMetric.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Retriever/NewRetriver.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/FeatureExpander.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/SearchEngineWrapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SearchEngine/SimpleModel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Settings/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/Settings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Looper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/QueryCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/QueryStopWords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/SimWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/SimWrapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Utility/FileWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/FileWriter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Utility/General.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/General.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/JsonCreator.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,22 +175,22 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582188781593" />
-    <state width="1807" height="290" key="GridCell.Tab.0.bottom" timestamp="1587800854430">
+    <state width="1807" height="290" key="GridCell.Tab.0.bottom" timestamp="1587816843507">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="290" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587800854430" />
-    <state width="1807" height="290" key="GridCell.Tab.0.center" timestamp="1587800854428">
+    <state width="1807" height="290" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1587816843507" />
+    <state width="1807" height="290" key="GridCell.Tab.0.center" timestamp="1587816843507">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="290" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587800854428" />
-    <state width="1807" height="290" key="GridCell.Tab.0.left" timestamp="1587800854428">
+    <state width="1807" height="290" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1587816843507" />
+    <state width="1807" height="290" key="GridCell.Tab.0.left" timestamp="1587816843506">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="290" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587800854428" />
-    <state width="1807" height="290" key="GridCell.Tab.0.right" timestamp="1587800854429">
+    <state width="1807" height="290" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1587816843506" />
+    <state width="1807" height="290" key="GridCell.Tab.0.right" timestamp="1587816843507">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="290" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587800854429" />
+    <state width="1807" height="290" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1587816843507" />
     <state width="1807" height="343" key="GridCell.Tab.1.bottom" timestamp="1584083988822">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

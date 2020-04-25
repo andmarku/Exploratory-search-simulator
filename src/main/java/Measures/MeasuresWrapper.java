@@ -6,91 +6,108 @@ import Utility.FileReader;
 import Utility.General;
 
 import javax.json.JsonObject;
+import java.io.IOException;
 import java.util.*;
 
 public class MeasuresWrapper {
-    public static void measureAll(Settings settings, List<List<General.Pair>> rankedListsWithSameQuery){
-        double p = 0.7;
-        System.out.println("OBS!!!! P is set in writing method.");
-
-        // read queries from file
-        List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
-
-        // parse jsons read from file
-        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
+    public static void measureAll(Settings settings, Map<String, List<General.Pair>> rankedListsWithSameQuery) throws IOException {
 
         /////////////////////////////
-        AbstractMap<String, AbstractMap<String, Double>> twoScoresAllDocs = runRbcAndRbs(settings, rankedListsWithSameQuery, p);
-
-
-        /////////////////////////////
-
-        AbstractMap<String, AbstractMap<String, Double>> allRboComparisonsPerQuery = runRboOnAllListInSetting(settings, rankedListsWithSameQuery, p);
+        // Map with key = value of p, middle key = settings, and inner key = measure. Inner value = score of the measure denoted by the key.
+        AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> twoScoresAllDocs = runRbcAndRbs(rankedListsWithSameQuery, settings.getValuesOfP());
 
         /////////////////////////////
-        // save the score with the setting as key
+        // Map with key = value of p, inner key = combo of settings, value = rbo score.
+        AbstractMap<String, AbstractMap<String, Double>> allRboComparisonsPerQuery = runRboOnAllListInSetting(rankedListsWithSameQuery, settings.getValuesOfP());
+
+
+        /*
+        /////////////////////////////
+        // save the score with the settings as key
         scoredMeasure.put(key, score);
 
         // add the scores of the simulations to the main map
         scoredList.put(simNr, scoredSettings);
+        */
     }
 
-    public static AbstractMap<String, Double> runRboOnAllListInSetting(){
-        AbstractMap<String, Double> rboForAllLists = new HashMap<>();
 
-        // compare each set-up once with each other set-up
-        for (String firstKey : sims.keySet()) {
-            for (String secondKey : sims.keySet()) {
-                // OBS makes sure that each comparison is only done once. (breaks when reaching the matrix diagonal)
-                if (firstKey.equals(secondKey)){
-                    break;
-                }
-                // compute the score
-                double score = RankBiasedOverlap.computeRankBiasedDistance(sims.get(firstKey), sims.get(secondKey), p);
+    public static AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> runRbcAndRbs(
+            Map<String, List<General.Pair>> rankedListsWithSameQuery,
+            List<Double> valuesOfP) throws IOException {
 
-                // save the score in map using CSV format
-                String name = firstKey + "," + secondKey;
-                rboForAllLists.put(name, score);
+        // map to store all scores for all p in (outer key = p, middle key = settingsCombo, innerKey = type of score)
+        AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> twoScoresAllDocsForAllP = new HashMap<>();
+
+        // map to store all scores for same p in (outer key is type of score, inner is docId)
+        AbstractMap<String, AbstractMap<String, Double>> twoScoresAllDocs;
+
+        for (Double p : valuesOfP) {
+            twoScoresAllDocs = new HashMap<>();
+
+            // through all combinations of params
+            for ( String paramCombo : rankedListsWithSameQuery.keySet()) {
+                // map to store the scores in
+                AbstractMap<String, Double> scoredMeasure = new HashMap<>();
+
+                // retrieve all linked documents
+                List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(rankedListsWithSameQuery.get(paramCombo));
+
+                // score the result list and its linked documents
+                double clusterScore = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
+                scoredMeasure.put("cluster", clusterScore);
+
+                // score the result list and its linked documents
+                double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, p);
+                scoredMeasure.put("sampling", samplingScore);
+
+                // store the scores in larger map
+                twoScoresAllDocs.put(paramCombo, scoredMeasure);
             }
+
+            twoScoresAllDocsForAllP.put("p=" + p, twoScoresAllDocs);
         }
-        return rboForAllLists;
+        return twoScoresAllDocsForAllP;
     }
 
-
-    public static AbstractMap<String, AbstractMap<String, Double>> runRbcAndRbs(Settings settings, List<List<General.Pair>> rankedListsWithSameQuery){
-        // map to store all scores in (outer key is type of score, inner is docId)
-        AbstractMap<String, AbstractMap<String, Double>> twoScoresAllDocs = new HashMap<>();
-
-        // alternativt
-/*
-        // score the result list and its linked documents
-        double score = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-*/
-
-        // through all combinations of params
-        for ( List<General.Pair> singleRes : rankedListsWithSameQuery) {
-            AbstractMap<String, Double> scoredMeasure = new HashMap<>();
-
-            // retrieve all linked documents
-            List<List<String>> retrievedAllLinkedDocs;
-
-            // score the result list and its linked documents
-            double clusterScore = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-            scoredMeasure.put("cluster", clusterScore);
-
-            // score the result list and its linked documents
-            double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-
-            // save the score with the setting as key
-            scoredMeasure.put("sampling", samplingScore);
-
-            twoScoresAllDocs.put(settingsKey, scoredMeasure);
+    public static List<List<String>> retrieveAllLinkedDocs(List<General.Pair> allResults) throws IOException {
+        List<String> settingsList = new ArrayList<>();
+        // add all pairs in single result
+        for (General.Pair pair: allResults) {
+            settingsList.add(pair.getKey());
         }
-
-        return twoScoresAllDocs;
+        return NewRetriever.multiGetList(settingsList);
     }
 
+    public static AbstractMap<String, AbstractMap<String, Double>> runRboOnAllListInSetting(
+                                                                                Map<String, List<General.Pair>> sims,
+                                                                                List<Double> valuesOfP){
+        AbstractMap<String, AbstractMap<String, Double>> rboForAllListsForAllP = new HashMap<>();
+        AbstractMap<String, Double> rboForAllLists;
 
+        // compute the score for each p
+        for (Double p : valuesOfP) {
+            rboForAllLists = new HashMap<>();
+
+            // compare each set-up once with each other set-up
+            for (String firstKey : sims.keySet()) {
+                for (String secondKey : sims.keySet()) {
+                    // OBS makes sure that each comparison is only done once. (breaks when reaching the matrix diagonal)
+                    if (firstKey.equals(secondKey)){
+                        break;
+                    }
+
+                    double score = RankBiasedOverlap.computeRankBiasedOverlap(sims.get(firstKey), sims.get(secondKey), p);
+
+                    // save the score in map using CSV format
+                    String name = firstKey + "," + secondKey;
+                    rboForAllLists.put(name, score);
+                }
+            }
+            rboForAllListsForAllP.put("p=" + p, rboForAllLists);
+        }
+        return rboForAllListsForAllP;
+    }
 
 
 
@@ -214,6 +231,7 @@ public class MeasuresWrapper {
         }
         return allMeasuredCases;
     }*/
+
 
 }
 

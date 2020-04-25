@@ -14,5 +14,6 @@ public interface Settings {
     int getSizeOfRetrievedList();
     void setStandardSettings();
     List<AbstractMap<String, Double>> getParamCombs();
+    List<Double> getValuesOfP();
 
 }

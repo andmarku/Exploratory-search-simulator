@@ -5,7 +5,7 @@ import Utility.General;
 import javax.json.JsonObject;
 import java.util.*;
 
-public class MeasuresParser {
+public class REMOVE__MeasuresParser {
     public static AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> parseListOfSimulationResults(List<JsonObject> simsFromFile){
         AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> listsFromAllItr = new HashMap<>();
 

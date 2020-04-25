@@ -1,30 +1,8 @@
 package Measures;
 
-import Utility.General;
-
 import java.util.*;
 
 public class RankBiasedClusters {
-
-    public static List<List<Double>> runMeasureListOfListOfResults(List<List<List<List<String>>>> allLists, double p){
-        List<List<Double>> scores = new ArrayList<>();
-
-        // through all lists of results
-        for (List<List<List<String>>> listOfLists : allLists) {
-            scores.add(runMeasureListOfResults(listOfLists, p));
-        }
-        return scores;
-    }
-
-    public static List<Double> runMeasureListOfResults(List<List<List<String>>> allLists, double p){
-        List<Double> scores = new ArrayList<>();
-
-        // through all lists of results
-        for (List<List<String>> listOfLinks : allLists) {
-            scores.add(runMeasureSingleResult(listOfLinks, p));
-        }
-        return scores;
-    }
 
     public static double runMeasureSingleResult(List<List<String>> listOfLinks, double p){
         List<Set<Integer>> setsInResult = new ArrayList<>();
