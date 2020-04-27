@@ -19,7 +19,6 @@ public class JsonCreator {
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder()
                 .add("date", date)
                 .add("sQ", settings.getSizeOfQuery()) // sizeOfFullQuery
-                .add("sFL", settings.getSizeOfFinalRankedList()) // sizeOfFinalRankedList
                 .add("sRL", settings.getSizeOfRetrievedList()) // sizeOfRetrievedList
                 .add("itr", itr)
                 .add("eM", expMultiplier) // expansionMultiplier
@@ -43,25 +42,24 @@ public class JsonCreator {
         return jsonBuilder.build();
     }
 
-    public static JsonObject createJsonFromMapOfMapOfDoubles(AbstractMap<String, AbstractMap<String, Double>> myMap, int itr){
+    public static JsonObject createJsonFromMapOfMapOfDoubles(AbstractMap<String, AbstractMap<String, Double>> myMap, String itrId){
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         JsonObjectBuilder innerJsonBuilder;
         AbstractMap<String, Double> innerMap;
 
+        jsonBuilder.add("id", itrId);
+
         // through outer map
         for (String key : myMap.keySet()) {
             innerJsonBuilder = Json.createObjectBuilder();
-            innerMap = myMap.get(key);
 
             // through inner map
+            innerMap = myMap.get(key);
             for (String innerKey : innerMap.keySet()) {
-                jsonBuilder.add(innerKey, innerMap.get(innerKey));
-                System.out.println("Outer key " + key + " \n\tInner key " + innerKey + " \n\t\tStoring " + innerMap.get(innerKey));
+                innerJsonBuilder.add(innerKey, innerMap.get(innerKey));
             }
-            jsonBuilder.add(key, innerJsonBuilder);
+            jsonBuilder.add(key, innerJsonBuilder.build());
         }
-
-        jsonBuilder.add("itr", itr);
 
         return jsonBuilder.build();
     }

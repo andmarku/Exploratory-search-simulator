@@ -27,8 +27,12 @@ import java.io.IOException;
 public class NewRetriever {
 
     // method for retrieving docs related to list of ids
-    public static List<List<String>> multiGetList(List<String> ids) throws IOException {
-        List<List<String>> allIdsAndLinked = new ArrayList<>();
+    public static AbstractMap<String, List<String>> multiGetList(List<String> ids) throws IOException {
+        AbstractMap<String, List<String>> allIdsAndLinked = new HashMap<>();
+
+        if (ids.isEmpty()){
+            return allIdsAndLinked;
+        }
 
         // set-up
         RestHighLevelClient client = new RestHighLevelClient(
@@ -61,7 +65,7 @@ public class NewRetriever {
 
             }
 
-            allIdsAndLinked.add(docAndLinked);
+            allIdsAndLinked.put(id, docAndLinked);
         }
 
         // terminate call

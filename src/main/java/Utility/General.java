@@ -28,16 +28,17 @@ public class General {
         return sortedValues;
     }//end of orderResults
 
-    public static List<Pair> listRankedResults(AbstractMap<String,Double> scoredDocs, int numOfRankedResults){
+    public static List<Pair> listRankedResults(AbstractMap<String,Double> scoredDocs, int maxSize){
         AbstractQueue<Pair> orderedResults = orderResults(scoredDocs);
         List<Pair> listedResults = new ArrayList<>();
-        for (int i = 0; i < numOfRankedResults; i++) {
-            if (orderedResults.isEmpty()){
-                break;
-            }
+        for (int i = 0; i < orderedResults.size(); i++) {
             listedResults.add(orderedResults.poll());
         }
-        return listedResults;
+
+        if (maxSize > listedResults.size()){
+            maxSize = listedResults.size();
+        }
+        return listedResults.subList(0, maxSize);
     }//end of listRankedResults
 
     public static class Pair implements Comparable<Pair>{

@@ -9,52 +9,67 @@ public class ThreeQueryTerms implements Settings{
     String simulationPath;
     String queryPath;
     String scorePath;
-    String searchPath;
     int numOfItr;
     int sizeOfQuery;
-    int sizeOfFinalRankedList;
     int sizeOfRetrievedList;
+    int maxSizeOfFinalList;
     List<Double> alphaList = new ArrayList<>();
     List<Double> betaList = new ArrayList<>();
     List<Double> etaList = new ArrayList<>();
     List<Double> gamma1List = new ArrayList<>();
     List<Double> gamma2List = new ArrayList<>();
     List<Double> valuesOfP = new ArrayList<>();
+    List<Double> valuesOfInnerP = new ArrayList<>();
     List<AbstractMap<String, Double>> parameterCombinations;
 
     public void setStandardSettings(){
         // general parameters
-        numOfItr = 1;
-        sizeOfFinalRankedList = 5;
-        sizeOfRetrievedList = 5;
+        numOfItr = 1000;
+        sizeOfRetrievedList = 100;
         sizeOfQuery = 3;
+        maxSizeOfFinalList = 50;
 
         // set parameter values
+        alphaList.add(-0.5);
+        alphaList.add((double) 0);
+        alphaList.add(0.5);
         alphaList.add((double) 1);
+
+        betaList.add((double) 0);
+        betaList.add(0.5);
         betaList.add((double) 1);
+
+        etaList.add((double) 0);
+        etaList.add(0.5);
         etaList.add((double) 1);
+
         gamma1List.add((double) 1);
+        gamma1List.add((double) 0);
+
         gamma2List.add((double) 1);
+        gamma2List.add((double) 0);
 
         // create all relevant combinations
         parameterCombinations = createAllParamCombinations(alphaList, betaList, etaList, gamma1List, gamma2List);
 
         // set values of p
+        valuesOfP.add(0.8);
         valuesOfP.add(0.9);
-        valuesOfP.add(0.95);
+
+        // set values of inner p
+        valuesOfInnerP.add(0.6);
+        valuesOfInnerP.add(0.7);
 
         // set names
-        String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//";
+        String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";
         String simulationName = "sims";
         String queryName = "queryTerms";
         String scoreName = "rboScores";
-        String searchName = "searchRes" + "QSize" + sizeOfQuery + "RLSize" + sizeOfRetrievedList;
 
         // create paths
         simulationPath = pathToFolder + simulationName;
         queryPath = pathToFolder + queryName;
         scorePath = pathToFolder + scoreName;
-        searchPath = pathToFolder + searchName;
     }
 
     private static List<AbstractMap<String, Double>> createAllParamCombinations(List<Double> alphaList, List<Double> betaList,
@@ -67,11 +82,11 @@ public class ThreeQueryTerms implements Settings{
                     for (double gamma1 : gamma1List) {
                         for (double gamma2 : gamma2List) {
                             AbstractMap<String, Double> singleParamComb = new HashMap<>();
-                            singleParamComb.put("alpha", alpha);
-                            singleParamComb.put("beta", beta);
-                            singleParamComb.put("eta", eta);
-                            singleParamComb.put("gamma1", gamma1);
-                            singleParamComb.put("gamma2", gamma2);
+                            singleParamComb.put("a", alpha);
+                            singleParamComb.put("b", beta);
+                            singleParamComb.put("e", eta);
+                            singleParamComb.put("g1", gamma1);
+                            singleParamComb.put("g2", gamma2);
                             paramCombs.add(singleParamComb);
                         }
                     }
@@ -82,15 +97,14 @@ public class ThreeQueryTerms implements Settings{
         return paramCombs;
     }
 
-    public String getSimulationPath(){return simulationPath;}
     public String getQueryPath(){return queryPath;}
     public String getScorePath(){return scorePath;}
-    public String getSearchPath(){return searchPath;}
     public int getNumOfItr(){return numOfItr;}
     public int getSizeOfQuery(){return sizeOfQuery;}
-    public int getSizeOfFinalRankedList(){return sizeOfFinalRankedList;}
     public int getSizeOfRetrievedList(){return sizeOfRetrievedList;}
+    public int getMaxSizeOfFinalList(){return maxSizeOfFinalList;}
     public List<AbstractMap<String, Double>> getParamCombs(){return parameterCombinations;}
     public List<Double> getValuesOfP(){return valuesOfP;}
+    public List<Double> getValuesOfInnerP(){return valuesOfInnerP;}
 
 }

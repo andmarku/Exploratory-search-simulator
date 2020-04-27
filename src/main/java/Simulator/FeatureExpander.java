@@ -8,9 +8,6 @@ public class FeatureExpander {
                                                            AbstractMap<String, Set<String>> v1,
                                                            AbstractMap<String, Set<String>> v2,
                                                            AbstractMap<String, Double> fcnParams){
-/*
-        System.out.println("Unchecked expansion component");
-*/
 
         AbstractMap<String, Double> expandedRes = new HashMap<>();
 
@@ -18,19 +15,16 @@ public class FeatureExpander {
         Map<String, Map<String,Double>> preppedDocs = prepForExpansion(scoredDocs, v1, v2);
 
         // rescore each document
-        double newScore;
         for (String id: preppedDocs.keySet()) {
-            newScore = 0;
-
             // evaluate function
-            newScore = expansionScoringFunction(
+            double newScore = expansionScoringFunction(
                     preppedDocs.get(id).get("score"),
                     preppedDocs.get(id).get("v1Score"),
                     preppedDocs.get(id).get("v2Score"),
                     preppedDocs.get(id).get("v1SizeFraction"),
                     preppedDocs.get(id).get("v2SizeFraction"),
-                    fcnParams.get("alpha"), fcnParams.get("beta"), fcnParams.get("eta"),
-                    fcnParams.get("gamma1"), fcnParams.get("gamma2"));
+                    fcnParams.get("a"), fcnParams.get("b"), fcnParams.get("e"),
+                    fcnParams.get("g1"), fcnParams.get("g2"));
 
             // add to final expanded scores
             expandedRes.put(id, newScore);
@@ -42,9 +36,6 @@ public class FeatureExpander {
     public static double expansionScoringFunction(double saScore, double v1Score, double v2Score,
                                                   double v1SizeFraction, double v2SizeFraction,
                                                   double alpha, double beta, double eta, double gamma1, double gamma2){
-/*
-        System.out.println("Unchecked exp function");
-*/
         return  saScore * alpha +
                 beta * ( gamma1 + (1-gamma1) * v1SizeFraction ) * v1Score +
                 eta * ( gamma2 + (1-gamma2) * v2SizeFraction ) * v2Score;
@@ -53,26 +44,21 @@ public class FeatureExpander {
     public static Map<String, Map<String,Double>> prepForExpansion(AbstractMap<String, Double> scoredDocs,
                                                                    AbstractMap<String, Set<String>> v1,
                                                                    AbstractMap<String, Set<String>> v2){
-/*
-        System.out.println("Unchecked prep for expansion");
-*/
+
         Map<String, Map<String,Double>> preppedDocs = new HashMap<>();
 
-        double score;
-        double v1Score;
-        double v2Score;
         double v1SizeFraction;
         double v2SizeFraction;
         Map<String, Double> mapScores;
         for (String id : v1.keySet()) {
             // add the original score, if any
-            score = 0;
+            double score = 0;
             if (scoredDocs.containsKey(id)) {
                 score += scoredDocs.get(id);
             }
 
             // sum all scores for v1 docs (if those docs are scored)
-            v1Score = 0;
+            double v1Score = 0;
             for (String v1Id : v1.get(id)) {
                 if (scoredDocs.containsKey(v1Id)) {
                     v1Score += scoredDocs.get(v1Id);
@@ -80,7 +66,7 @@ public class FeatureExpander {
             }
 
             // sum all scores for v2 docs (if those docs are scored)
-            v2Score = 0;
+            double v2Score = 0;
             for (String v2Id : v2.get(id)) {
                 if (scoredDocs.containsKey(v2Id)) {
                     v2Score += scoredDocs.get(v2Id);

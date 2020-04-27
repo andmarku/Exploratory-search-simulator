@@ -1,219 +1,95 @@
 package Measures;
 
-import Retriever.NewRetriever;
 import Settings.Settings;
-import Utility.FileReader;
 import Utility.General;
-
-import javax.json.JsonObject;
 import java.io.IOException;
 import java.util.*;
 
 public class MeasuresWrapper {
-    public static void measureAll(Settings settings, Map<String, List<General.Pair>> rankedListsWithSameQuery) throws IOException {
+    public static AbstractMap<String, AbstractMap<String, Double>> measureAll(Settings settings,
+                                                                              Map<String, List<General.Pair>> rankedListsWithSameQuery,
+                                                                              AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) throws IOException {
 
-        /////////////////////////////
-        // Map with key = value of p, middle key = settings, and inner key = measure. Inner value = score of the measure denoted by the key.
-        AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> twoScoresAllDocs = runRbcAndRbs(rankedListsWithSameQuery, settings.getValuesOfP());
+        AbstractMap<String, AbstractMap<String, Double>> mapOfMeasures = new HashMap<>();
 
-        /////////////////////////////
-        // Map with key = value of p, inner key = combo of settings, value = rbo score.
-        AbstractMap<String, AbstractMap<String, Double>> allRboComparisonsPerQuery = runRboOnAllListInSetting(rankedListsWithSameQuery, settings.getValuesOfP());
+        // Store map with key = value of p, settings, and value = rbCluster score
+        // rbc = rbc for all values of p
+        mapOfMeasures.put("rbc", runRbClusters(rankedListsWithSameQuery, settings.getValuesOfP(), mapOfAllDocsInAllOfV1));
+
+        // Store map with key = value of p, settings, and value = rbSampling score,
+        // rbs = rbs for all combinations of inner and outer p
+        mapOfMeasures.put("rbs", runRbSampling(rankedListsWithSameQuery,
+                settings.getValuesOfP(),
+                settings.getValuesOfInnerP(),
+                mapOfAllDocsInAllOfV1));
 
 
-        /*
-        /////////////////////////////
-        // save the score with the settings as key
-        scoredMeasure.put(key, score);
+        // Store map with key = value of p, combo of settings, and with value = rbOverlap score.
+        // rbo = rbo all comparisons for the parameter settings
+        mapOfMeasures.put("rbo", runRbOverlapOnAllListInSetting(rankedListsWithSameQuery,
+                settings.getValuesOfP()));
 
-        // add the scores of the simulations to the main map
-        scoredList.put(simNr, scoredSettings);
-        */
+        return mapOfMeasures;
     }
 
+    public static AbstractMap<String, Double> runRbSampling(Map<String, List<General.Pair>> mapOfRankedLists,
+                                                            List<Double> valuesOfOuterP,
+                                                            List<Double> valuesOfInnerP,
+                                                            AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1 ) throws IOException {
+        // map to store all scores for all p in
+        AbstractMap<String, Double> scoresAllDocsForAllCombosOfP = new HashMap<>();
 
-    public static AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> runRbcAndRbs(
-            Map<String, List<General.Pair>> rankedListsWithSameQuery,
-            List<Double> valuesOfP) throws IOException {
+        for (String paramCombo : mapOfRankedLists.keySet()) {
+            // retrieve all linked documents
+            List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(mapOfRankedLists.get(paramCombo),
+                    mapOfAllDocsInAllOfV1);
 
-        // map to store all scores for all p in (outer key = p, middle key = settingsCombo, innerKey = type of score)
-        AbstractMap<String, AbstractMap<String, AbstractMap<String, Double>>> twoScoresAllDocsForAllP = new HashMap<>();
+            for (Double outerP : valuesOfOuterP) {
+                for (Double innerP : valuesOfInnerP) {
+                    // score the result list and its linked documents
+                    double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, outerP, innerP);
 
-        // map to store all scores for same p in (outer key is type of score, inner is docId)
-        AbstractMap<String, AbstractMap<String, Double>> twoScoresAllDocs;
+                    // create key for map. s = parameter settings, op = outer parameter, ip = inner parameter
+                    String tag = "id=[s=[" + paramCombo + "],op=" + outerP + ",ip=" + innerP +"]" ;
 
-        for (Double p : valuesOfP) {
-            twoScoresAllDocs = new HashMap<>();
+                    // store the scores
+                    scoresAllDocsForAllCombosOfP.put(tag, samplingScore);
+                }
+            }
+        }
+        return scoresAllDocsForAllCombosOfP;
+    }
 
-            // through all combinations of params
-            for ( String paramCombo : rankedListsWithSameQuery.keySet()) {
-                // map to store the scores in
-                AbstractMap<String, Double> scoredMeasure = new HashMap<>();
+    public static AbstractMap<String, Double> runRbClusters(Map<String, List<General.Pair>> rankedListsWithSameQuery,
+                                                            List<Double> valuesOfP,
+                                                            AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) throws IOException {
+        // map to store all scores for all p in
+        AbstractMap<String, Double> rbcScoresAllDocsForAllP = new HashMap<>();
 
-                // retrieve all linked documents
-                List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(rankedListsWithSameQuery.get(paramCombo));
+        for (String paramCombo : rankedListsWithSameQuery.keySet()) {
+            // retrieve all linked documents
+            List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(rankedListsWithSameQuery.get(paramCombo),
+                    mapOfAllDocsInAllOfV1);
 
+            for (Double p : valuesOfP) {
                 // score the result list and its linked documents
                 double clusterScore = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-                scoredMeasure.put("cluster", clusterScore);
 
-                // score the result list and its linked documents
-                double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-                scoredMeasure.put("sampling", samplingScore);
+                // key to use in map. s = parameter settings
+                String tag = "id=[s=[" + paramCombo + "],p=" + p + "]";
 
-                // store the scores in larger map
-                twoScoresAllDocs.put(paramCombo, scoredMeasure);
+                // store the scores in map
+                rbcScoresAllDocsForAllP.put(tag, clusterScore);
             }
-
-            twoScoresAllDocsForAllP.put("p=" + p, twoScoresAllDocs);
         }
-        return twoScoresAllDocsForAllP;
+        return rbcScoresAllDocsForAllP;
     }
 
-    public static List<List<String>> retrieveAllLinkedDocs(List<General.Pair> allResults) throws IOException {
-        List<String> settingsList = new ArrayList<>();
-        // add all pairs in single result
-        for (General.Pair pair: allResults) {
-            settingsList.add(pair.getKey());
-        }
-        return NewRetriever.multiGetList(settingsList);
-    }
+    public static AbstractMap<String, Double> runRbOverlapOnAllListInSetting(Map<String, List<General.Pair>> sims,
+                                                                       List<Double> valuesOfP){
+        // map to store all scores for all p in
+        AbstractMap<String, Double> rboForAllListsForAllP = new HashMap<>();
 
-    public static AbstractMap<String, AbstractMap<String, Double>> runRboOnAllListInSetting(
-                                                                                Map<String, List<General.Pair>> sims,
-                                                                                List<Double> valuesOfP){
-        AbstractMap<String, AbstractMap<String, Double>> rboForAllListsForAllP = new HashMap<>();
-        AbstractMap<String, Double> rboForAllLists;
-
-        // compute the score for each p
-        for (Double p : valuesOfP) {
-            rboForAllLists = new HashMap<>();
-
-            // compare each set-up once with each other set-up
-            for (String firstKey : sims.keySet()) {
-                for (String secondKey : sims.keySet()) {
-                    // OBS makes sure that each comparison is only done once. (breaks when reaching the matrix diagonal)
-                    if (firstKey.equals(secondKey)){
-                        break;
-                    }
-
-                    double score = RankBiasedOverlap.computeRankBiasedOverlap(sims.get(firstKey), sims.get(secondKey), p);
-
-                    // save the score in map using CSV format
-                    String name = firstKey + "," + secondKey;
-                    rboForAllLists.put(name, score);
-                }
-            }
-            rboForAllListsForAllP.put("p=" + p, rboForAllLists);
-        }
-        return rboForAllListsForAllP;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public static void run2(Settings settings) throws Exception {
-        // OBS!!
-        double p = 0.7;
-        System.out.println("OBS!!!! P is set in writing method.");
-
-        // read queries from file
-        List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
-
-        // parse jsons read from file
-        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
-
-        // map to store all scores in
-        AbstractMap<Integer, AbstractMap<String, Double>> scoredSimulations = new HashMap<>();
-
-        // loop trough all iterations from the simulations
-        for (Integer simNr: allResults.keySet()) {
-            // map for the score of each result in this simulationNr
-            AbstractMap<String, Double> scoredSettings = new HashMap<>();
-
-            // loop through all settings
-            for (String key: allResults.get(simNr).keySet()) {
-                // list for the ids in the result for this setting
-                List<String> settingsList = new ArrayList<>();
-
-                // loop through all pairs in single result
-                for (General.Pair pair: allResults.get(simNr).get(key)) {
-                    settingsList.add(pair.getKey());
-                }
-                // retrieve all linked documents
-                List<List<String>> retrievedForSettings = NewRetriever.multiGetList(settingsList);
-
-                // score the result list and its linked documents
-                double score = RankBiasedClusters.runMeasureSingleResult(retrievedForSettings, p);
-
-                // save the score with the setting as key
-                scoredSettings.put(key, score);
-            }
-            // add the scores of the simulations to the main map
-            scoredSimulations.put(simNr, scoredSettings);
-        }
-
-    }*/
-
-    /*public static void compareWithRBD(Settings settings) throws Exception {
-        // OBS!!
-        double p = 0.7;
-        System.out.println("OBS!!!! P is set withing method.");
-
-        // read queries from file
-        List<JsonObject> simulationsListOfJsons = FileReader.readJsonFromFile(settings.getSimulationPath());
-
-        // parse jsons read from file
-        AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults = MeasuresParser.parseListOfSimulationResults(simulationsListOfJsons);
-
-        PrepClusterMetric.createListOfSets(allResults.get(0));
-       *//*
-        // list to store the results in
-        AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = compareAllCombinationsWithRBD(p, allResults);
-
-        FileWriter.storeScoreInFileAsCsv(scoresForAllIterations, settings.getScorePath());*//*
-    }
-
-    private static AbstractMap<Integer, AbstractMap<String, Double>> compareAllCombinationsWithRBD
-            (double p, AbstractMap<Integer, AbstractMap<String, List<General.Pair>>> allResults ) throws Exception {
-
-        // map for returning all scores
-        AbstractMap<Integer, AbstractMap<String, Double>> scoresForAllIterations = new HashMap<>();
-
-        // map for temporary saving the results in loop
-        AbstractMap<String, Double> scoresForIteration;
-
-        // compare all lists from the same interation (the iterations are keys in the map)
-        for (Integer itr : allResults.keySet()) {
-            // compare the lists
-            scoresForIteration = compareAllCases(allResults.get(itr), p);
-
-            // save this iterations scores
-            scoresForAllIterations.put(itr, scoresForIteration);
-        }
-        return scoresForAllIterations;
-    }
-*/
-
- /*   private static AbstractMap<String, Double>  compareAllCases(AbstractMap<String, List<General.Pair>> sims, double p) throws Exception {
-        AbstractMap<String, Double> allMeasuredCases = new HashMap<>();
         // compare each set-up once with each other set-up
         for (String firstKey : sims.keySet()) {
             for (String secondKey : sims.keySet()) {
@@ -221,31 +97,39 @@ public class MeasuresWrapper {
                 if (firstKey.equals(secondKey)){
                     break;
                 }
-                // compute the score
-                double score = RankBiasedOverlap.computeRankBiasedDistance(sims.get(firstKey), sims.get(secondKey), p);
 
-                // save the score in map using CSV format
-                String name = firstKey + "," + secondKey;
-                allMeasuredCases.put(name, score);
+                for (Double p : valuesOfP) {
+                    // compute the score
+                    double score = RankBiasedOverlap.computeRankBiasedOverlap(sims.get(firstKey), sims.get(secondKey), p);
+
+                    // create key using CSV format. os = outer parameter settings, is = inner parameter settings.
+                    String tag = "id=[os=[" + firstKey + "],is=[" + secondKey + "],p=" + p + "]";
+
+                    // save the score in map
+                    rboForAllListsForAllP.put(tag, score);
+                }
             }
         }
-        return allMeasuredCases;
-    }*/
+        return rboForAllListsForAllP;
+    }
 
+    public static List<List<String>> retrieveAllLinkedDocs(List<General.Pair> allResults,
+                                                           AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) throws IOException {
+
+        List<List<String>> docsLinkedToTheRankedDocs = new ArrayList<>();
+
+        // go through the (assumed ordered) list of ranked docs
+        for (General.Pair pair: allResults) {
+            List<String> linkedDocs = new ArrayList<>();
+
+            // add all linked docs from the map of all
+            linkedDocs.addAll(mapOfAllDocsInAllOfV1.get(pair.getKey()));
+
+            // append the linked docs (in the right place)
+            docsLinkedToTheRankedDocs.add(linkedDocs);
+        }
+
+        return docsLinkedToTheRankedDocs;
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

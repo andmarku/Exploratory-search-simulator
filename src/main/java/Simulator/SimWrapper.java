@@ -15,7 +15,7 @@ public class SimWrapper {
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
 
-        // SimWrapper.generateSearches(settings);
+        SimWrapper.generateSearches(settings);
 
         SimWrapper.simulator(settings);
 

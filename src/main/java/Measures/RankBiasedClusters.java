@@ -7,7 +7,7 @@ public class RankBiasedClusters {
     public static double runMeasureSingleResult(List<List<String>> listOfLinks, double p){
         List<Set<Integer>> setsInResult = new ArrayList<>();
 
-        // through all list of linked document (incl original doc)
+        // through all lists of linked document (incl original doc)
         for (List<String> listOfIds : listOfLinks) {
             Set mySet = new HashSet();
 
@@ -19,18 +19,9 @@ public class RankBiasedClusters {
         }
 
         // calculate the score for a single result list
-        double score = computeRankBiasedClusterDistance(setsInResult,p);
-
-        /*System.out.println(score);*/
+        double score = computeRankBiasedClusters(setsInResult,p);
 
         return score;
-    }
-
-    public static double computeRankBiasedClusterDistance(List<Set<Integer>> orderedList, double p){
-        double rBO = computeRankBiasedClusters(orderedList, p);
-
-        // the measure is defined as 1 - totalScore (since higher total score means more similar lists)
-        return 1 - rBO;
     }
 
     private static double computeRankBiasedClusters(List<Set<Integer>> orderedList, double p){
