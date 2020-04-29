@@ -3,6 +3,8 @@ package Measures;
 import Settings.Settings;
 import Utility.General;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class MeasuresWrapper {
@@ -22,7 +24,6 @@ public class MeasuresWrapper {
                 settings.getValuesOfP(),
                 settings.getValuesOfInnerP(),
                 mapOfAllDocsInAllOfV1));
-
 
         // Store map with key = value of p, combo of settings, and with value = rbOverlap score.
         // rbo = rbo all comparisons for the parameter settings
@@ -49,8 +50,11 @@ public class MeasuresWrapper {
                     // score the result list and its linked documents
                     double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, outerP, innerP);
 
+                    // round the score
+                    samplingScore = Math.floor(samplingScore * 10000) / (double) 10000;
+
                     // create key for map. s = parameter settings, op = outer parameter, ip = inner parameter
-                    String tag = "id=[s=[" + paramCombo + "],op=" + outerP + ",ip=" + innerP +"]" ;
+                    String tag = paramCombo + "," + outerP + "," + innerP ;
 
                     // store the scores
                     scoresAllDocsForAllCombosOfP.put(tag, samplingScore);
@@ -75,8 +79,11 @@ public class MeasuresWrapper {
                 // score the result list and its linked documents
                 double clusterScore = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
 
+                // round the score
+                clusterScore = Math.floor(clusterScore * 10000) / (double) 10000;
+
                 // key to use in map. s = parameter settings
-                String tag = "id=[s=[" + paramCombo + "],p=" + p + "]";
+                String tag = paramCombo + "," + p;
 
                 // store the scores in map
                 rbcScoresAllDocsForAllP.put(tag, clusterScore);
@@ -102,8 +109,11 @@ public class MeasuresWrapper {
                     // compute the score
                     double score = RankBiasedOverlap.computeRankBiasedOverlap(sims.get(firstKey), sims.get(secondKey), p);
 
+                    // round the score
+                    score = Math.floor(score * 10000) / (double) 10000;
+
                     // create key using CSV format. os = outer parameter settings, is = inner parameter settings.
-                    String tag = "id=[os=[" + firstKey + "],is=[" + secondKey + "],p=" + p + "]";
+                    String tag = firstKey + "," + secondKey + "," + p;
 
                     // save the score in map
                     rboForAllListsForAllP.put(tag, score);

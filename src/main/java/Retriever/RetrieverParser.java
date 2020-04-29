@@ -74,7 +74,7 @@ public class RetrieverParser {
         }
     }
 
-    private static String removeCitationMarks(String str) throws Exception {
+    public static String removeCitationMarks(String str) throws Exception {
         if(!(str.substring(0,1).equals("\"") && str.substring(str.length()-1).equals("\""))){
             throw new Exception("Deleted something that wasn't citation marks ");
         }

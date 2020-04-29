@@ -34,6 +34,14 @@ public class FileWriter {
         return jsonAsStringList;
     }
 
+    public static void writeCsv(String itrId, AbstractMap<String, Double> mapOfScores, String fileName){
+        List<String> rowsToWrite = new ArrayList<>();
+        for (String key : mapOfScores.keySet()) {
+            rowsToWrite.add(itrId + "," + key + "," + mapOfScores.get(key));
+        }
+        appendToFile(rowsToWrite, fileName);
+    }
+
     private static void appendToFile(List<String> listToAppend, String fileName){
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(fileName, true), StandardCharsets.UTF_8))) {

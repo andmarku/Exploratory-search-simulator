@@ -62,7 +62,7 @@ public class NewRetriever {
                 docAndLinked.addAll((List<String>)  sourceAsMap.get("inCitations"));
                 docAndLinked.addAll((List<String>)  sourceAsMap.get("outCitations"));
             } else {
-
+                //System.out.println("No item response in new retriever");
             }
 
             allIdsAndLinked.put(id, docAndLinked);
@@ -86,7 +86,7 @@ public class NewRetriever {
 
         // create the query
         QueryBuilder query =  new MatchQueryBuilder("title", queryStr);
-        WeightBuilder scorer = new WeightBuilder().setWeight(10);
+        WeightBuilder scorer = new WeightBuilder().setWeight(2);
         QueryBuilder filter1 = QueryBuilders.existsQuery("inCitations");
         QueryBuilder filter2 = QueryBuilders.existsQuery("outCitations");
         FunctionScoreQueryBuilder.FilterFunctionBuilder[] filterFunctionBuilders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[]{

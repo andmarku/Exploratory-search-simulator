@@ -42,6 +42,18 @@ public class JsonCreator {
         return jsonBuilder.build();
     }
 
+    public static JsonObject createJsonFromMapOfDoubles(AbstractMap<String, Double> myMap, String itrId){
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
+
+        jsonBuilder.add("id", itrId);
+
+        for (String key : myMap.keySet()) {
+            jsonBuilder.add(key, myMap.get(key));
+        }
+
+        return jsonBuilder.build();
+    }
+
     public static JsonObject createJsonFromMapOfMapOfDoubles(AbstractMap<String, AbstractMap<String, Double>> myMap, String itrId){
         JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         JsonObjectBuilder innerJsonBuilder;

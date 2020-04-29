@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class RankBiasedSampling {
     public static double runMeasureSingleResult(List<List<String>> listOfLinks, double outerP, double innerP){
-        List<Set<Integer>> setsInResult = new ArrayList<>();
+        List<Set<String>> setsInResult = new ArrayList<>();
 
         // through all lists of linked document (incl original doc)
         for (List<String> listOfIds : listOfLinks) {
@@ -15,7 +15,7 @@ public class RankBiasedSampling {
 
             // through all linked documents (incl original doc)
             for (String docId : listOfIds) {
-                mySet.add(Integer.getInteger(docId));
+                mySet.add(docId);
             }
             setsInResult.add(mySet);
         }
@@ -26,7 +26,7 @@ public class RankBiasedSampling {
         return score;
     }
 
-    private static double computeRankBiasedSampling(List<Set<Integer>> orderedList, double outerP, double innerP){
+    private static double computeRankBiasedSampling(List<Set<String>> orderedList, double outerP, double innerP){
         List<Integer> nrOfClustersAtEachDepthStartingAtDepth2 = new ArrayList<>();
 
         // start at second entry, since at least two entries are needed for a meaningful cluster
@@ -73,7 +73,7 @@ public class RankBiasedSampling {
     }
 
 
-    private static int greedyAlgorithmFindingNumberOfClustersInList(List<Set<Integer>> sets) {
+    private static int greedyAlgorithmFindingNumberOfClustersInList(List<Set<String>> sets) {
 
         // avoid unnecessary work without tampering with the list sets during iteration
         List<Integer> indexesOfSetsToRemove = new ArrayList<>();
@@ -97,7 +97,7 @@ public class RankBiasedSampling {
                     }
 
                     //through all connections in set i
-                    for (Integer id: sets.get(i)) {
+                    for (String id: sets.get(i)) {
                         // if set i has a connection to set j, add set i to set j, and add set i to sets to remove list
                         if(sets.get(j).contains(id)){
                             sets.get(j).addAll(sets.get(i));

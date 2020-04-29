@@ -5,7 +5,7 @@ import java.util.*;
 public class RankBiasedClusters {
 
     public static double runMeasureSingleResult(List<List<String>> listOfLinks, double p){
-        List<Set<Integer>> setsInResult = new ArrayList<>();
+        List<Set<String>> setsInResult = new ArrayList<>();
 
         // through all lists of linked document (incl original doc)
         for (List<String> listOfIds : listOfLinks) {
@@ -13,7 +13,7 @@ public class RankBiasedClusters {
 
             // through all linked documents (incl original doc)
             for (String docId : listOfIds) {
-                mySet.add(Integer.getInteger(docId));
+                mySet.add(docId);
             }
             setsInResult.add(mySet);
         }
@@ -24,8 +24,8 @@ public class RankBiasedClusters {
         return score;
     }
 
-    private static double computeRankBiasedClusters(List<Set<Integer>> orderedList, double p){
-        int nrOfClusters;
+    private static double computeRankBiasedClusters(List<Set<String>> orderedList, double p){
+        int nrOfClusters = 0;
         double score = 0;
 
         // start at second entry
@@ -35,15 +35,15 @@ public class RankBiasedClusters {
 
             // compute score at depth k (actual depth for second article starts at 2, not 1, hence i + 1)
             score += computeOverlapFormulaAtDepthK(nrOfClusters, d+1, p);
-        }
 
+        }
         // normalise (max sum from infinite loop is 1/(1 - p) )
         score = score * (1-p);
 
         return score;
     }
 
-    private static int greedyAlgorithmFindingNumberOfClustersInList(List<Set<Integer>> sets) {
+    private static int greedyAlgorithmFindingNumberOfClustersInList(List<Set<String>> sets) {
 
         // avoid unnecessary work without tampering with the list sets during iteration
         List<Integer> indexesOfSetsToRemove = new ArrayList<>();
@@ -67,7 +67,7 @@ public class RankBiasedClusters {
                     }
 
                     //through all connections in set i
-                    for (Integer id: sets.get(i)) {
+                    for (String id: sets.get(i)) {
                         // if set i has a connection to set j, add set i to set j, and add set i to sets to remove list
                         if(sets.get(j).contains(id)){
                             sets.get(j).addAll(sets.get(i));
@@ -78,7 +78,7 @@ public class RankBiasedClusters {
 
                     } // end loop through all connections for set i
 
-                    // if set i is already added a set, make sure not to check it against further sets
+                    // if set i is already added to a set, make sure not to check it against further sets
                     if (sweepAgain){
                         break;
                     }
@@ -97,9 +97,9 @@ public class RankBiasedClusters {
 }
 
 
-       /* List<Set<Integer>> l = new ArrayList<>();
+       /* List<Set<String>> l = new ArrayList<>();
 
-        Set<Integer> s = new TreeSet<>();
+        Set<String> s = new TreeSet<>();
         s.add(1);
         s.add(2);
         s.add(3);
