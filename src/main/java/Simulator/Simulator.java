@@ -26,6 +26,9 @@ public class Simulator {
 
             String itrId = "itr=" + itr;
 
+            // TODO: 2020-04-29  
+            System.out.println(itrId);
+            
             // Prepare for applying the expansion component
             AbstractMap<String, Double> scoredDocs = createScoredDocs(singleSearchResult);
             AbstractMap<String, Set<String>> v1 = createIncompleteV1(singleSearchResult);

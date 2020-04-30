@@ -25,23 +25,28 @@ public class ThreeQueryTerms implements Settings{
 
     public void setStandardSettings(){
         // general parameters
-        numOfItr = 3;
-        sizeOfQuery = 5;
+        numOfItr = 10;
+        sizeOfQuery = 7;
         sizeOfRetrievedList = 500;
         maxSizeOfFinalList = 50;
 
         // set parameter values
-        alphaList.add(-0.5);
         alphaList.add((double) 0);
+        alphaList.add(0.25);
         alphaList.add(0.5);
+        alphaList.add(0.75);
         alphaList.add((double) 1);
 
         betaList.add((double) 0);
+        betaList.add(0.25);
         betaList.add(0.5);
+        betaList.add(0.75);
         betaList.add((double) 1);
 
         gamma1List.add((double) 0);
+        gamma1List.add(0.25);
         gamma1List.add(0.5);
+        gamma1List.add(0.75);
         gamma1List.add((double) 1);
 
         // create all relevant combinations
@@ -52,11 +57,9 @@ public class ThreeQueryTerms implements Settings{
         valuesOfP.add(0.9);
         valuesOfP.add(0.95);
 
-
         // set values of inner p
         valuesOfInnerP.add(0.75);
         valuesOfInnerP.add(0.8);
-
 
         // set names
         String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";

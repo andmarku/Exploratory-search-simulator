@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RankBiasedSampling {
-    public static double runMeasureSingleResult(List<List<String>> listOfLinks, double outerP, double innerP){
+/*    public static double runMeasureSingleResult(List<List<String>> listOfLinks, double outerP, double innerP){
         List<Set<String>> setsInResult = new ArrayList<>();
 
         // through all lists of linked document (incl original doc)
@@ -24,31 +24,21 @@ public class RankBiasedSampling {
         double score = computeRankBiasedSampling(setsInResult, outerP, innerP);
 
         return score;
-    }
+    }*/
 
-    private static double computeRankBiasedSampling(List<Set<String>> orderedList, double outerP, double innerP){
-        List<Integer> nrOfClustersAtEachDepthStartingAtDepth2 = new ArrayList<>();
-
-        // start at second entry, since at least two entries are needed for a meaningful cluster
-        for (int d = 1; d < orderedList.size(); d++) {
-            // + 1 is because subList is exclusive.
-            nrOfClustersAtEachDepthStartingAtDepth2.add(greedyAlgorithmFindingNumberOfClustersInList(orderedList.subList(0, d + 1)));
-        }
-
+    public static double computeRankBiasedSampling(List<Integer> nrOfClustersAtEachDepthStartingAtDepth2,
+                                                   double outerP, double innerP){
         double outerScore = 0;
-        double innerScore;
-        double a_d;
-        double a_j;
-        double indexOfEntryInSum;
-        double actualDepth;
         for (int d = 0; d < nrOfClustersAtEachDepthStartingAtDepth2.size(); d++) {
-            innerScore = 0;
+            double indexOfEntryInSum;
+            double actualDepth;
+            double innerScore = 0;
 
             // does not include d = j = 0
             for (int j = 0; j < d; j++) {
                 // since when j = 0, the nrOfClusters = 2
                 actualDepth = (double) j + 2;
-                a_j = nrOfClustersAtEachDepthStartingAtDepth2.get(j) / actualDepth;
+                double a_j = nrOfClustersAtEachDepthStartingAtDepth2.get(j) / actualDepth;
 
                 // since j = 0 is the first entry in the sum
                 indexOfEntryInSum = (double) j + 1;
@@ -57,7 +47,7 @@ public class RankBiasedSampling {
 
             // since when d = 0, the nrOfClusters = 2
             actualDepth = (double) d + 2;
-            a_d = (1 - nrOfClustersAtEachDepthStartingAtDepth2.get(d) / actualDepth) * innerScore;
+            double a_d = (1 - nrOfClustersAtEachDepthStartingAtDepth2.get(d) / actualDepth) * innerScore;
 
             // since d = 0 is the first entry in the sum
             indexOfEntryInSum = (double) d + 1;

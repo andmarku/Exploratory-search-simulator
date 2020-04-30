@@ -2,9 +2,8 @@ package Measures;
 
 import Settings.Settings;
 import Utility.General;
+
 import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class MeasuresWrapper {
@@ -14,41 +13,59 @@ public class MeasuresWrapper {
 
         AbstractMap<String, AbstractMap<String, Double>> mapOfMeasures = new HashMap<>();
 
+        // Compute the clusters for each list (placed here in order to just do it once)
+        AbstractMap<String, List<Integer>> mapOfNrOfClusterForEachSetting =
+                computeNrOfClustersForEachSetting(rankedListsWithSameQuery, mapOfAllDocsInAllOfV1);
+
         // Store map with key = value of p, settings, and value = rbCluster score
         // rbc = rbc for all values of p
-        mapOfMeasures.put("rbc", runRbClusters(rankedListsWithSameQuery, settings.getValuesOfP(), mapOfAllDocsInAllOfV1));
+        mapOfMeasures.put("rbc", runRbClusters(mapOfNrOfClusterForEachSetting, settings.getValuesOfP()));
 
         // Store map with key = value of p, settings, and value = rbSampling score,
         // rbs = rbs for all combinations of inner and outer p
-        mapOfMeasures.put("rbs", runRbSampling(rankedListsWithSameQuery,
-                settings.getValuesOfP(),
-                settings.getValuesOfInnerP(),
-                mapOfAllDocsInAllOfV1));
+        mapOfMeasures.put("rbs", runRbSampling(mapOfNrOfClusterForEachSetting, settings.getValuesOfP(), settings.getValuesOfInnerP()));
 
         // Store map with key = value of p, combo of settings, and with value = rbOverlap score.
         // rbo = rbo all comparisons for the parameter settings
-        mapOfMeasures.put("rbo", runRbOverlapOnAllListInSetting(rankedListsWithSameQuery,
-                settings.getValuesOfP()));
+        mapOfMeasures.put("rbo", runRbOverlapOnAllListInSetting(rankedListsWithSameQuery, settings.getValuesOfP()));
 
         return mapOfMeasures;
     }
 
-    public static AbstractMap<String, Double> runRbSampling(Map<String, List<General.Pair>> mapOfRankedLists,
+    public static AbstractMap<String, Double> runRbClusters(AbstractMap<String, List<Integer>> mapOfNrOfClusterForEachSetting,
+                                                            List<Double> valuesOfP){
+        // map to store all scores for all p in
+        AbstractMap<String, Double> rbcScoresAllDocsForAllP = new HashMap<>();
+
+        for (String paramCombo : mapOfNrOfClusterForEachSetting.keySet()) {
+            for (double p : valuesOfP) {
+                // score the result list and its linked documents
+                double clusterScore = RankBiasedClusters.computeRankBiasedClusters(mapOfNrOfClusterForEachSetting.get(paramCombo), p);
+
+                // round the score
+                clusterScore = Math.floor(clusterScore * 10000) / (double) 10000;
+
+                // key to use in map. s = parameter settings
+                String tag = paramCombo + "," + p;
+
+                // store the scores in map
+                rbcScoresAllDocsForAllP.put(tag, clusterScore);
+            }
+        }
+        return rbcScoresAllDocsForAllP;
+    }
+
+    public static AbstractMap<String, Double> runRbSampling(AbstractMap<String, List<Integer>> mapOfNrOfClusterForEachSetting,
                                                             List<Double> valuesOfOuterP,
-                                                            List<Double> valuesOfInnerP,
-                                                            AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1 ) throws IOException {
+                                                            List<Double> valuesOfInnerP){
         // map to store all scores for all p in
         AbstractMap<String, Double> scoresAllDocsForAllCombosOfP = new HashMap<>();
 
-        for (String paramCombo : mapOfRankedLists.keySet()) {
-            // retrieve all linked documents
-            List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(mapOfRankedLists.get(paramCombo),
-                    mapOfAllDocsInAllOfV1);
-
-            for (Double outerP : valuesOfOuterP) {
-                for (Double innerP : valuesOfInnerP) {
+        for (String paramCombo : mapOfNrOfClusterForEachSetting.keySet()) {
+           for (double outerP : valuesOfOuterP) {
+                for (double innerP : valuesOfInnerP) {
                     // score the result list and its linked documents
-                    double samplingScore = RankBiasedSampling.runMeasureSingleResult(retrievedAllLinkedDocs, outerP, innerP);
+                    double samplingScore = RankBiasedSampling.computeRankBiasedSampling(mapOfNrOfClusterForEachSetting.get(paramCombo), outerP, innerP);
 
                     // round the score
                     samplingScore = Math.floor(samplingScore * 10000) / (double) 10000;
@@ -62,34 +79,6 @@ public class MeasuresWrapper {
             }
         }
         return scoresAllDocsForAllCombosOfP;
-    }
-
-    public static AbstractMap<String, Double> runRbClusters(Map<String, List<General.Pair>> rankedListsWithSameQuery,
-                                                            List<Double> valuesOfP,
-                                                            AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) throws IOException {
-        // map to store all scores for all p in
-        AbstractMap<String, Double> rbcScoresAllDocsForAllP = new HashMap<>();
-
-        for (String paramCombo : rankedListsWithSameQuery.keySet()) {
-            // retrieve all linked documents
-            List<List<String>> retrievedAllLinkedDocs = retrieveAllLinkedDocs(rankedListsWithSameQuery.get(paramCombo),
-                    mapOfAllDocsInAllOfV1);
-
-            for (Double p : valuesOfP) {
-                // score the result list and its linked documents
-                double clusterScore = RankBiasedClusters.runMeasureSingleResult(retrievedAllLinkedDocs, p);
-
-                // round the score
-                clusterScore = Math.floor(clusterScore * 10000) / (double) 10000;
-
-                // key to use in map. s = parameter settings
-                String tag = paramCombo + "," + p;
-
-                // store the scores in map
-                rbcScoresAllDocsForAllP.put(tag, clusterScore);
-            }
-        }
-        return rbcScoresAllDocsForAllP;
     }
 
     public static AbstractMap<String, Double> runRbOverlapOnAllListInSetting(Map<String, List<General.Pair>> sims,
@@ -123,23 +112,145 @@ public class MeasuresWrapper {
         return rboForAllListsForAllP;
     }
 
-    public static List<List<String>> retrieveAllLinkedDocs(List<General.Pair> allResults,
-                                                           AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) throws IOException {
+    public static AbstractMap<String, List<Integer>> computeNrOfClustersForEachSetting(Map<String, List<General.Pair>> rankedListsWithSameQuery,
+                                                                                       AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1){
+        AbstractMap<String, List<Integer>> nrOfClustersForEachSetting = new HashMap<>();
 
-        List<List<String>> docsLinkedToTheRankedDocs = new ArrayList<>();
+        for (String paramCombo : rankedListsWithSameQuery.keySet()) {
+            // retrieve all linked documents
+            List<Set<String>> listOfLinks = getAllLinkedDocs(rankedListsWithSameQuery.get(paramCombo),
+                    mapOfAllDocsInAllOfV1);
+
+            // compute number of clusters
+            List<Integer> listOfNrOfClustersForSingleSetting = findNumberOfClustersInListForDifferentDepth(listOfLinks);
+
+            // store the scores in map
+            nrOfClustersForEachSetting.put(paramCombo, listOfNrOfClustersForSingleSetting);
+        }
+
+        return nrOfClustersForEachSetting;
+    }
+
+    public static List<Set<String>> getAllLinkedDocs(List<General.Pair> allResults,
+                                                           AbstractMap<String, Set<String>> mapOfAllDocsInAllOfV1) {
+
+        List<Set<String>> docsLinkedToTheRankedDocs = new ArrayList<>();
 
         // go through the (assumed ordered) list of ranked docs
         for (General.Pair pair: allResults) {
-            List<String> linkedDocs = new ArrayList<>();
-
-            // add all linked docs from the map of all
-            linkedDocs.addAll(mapOfAllDocsInAllOfV1.get(pair.getKey()));
-
             // append the linked docs (in the right place)
-            docsLinkedToTheRankedDocs.add(linkedDocs);
+            docsLinkedToTheRankedDocs.add(mapOfAllDocsInAllOfV1.get(pair.getKey()));
         }
 
         return docsLinkedToTheRankedDocs;
     }
 
+
+    public static List<Integer> findNumberOfClustersInListForDifferentDepth(List<Set<String>> orderedList) {
+        List<Integer> allNumbersOfClusters = new ArrayList<>();
+        // List<Set<String>> allDisjointClusters = new ArrayList<>();
+        List<Set<Integer>> indicesOfOverlappingSets = new ArrayList<>();
+
+        // start the loop second entry since just one set is always disjoint
+        Set<Integer> newCluster = new HashSet<>();
+        newCluster.add(0);
+        indicesOfOverlappingSets.add(newCluster);
+        // allDisjointClusters.add(orderedList.get(0));
+        for (int d = 1; d < orderedList.size(); d++) {
+             // find the new list of disjoint sets
+            //allDisjointClusters = findAllDisjointSets(allDisjointClusters, orderedList.get(d));
+
+            indicesOfOverlappingSets = findAllDisjointSets2(orderedList.subList(0, d+1), indicesOfOverlappingSets);
+
+            /*if (allDisjointClusters.size() != indicesOfOverlappingSets.size()){
+                System.out.println("Something is wrong");
+            }*/
+
+            // add the number of disjoint clusters
+            allNumbersOfClusters.add(indicesOfOverlappingSets.size());
+        }
+        return allNumbersOfClusters;
+    }
+
+
+    public static List<Set<Integer>> findAllDisjointSets2(List<Set<String>> allSets, List<Set<Integer>> indicesOfOverlappingSets){
+        Stack<Integer> clustersToJoin = new Stack<>();
+        Boolean breakLoop = false;
+        // find out which clusters that the new set overlaps
+        for (int i = 0; i < indicesOfOverlappingSets.size(); i++) {
+            breakLoop = false;
+            // for each set in the cluster at position i
+            for (Integer indexOfSetInCluster : indicesOfOverlappingSets.get(i)) {
+                Set<String> existingSet = allSets.get(indexOfSetInCluster);
+                // check if the new set overlaps the existing set for any id
+                for (String id : allSets.get(allSets.size() - 1)) {
+                    if (existingSet.contains(id)){
+                        // keep track of the clusters that the new set overlaps
+                        clustersToJoin.push(i);
+                        breakLoop = true;
+                        break;
+                    }
+                }
+                if (breakLoop){
+                    break;
+                }
+            }
+        }
+
+        // if the new set did not overlap any old clusters, add it as a cluster on its own
+        // merge the clusters that have become joined
+        if (clustersToJoin.isEmpty()){
+            Set<Integer> newCluster = new HashSet<>();
+            newCluster.add(allSets.size() - 1);
+            indicesOfOverlappingSets.add(newCluster);
+        }else{
+            Set<Integer> newCluster = new HashSet<>();
+            newCluster.add(allSets.size() - 1);
+            while (!clustersToJoin.isEmpty()){
+                int i = clustersToJoin.pop();
+                newCluster.addAll(indicesOfOverlappingSets.get(i));
+                indicesOfOverlappingSets.remove(i);
+            }
+            indicesOfOverlappingSets.add(newCluster);
+        }
+
+        return indicesOfOverlappingSets;
+    }
+
+    public static List<Set<String>> findAllDisjointSets(List<Set<String>> sets, Set<String> setToExamine){
+        Set<String> setToAddToTheList = new HashSet<>();
+        Stack<Integer> indicesToRemove = new Stack<>();
+
+        for (int i = 0; i < sets.size(); i++) {
+            Set<String> existingSet = sets.get(i);
+            for (String id : setToExamine) {
+                if (existingSet.contains(id)){
+                    setToAddToTheList.addAll(existingSet);
+
+                    // sets need to be removed in reverse order later in order to not change the higher indices
+                    indicesToRemove.push(i);
+                    break;
+                }
+            }
+        }
+        
+        // if the new set was disjoint with the other sets, add it to the list
+        // else add all elements from the new set to the "to add"-set
+        if (indicesToRemove.isEmpty()){
+            setToAddToTheList = setToExamine;
+        }else{
+            setToAddToTheList.addAll(setToExamine);
+        }
+
+        // remove all those sets that matched the new sets
+        while (!indicesToRemove.isEmpty()) {
+            // pick out the index added last
+            int index = indicesToRemove.pop();
+            sets.remove(index);
+        }
+
+        sets.add(setToAddToTheList);
+        
+        return sets;
+    }
 }
