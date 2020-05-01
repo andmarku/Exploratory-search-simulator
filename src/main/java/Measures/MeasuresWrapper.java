@@ -145,26 +145,17 @@ public class MeasuresWrapper {
         return docsLinkedToTheRankedDocs;
     }
 
-
     public static List<Integer> findNumberOfClustersInListForDifferentDepth(List<Set<String>> orderedList) {
         List<Integer> allNumbersOfClusters = new ArrayList<>();
-        // List<Set<String>> allDisjointClusters = new ArrayList<>();
         List<Set<Integer>> indicesOfOverlappingSets = new ArrayList<>();
 
         // start the loop second entry since just one set is always disjoint
         Set<Integer> newCluster = new HashSet<>();
         newCluster.add(0);
         indicesOfOverlappingSets.add(newCluster);
-        // allDisjointClusters.add(orderedList.get(0));
         for (int d = 1; d < orderedList.size(); d++) {
              // find the new list of disjoint sets
-            //allDisjointClusters = findAllDisjointSets(allDisjointClusters, orderedList.get(d));
-
-            indicesOfOverlappingSets = findAllDisjointSets2(orderedList.subList(0, d+1), indicesOfOverlappingSets);
-
-            /*if (allDisjointClusters.size() != indicesOfOverlappingSets.size()){
-                System.out.println("Something is wrong");
-            }*/
+             indicesOfOverlappingSets = findAllDisjointSets(orderedList.subList(0, d+1), indicesOfOverlappingSets);
 
             // add the number of disjoint clusters
             allNumbersOfClusters.add(indicesOfOverlappingSets.size());
@@ -172,8 +163,7 @@ public class MeasuresWrapper {
         return allNumbersOfClusters;
     }
 
-
-    public static List<Set<Integer>> findAllDisjointSets2(List<Set<String>> allSets, List<Set<Integer>> indicesOfOverlappingSets){
+    public static List<Set<Integer>> findAllDisjointSets(List<Set<String>> allSets, List<Set<Integer>> indicesOfOverlappingSets){
         Stack<Integer> clustersToJoin = new Stack<>();
         Boolean breakLoop = false;
         // find out which clusters that the new set overlaps
@@ -215,42 +205,5 @@ public class MeasuresWrapper {
         }
 
         return indicesOfOverlappingSets;
-    }
-
-    public static List<Set<String>> findAllDisjointSets(List<Set<String>> sets, Set<String> setToExamine){
-        Set<String> setToAddToTheList = new HashSet<>();
-        Stack<Integer> indicesToRemove = new Stack<>();
-
-        for (int i = 0; i < sets.size(); i++) {
-            Set<String> existingSet = sets.get(i);
-            for (String id : setToExamine) {
-                if (existingSet.contains(id)){
-                    setToAddToTheList.addAll(existingSet);
-
-                    // sets need to be removed in reverse order later in order to not change the higher indices
-                    indicesToRemove.push(i);
-                    break;
-                }
-            }
-        }
-        
-        // if the new set was disjoint with the other sets, add it to the list
-        // else add all elements from the new set to the "to add"-set
-        if (indicesToRemove.isEmpty()){
-            setToAddToTheList = setToExamine;
-        }else{
-            setToAddToTheList.addAll(setToExamine);
-        }
-
-        // remove all those sets that matched the new sets
-        while (!indicesToRemove.isEmpty()) {
-            // pick out the index added last
-            int index = indicesToRemove.pop();
-            sets.remove(index);
-        }
-
-        sets.add(setToAddToTheList);
-        
-        return sets;
     }
 }

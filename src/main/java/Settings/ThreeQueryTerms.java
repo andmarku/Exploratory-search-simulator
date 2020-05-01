@@ -16,50 +16,65 @@ public class ThreeQueryTerms implements Settings{
     int maxSizeToExpandToV1;
     List<Double> alphaList = new ArrayList<>();
     List<Double> betaList = new ArrayList<>();
-    List<Double> etaList = new ArrayList<>();
     List<Double> gamma1List = new ArrayList<>();
-    List<Double> gamma2List = new ArrayList<>();
     List<Double> valuesOfP = new ArrayList<>();
     List<Double> valuesOfInnerP = new ArrayList<>();
     List<List<Double>> parameterCombinations;
 
     public void setStandardSettings(){
         // general parameters
-        numOfItr = 10;
+        numOfItr = 100;
         sizeOfQuery = 7;
         sizeOfRetrievedList = 500;
-        maxSizeOfFinalList = 50;
+        maxSizeOfFinalList = 40;
 
         // set parameter values
+        alphaList.add((double) -1);
+        alphaList.add(-0.8);
+        alphaList.add(-0.6);
+        alphaList.add(-0.4);
+        alphaList.add(-0.2);
         alphaList.add((double) 0);
         alphaList.add(0.25);
         alphaList.add(0.5);
         alphaList.add(0.75);
         alphaList.add((double) 1);
 
+        betaList.add((double) -1);
+        betaList.add(-0.8);
+        betaList.add(-0.6);
+        betaList.add(-0.4);
+        betaList.add(-0.2);
         betaList.add((double) 0);
-        betaList.add(0.25);
-        betaList.add(0.5);
-        betaList.add(0.75);
+        betaList.add(0.2);
+        betaList.add(0.4);
+        betaList.add(0.6);
+        betaList.add(0.8);
         betaList.add((double) 1);
 
         gamma1List.add((double) 0);
-        gamma1List.add(0.25);
-        gamma1List.add(0.5);
-        gamma1List.add(0.75);
+        gamma1List.add(0.2);
+        gamma1List.add(0.4);
+        gamma1List.add(0.6);
+        gamma1List.add(0.8);
         gamma1List.add((double) 1);
 
         // create all relevant combinations
         parameterCombinations = createAllParamCombinations(alphaList, betaList, gamma1List);
 
         // set values of p
+        valuesOfP.add(0.75);
+        valuesOfP.add(0.8);
         valuesOfP.add(0.85);
         valuesOfP.add(0.9);
         valuesOfP.add(0.95);
 
         // set values of inner p
+        valuesOfInnerP.add(0.6);
+        valuesOfInnerP.add(0.7);
         valuesOfInnerP.add(0.75);
         valuesOfInnerP.add(0.8);
+        valuesOfInnerP.add(0.9);
 
         // set names
         String pathToFolder = "//home//fallman//development//dataForThesis//storedSimulationResults//threeQueryTerms//";
@@ -69,9 +84,9 @@ public class ThreeQueryTerms implements Settings{
         String scoreName = "smallerTest_";
 
         // create paths
-        rbClusterPath = pathToFolder + scoreName + "rbCluster";
-        rbSamplingPath = pathToFolder + scoreName + "rbSampling";
-        rbOverlapPath = pathToFolder + scoreName + "rbOverlap";
+        rbClusterPath = pathToFolder + scoreName + "rbCluster" + "_nrOfQt=" + sizeOfQuery;
+        rbSamplingPath = pathToFolder + scoreName + "rbSampling" + "_nrOfQt=" + sizeOfQuery;
+        rbOverlapPath = pathToFolder + scoreName + "rbOverlap" + "_nrOfQt=" + sizeOfQuery;
         simulationPath = pathToFolder + simulationName;
         queryPath = pathToFolder + queryName;
     }
