@@ -1,41 +1,22 @@
 package Measures;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class RankBiasedSampling {
-/*    public static double runMeasureSingleResult(List<List<String>> listOfLinks, double outerP, double innerP){
-        List<Set<String>> setsInResult = new ArrayList<>();
 
-        // through all lists of linked document (incl original doc)
-        for (List<String> listOfIds : listOfLinks) {
-            Set mySet = new HashSet();
-
-            // through all linked documents (incl original doc)
-            for (String docId : listOfIds) {
-                mySet.add(docId);
-            }
-            setsInResult.add(mySet);
-        }
-
-        // calculate the score for a single result list
-        double score = computeRankBiasedSampling(setsInResult, outerP, innerP);
-
-        return score;
-    }*/
-
-    public static double computeRankBiasedSampling(List<Integer> nrOfClustersAtEachDepthStartingAtDepth2,
+    public static double computeBatchRankBiasedSampling(List<Integer> nrOfClustersAtEachDepthStartingAtDepth2, int batchSize,
                                                    double outerP, double innerP){
         double outerScore = 0;
-        for (int d = 0; d < nrOfClustersAtEachDepthStartingAtDepth2.size(); d++) {
+        // minus one since indices in arrays starts at zero
+        for (int d = batchSize-1; d < nrOfClustersAtEachDepthStartingAtDepth2.size(); d+=batchSize) {
             double indexOfEntryInSum;
             double actualDepth;
             double innerScore = 0;
 
-            // does not include d = j = 0
-            for (int j = 0; j < d; j++) {
+            // minus one since indices in arrays starts at zero
+            for (int j = batchSize-1; j <= d; j+=batchSize) {
                 // since when j = 0, the nrOfClusters = 2
                 actualDepth = (double) j + 2;
                 double a_j = nrOfClustersAtEachDepthStartingAtDepth2.get(j) / actualDepth;
@@ -54,7 +35,6 @@ public class RankBiasedSampling {
             outerScore += a_d * calcW(indexOfEntryInSum, outerP);
         }
 
-
         return outerScore;
     }
 
@@ -62,50 +42,4 @@ public class RankBiasedSampling {
         return (1-p) * Math.pow(p, depth-1);
     }
 
-
-    private static int greedyAlgorithmFindingNumberOfClustersInList(List<Set<String>> sets) {
-
-        // avoid unnecessary work without tampering with the list sets during iteration
-        List<Integer> indexesOfSetsToRemove = new ArrayList<>();
-
-        boolean sweepAgain = true;
-        while (sweepAgain) {
-            sweepAgain = false;
-
-            // through all sets
-            for (int i = 0; i < sets.size(); i++) {
-                // avoid unnecessary work
-                if (indexesOfSetsToRemove.contains(i)){
-                    continue;
-                }
-
-                // through all sets higher on the list
-                for (int j = 0; j < i; j++) {
-                    // avoid unnecessary work
-                    if (indexesOfSetsToRemove.contains(j)){
-                        continue;
-                    }
-
-                    //through all connections in set i
-                    for (String id: sets.get(i)) {
-                        // if set i has a connection to set j, add set i to set j, and add set i to sets to remove list
-                        if(sets.get(j).contains(id)){
-                            sets.get(j).addAll(sets.get(i));
-                            indexesOfSetsToRemove.add(i);
-                             sweepAgain = true;
-                            break;
-                        }
-
-                    } // end loop through all connections for set i
-
-                    // if set i is already added a set, make sure not to check it against further sets
-                    if (sweepAgain){
-                        break;
-                    }
-                } // end loop through all sets higher on the list than set i
-            }
-        } // end while
-
-        return sets.size() - indexesOfSetsToRemove.size();
-    }
 }

@@ -13,7 +13,11 @@ public interface Settings {
     int getMaxSizeOfFinalList();
     int getMaxSizeToExpandToV1();
     void setStandardSettings();
+    void setBetaAsInterpolation();
+    void setGammaAsInterpolation();
+    void changeNumberOfQueryTerms(int newNrOfQueries);
     List<List<Double>> getParamCombs();
     List<Double> getValuesOfP();
     List<Double> getValuesOfInnerP();
+    List<Integer> getQuerySpecificityToTest();
 }

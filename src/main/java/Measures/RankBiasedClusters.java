@@ -4,43 +4,22 @@ import java.util.*;
 
 public class RankBiasedClusters {
 
-/*    public static double runMeasureSingleResult(List<List<String>> listOfLinks, double p){
-        List<Set<String>> setsInResult = new ArrayList<>();
-
-        // through all lists of linked document (incl original doc)
-        for (List<String> listOfIds : listOfLinks) {
-            Set mySet = new HashSet();
-
-            // through all linked documents (incl original doc)
-            for (String docId : listOfIds) {
-                mySet.add(docId);
-            }
-            setsInResult.add(mySet);
-        }
-
-        // calculate the score for a single result list
-        double score = computeRankBiasedClusters(setsInResult,p);
-
-        return score;
-    }
-    */
-
-
-    public static double computeRankBiasedClusters(List<Integer> listOfNrOfClusterPerDepth, double p){
-        int nrOfClusters = 0;
+    public static double computeBatchRankBiasedClusters(List<Integer> listOfNrOfClusterPerDepth, int batchSize, double p){
         double score = 0;
 
-        // start at second entry
-        for (int indexOfDepth = 0; indexOfDepth < listOfNrOfClusterPerDepth.size(); indexOfDepth++) {
+        // minus one since indices in arrays starts at zero
+        for (int indexOfDepth = batchSize - 1; indexOfDepth < listOfNrOfClusterPerDepth.size(); indexOfDepth += batchSize) {
 
             // make index inclusive
-            nrOfClusters = listOfNrOfClusterPerDepth.get(indexOfDepth);
+            int nrOfClusters = listOfNrOfClusterPerDepth.get(indexOfDepth);
 
-            // depth to compute (actual depth for second article starts at 2, not 0, hence i + 1)
+            // (index in sum starts at 1, not 0 which is the index in the array, hence i + 1)
+            int indexInSum = indexOfDepth + 1;
+            // (depth starts at 2, not 0 which is the index in the array, hence i + 1)
             int depth = indexOfDepth + 2;
 
             // compute score at depth k
-            score += computeOverlapFormulaAtDepthK(nrOfClusters, depth, p);
+            score += computeOverlapFormulaAtDepthK(nrOfClusters, depth, indexInSum, p);
 
         }
         // normalise (max sum from infinite loop is 1/(1 - p) )
@@ -49,8 +28,8 @@ public class RankBiasedClusters {
         return score;
     }
 
-    private static double computeOverlapFormulaAtDepthK(int nrOfClusters, double k, double p){
-        double ratio = (k - nrOfClusters)/k;
+    private static double computeOverlapFormulaAtDepthK(int nrOfClusters, double depth, int k, double p){
+        double ratio = (depth - nrOfClusters)/(depth-1);
         return Math.pow(p, k-1) * ratio;
     }
 

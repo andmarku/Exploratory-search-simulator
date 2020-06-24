@@ -1,14 +1,17 @@
 package Simulator;
 
 import Measures.MeasuresWrapper;
+import Retriever.NewParser;
 import Retriever.NewRetriever;
 import Retriever.RetrieverParser;
 import Retriever.RetrieverWrapper;
 import Settings.Settings;
 import Utility.General;
 import Utility.FileWriter;
+import org.elasticsearch.search.SearchHits;
 
 import javax.json.*;
+import java.io.IOException;
 import java.util.*;
 
 public class Simulator {
@@ -16,7 +19,9 @@ public class Simulator {
     public static void runAllIterations(Settings settings, List<String> listOfQueryTerms) throws Exception {
 
         for (int itr= 0; itr < settings.getNumOfItr(); itr++) {
-
+            if (itr < 26){
+                continue;
+            }
             /* --- Querying Elastic --- */
             // pick out this iterations query,
             List<String> query = listOfQueryTerms.subList(itr*settings.getSizeOfQuery(), (itr+1)*settings.getSizeOfQuery());
@@ -24,17 +29,18 @@ public class Simulator {
 
             JsonObject singleSearchResult = RetrieverWrapper.retrieveSearchResults(query, settings.getSizeOfRetrievedList());
 
-            String itrId = "itr=" + itr;
+            String itrId = "" + itr;
 
-            // TODO: 2020-04-29  
-            System.out.println(itrId);
+            System.out.println(itrId + "\t" + settings.getSizeOfQuery());
             
             // Prepare for applying the expansion component
             AbstractMap<String, Double> scoredDocs = createScoredDocs(singleSearchResult);
             AbstractMap<String, Set<String>> v1 = createIncompleteV1(singleSearchResult);
-            AbstractMap<String, Set<String>> completeV0 = createCompleteV0(singleSearchResult);
+            AbstractMap<String, Double> allOfV1Scored = retrieveAllRelevantScores(query, v1);
+
+
             // sum each vicinity score and measure the vicinities sizes
-            Map<String, Map<String,Double>> preppedDocs = FeatureExpander.prepForExpansion(scoredDocs, v1);
+            Map<String, Map<String,Double>> preppedDocs = FeatureExpander.prepForExpansion(allOfV1Scored, v1);
 
             // For each different combination of parameter values, apply component, apply metrics, and store results
             Map<String, List<General.Pair>> mapOfAllListsFromIteration = new HashMap<>();
@@ -57,23 +63,59 @@ public class Simulator {
                 mapOfAllListsFromIteration.put(paramName, rankedResults);
             }
 
-
+            AbstractMap<String, Set<String>> completeV0 = createCompleteV0(singleSearchResult);
             AbstractMap<String, Set<String>> mapOfAllTopDocs = createMapOfAllTopDocs(allTopRankedResults, completeV0);
 
             // score the results from this query
             AbstractMap<String, AbstractMap<String, Double>> mapOfMeasures = MeasuresWrapper.measureAll(settings,
                     mapOfAllListsFromIteration, mapOfAllTopDocs);
 
-            AbstractMap<String, Double> rbOverlap = mapOfMeasures.get("rbo");
-            FileWriter.writeCsv(itrId, rbOverlap, settings.getRbOverlapPath());
+//            AbstractMap<String, Double> rbOverlap = mapOfMeasures.get("rbo");
+//            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()), rbOverlap, settings.getRbOverlapPath());
 
             AbstractMap<String, Double> rbCluster = mapOfMeasures.get("rbc");
-            FileWriter.writeCsv(itrId, rbCluster, settings.getRbClusterPath());
+            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()), rbCluster, settings.getRbClusterPath());
 
             AbstractMap<String, Double> rbSampling = mapOfMeasures.get("rbs");
-            FileWriter.writeCsv(itrId, rbSampling, settings.getRbSamplingPath());
+            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()), rbSampling, settings.getRbSamplingPath());
         }
     }
+
+
+    public static AbstractMap<String, Double>  retrieveAllRelevantScores(List<String> queryTerms,
+                                                                         AbstractMap<String, Set<String>> completeV0) throws IOException {
+        Set<String> ids = completeV0.keySet();
+        List<String> idsList = new ArrayList<>();
+        idsList.addAll(ids);
+        AbstractMap<String, Double> scoredDocs = new HashMap<>();
+        for (int i = 0; i < idsList.size(); i ++) {
+            int endIndex = i + 1;
+            if(endIndex >= idsList.size()){
+                endIndex = idsList.size() - 1;
+            }
+            // query elastic
+            SearchHits hits = NewRetriever.queryElastic2(queryTerms, idsList.subList(i, endIndex), idsList.subList(i, endIndex).size());
+
+            // parse hits into json
+            JsonObject searchResultsAsJson = NewParser.newParser(hits);
+
+            AbstractMap<String, Double> tempMap = createMapOfScoreSForAllDocs(searchResultsAsJson,100);
+
+            for (String id : tempMap.keySet()) {
+                if (!scoredDocs.containsKey(id)){
+                    scoredDocs.put(id, tempMap.get(id));
+                }else{
+                    if (scoredDocs.get(id) < tempMap.get(id)){
+                        scoredDocs.put(id, tempMap.get(id));
+                    }
+                }
+            }
+        }
+
+        return scoredDocs;
+    }
+
+
 
     public static AbstractMap<String, Set<String>> createIncompleteV1(JsonObject singleSearchResult) throws Exception {
         AbstractMap<String, Set<String>> v1 = new HashMap<>();
@@ -171,8 +213,34 @@ public class Simulator {
             scoredDocs.put(id, document.getJsonNumber("score").doubleValue());
         }
         return scoredDocs;
-
     }
+
+    public static AbstractMap<String, Double> idAndScoreOfBestHit(JsonObject singleSearchResult){
+        AbstractMap<String, Double> scoredDocs = new HashMap<>();
+        String idOfDocWithMaxScore = "";
+        double maxScore = 0;
+        for (String id : singleSearchResult.keySet()) {
+            JsonObject document = singleSearchResult.getJsonObject(id);
+            if (maxScore < document.getJsonNumber("score").doubleValue()) {
+                maxScore = document.getJsonNumber("score").doubleValue();
+                idOfDocWithMaxScore = id;
+            }
+        }
+        scoredDocs.put(idOfDocWithMaxScore, maxScore);
+        return scoredDocs;
+    }
+
+    public static AbstractMap<String, Double> createMapOfScoreSForAllDocs(JsonObject singleSearchResult, double divideWith){
+        AbstractMap<String, Double> scoredDocs = new HashMap<>();
+        for (String id : singleSearchResult.keySet()) {
+            JsonObject document = singleSearchResult.getJsonObject(id);
+            double score = document.getJsonNumber("score").doubleValue();
+            score = score /divideWith;
+            scoredDocs.put(id, score);
+        }
+        return scoredDocs;
+    }
+
 
     public static String parametersToString(List<Double> fcnParams){
         StringBuilder settingsAsCsvString = new StringBuilder();

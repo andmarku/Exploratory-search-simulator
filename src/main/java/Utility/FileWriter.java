@@ -34,10 +34,10 @@ public class FileWriter {
         return jsonAsStringList;
     }
 
-    public static void writeCsv(String itrId, AbstractMap<String, Double> mapOfScores, String fileName){
+    public static void writeCsv(String itrId, String nrOfQueryTerms, AbstractMap<String, Double> mapOfScores, String fileName){
         List<String> rowsToWrite = new ArrayList<>();
         for (String key : mapOfScores.keySet()) {
-            rowsToWrite.add(itrId + "," + key + "," + mapOfScores.get(key));
+            rowsToWrite.add(itrId + "," + nrOfQueryTerms + "," + key + "," + mapOfScores.get(key));
         }
         appendToFile(rowsToWrite, fileName);
     }

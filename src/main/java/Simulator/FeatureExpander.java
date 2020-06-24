@@ -24,10 +24,11 @@ public class FeatureExpander {
         return expandedRes;
     }
 
-    public static double expansionScoringFunction(double s_aScore, double v1Score, double v1SizeFraction,
+    public static double expansionScoringFunction(double v0Score, double v1Score, double v1SizeFraction,
                                                   double alpha, double beta, double gamma1){
-        return  s_aScore * alpha +
-                beta * ( gamma1 + (1-gamma1) * v1SizeFraction ) * v1Score;
+        return  alpha  * v0Score +
+                beta   * v1Score +
+                gamma1 * v1SizeFraction * v1Score;
     }
 
     public static Map<String, Map<String,Double>> prepForExpansion(AbstractMap<String, Double> scoredDocs,
@@ -52,9 +53,9 @@ public class FeatureExpander {
                 }
             }
 
-            // store the normalisation constant as either 1/size or as 0. The latter if size = 0.
-            if (v1.size() != 0){
-                v1SizeFraction = 1 / (double) v1.size();
+            // store the normalisation fraction constant as either 1/size or as 0. The latter if size = 0. (should never happen)
+            if (v1.get(id).size() != 0){
+                v1SizeFraction = 1 / (double) v1.get(id).size();
             }else{
                 v1SizeFraction = 0;
             }

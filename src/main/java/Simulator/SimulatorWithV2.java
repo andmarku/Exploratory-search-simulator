@@ -61,13 +61,13 @@ public class SimulatorWithV2 {
                     mapOfAllListsFromIteration, v2);
 
             AbstractMap<String, Double> rbOverlap = mapOfMeasures.get("rbo");
-            FileWriter.writeCsv(itrId, rbOverlap, settings.getRbOverlapPath());
+            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()),rbOverlap, settings.getRbOverlapPath());
 
             AbstractMap<String, Double> rbCluster = mapOfMeasures.get("rbc");
-            FileWriter.writeCsv(itrId, rbCluster, settings.getRbClusterPath());
+            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()), rbCluster, settings.getRbClusterPath());
 
             AbstractMap<String, Double> rbSampling = mapOfMeasures.get("rbs");
-            FileWriter.writeCsv(itrId, rbSampling, settings.getRbSamplingPath());
+            FileWriter.writeCsv(itrId, Integer.toString(settings.getSizeOfQuery()), rbSampling, settings.getRbSamplingPath());
 
         }
     }

@@ -14,11 +14,20 @@ public class SimWrapper {
         // Choose settings
         Settings settings = new ThreeQueryTerms();
         settings.setStandardSettings();
+        settings.setBetaAsInterpolation();
 
-        //SimWrapper.generateSearches(settings);
+        for (Integer nrOfQueryTerms : settings.getQuerySpecificityToTest()) {
 
-        SimWrapper.simulator(settings);
+            if (nrOfQueryTerms < 7){
+                continue;
+            }
 
+            settings.changeNumberOfQueryTerms(nrOfQueryTerms);
+
+            //SimWrapper.generateSearches(settings);
+
+            SimWrapper.simulator(settings);
+        }
         System.out.println("Finished");
     }
 

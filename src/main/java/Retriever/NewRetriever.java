@@ -10,10 +10,9 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.io.stream.StreamInput;
 import org.elasticsearch.common.lucene.search.function.CombineFunction;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.WeightBuilder;
 import org.elasticsearch.search.SearchHits;
@@ -75,6 +74,34 @@ public class NewRetriever {
     }
 
     // method for querying elastic using a list of search terms
+    public static SearchHits queryElastic2(List<String> queryList, List<String> ids, int sizeOfRetrievedList) throws IOException {
+        // create the query string
+        StringBuilder sb = new StringBuilder();
+        for (String s: queryList) {
+            sb.append(s);
+            sb.append(" ");
+        }
+        String queryStr = sb.toString();
+
+        // create the query
+        QueryBuilder query =  new MatchQueryBuilder("title", queryStr);
+        IdsQueryBuilder query3 = QueryBuilders.idsQuery();
+        for (String newId : ids) {
+            query3.addIds(newId);
+        }
+        WeightBuilder scorer = new WeightBuilder().setWeight(100);
+        FunctionScoreQueryBuilder.FilterFunctionBuilder[] filterFunctionBuilders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[]{
+                new FunctionScoreQueryBuilder.FilterFunctionBuilder(query3, scorer)
+        };
+        CombineFunction combineWithOriginalQuery = CombineFunction.MULTIPLY;
+        QueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(query,filterFunctionBuilders)
+                .boostMode(combineWithOriginalQuery);
+
+        // return results from elastic
+        return retriveThroughQuery(functionScoreQueryBuilder, sizeOfRetrievedList);
+    }
+
+    // method for querying elastic using a list of search terms
     public static SearchHits queryElastic(List<String> queryList, int sizeOfRetrievedList) throws IOException {
         // create the query string
         StringBuilder sb = new StringBuilder();
@@ -86,7 +113,7 @@ public class NewRetriever {
 
         // create the query
         QueryBuilder query =  new MatchQueryBuilder("title", queryStr);
-        WeightBuilder scorer = new WeightBuilder().setWeight(2);
+        WeightBuilder scorer = new WeightBuilder().setWeight(5);
         QueryBuilder filter1 = QueryBuilders.existsQuery("inCitations");
         QueryBuilder filter2 = QueryBuilders.existsQuery("outCitations");
         FunctionScoreQueryBuilder.FilterFunctionBuilder[] filterFunctionBuilders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[]{

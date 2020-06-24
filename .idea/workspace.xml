@@ -4,9 +4,27 @@
     <list default="true" id="024a4cb7-fcf3-49da-aea6-fd60989f55aa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/MeasuresWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedClusters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedClusters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedSampling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Measures/RankBiasedSampling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriever.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Retriever/NewRetriever.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/Settings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Settings/ThreeQueryTerms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/FeatureExpander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/FeatureExpander.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/SimWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/SimWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Simulator/SimulatorWithV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Simulator/SimulatorWithV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/FileWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/MeasuresWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Measures/RankBiasedClusters.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/RankBiasedClusters.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Measures/RankBiasedSampling.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Measures/RankBiasedSampling.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Retriever/NewRetriever.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Retriever/NewRetriever.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Settings/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/Settings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Settings/ThreeQueryTerms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/FeatureExpander.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/FeatureExpander.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/SimWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/SimWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/Simulator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/Simulator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Simulator/SimulatorWithV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Simulator/SimulatorWithV2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Utility/FileWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/FileWriter.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,25 +178,29 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1582188781593" />
-    <state width="1807" height="226" key="GridCell.Tab.0.bottom" timestamp="1588312348160">
+    <state width="1807" height="226" key="GridCell.Tab.0.bottom" timestamp="1590399567982">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="226" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1588312348160" />
+    <state width="1807" height="226" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1588788529177" />
+    <state width="1807" height="226" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1590399567982" />
     <state width="1807" height="212" key="GridCell.Tab.0.bottom/67.27.3773.1053@67.27.3773.1053" timestamp="1588253131746" />
-    <state width="1807" height="226" key="GridCell.Tab.0.center" timestamp="1588312348159">
+    <state width="1807" height="226" key="GridCell.Tab.0.center" timestamp="1590399567981">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="226" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1588312348159" />
+    <state width="1807" height="226" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1588788529177" />
+    <state width="1807" height="226" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1590399567981" />
     <state width="1807" height="212" key="GridCell.Tab.0.center/67.27.3773.1053@67.27.3773.1053" timestamp="1588253131745" />
-    <state width="1807" height="226" key="GridCell.Tab.0.left" timestamp="1588312348158">
+    <state width="1807" height="226" key="GridCell.Tab.0.left" timestamp="1590399567981">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="226" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1588312348158" />
+    <state width="1807" height="226" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1588788529177" />
+    <state width="1807" height="226" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1590399567981" />
     <state width="1807" height="212" key="GridCell.Tab.0.left/67.27.3773.1053@67.27.3773.1053" timestamp="1588253131745" />
-    <state width="1807" height="226" key="GridCell.Tab.0.right" timestamp="1588312348159">
+    <state width="1807" height="226" key="GridCell.Tab.0.right" timestamp="1590399567981">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1807" height="226" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1588312348159" />
+    <state width="1807" height="226" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1588788529177" />
+    <state width="1807" height="226" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1590399567981" />
     <state width="1807" height="212" key="GridCell.Tab.0.right/67.27.3773.1053@67.27.3773.1053" timestamp="1588253131746" />
     <state width="1807" height="343" key="GridCell.Tab.1.bottom" timestamp="1584083988822">
       <screen x="67" y="27" width="1853" height="1053" />
